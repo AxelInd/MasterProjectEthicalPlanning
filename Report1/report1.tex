@@ -131,7 +131,7 @@ $T$: an ordering function to linearise agent actions consistently  (turn taking 
 \end{itemize}
  \end{frame} 
  
- 
+%----------------------Deontological Approach------------------------------------------------- 
 \begin{frame}
 \frametitle{Deontological Approach}
 \begin{itemize}
@@ -164,57 +164,284 @@ $T$: an ordering function to linearise agent actions consistently  (turn taking 
  \end{frame} 
  
  
- \begin{frame}
-\frametitle{DELETE ME}
+\begin{frame}
+\frametitle{Deontological Approach Example}
+\begin{itemize}
+\item We assume that it is ethical for an agent to get a textbook they can read (and therefore pass).
+\item We assume that it is unethical to get a textbook you cannot read.
+\end{itemize}
 
+Using the definition which relies only on the ethical value of the acting agent's action:
+\begin{itemize}
+\item A can take either the English or the German book and as both are ethical actions for that agent.
+\item B can only take the English book, taking the German is morally impermissible.
+\item Thus if A takes the English book ($u_A(I,O_{A_{takeEnglish}})$) it causes B to take an action that is not ethically permissible.
+\end{itemize}
+\end{frame} 
+ 
+ \begin{frame}
+\frametitle{Deontological Approach Example}
+Using the definition which relies on the ethical value of the acting agent's action AND all subsequent agent actions until the acting agent is able to act again:
+\begin{itemize}
+\item A cannot take the English book because it means that the best case for B would still be an unethical action.
+\item Thus A must take the German book, and B must then take the English book (both morally permissible).
+\item If we allow B to have $O_{B_{doNothing}}$ with no ethical value, the best case for $O_{A_{takeEnglish}}$ becomes a morally permissible action, but the worst and average-case scenarios continue to have expected ethical utility $<0$.
+\end{itemize}
+@TODO illustrate with images on diagram.
+\end{frame} 
+
+%----------------------Utalitarian Approach---------------------------------------------------
+
+ \begin{frame}
+\frametitle{Utilitarianism}
+\begin{itemize}
+\item Consequences matter (state evaluation rather than action evaluation).
+\item Goal is that the action which results in the state with the \textbf{highest ethical utility} is taken.
+\item Direct relation to game theory.
+\item Only difference is that $u_A$ and $u_B$ can evaluate the same state differently.
+\item Consider that other agents may not be utilitarian at all.
+\end{itemize}
+ \end{frame} 
+
+
+ \begin{frame}
+\frametitle{Utilitarianism Cases}
+Agent Considerations
+\begin{enumerate}
+\item Only the acting agent's resulting state matters.
+\item Only the state in which A is able to act again matters.
+\item All intermediate states until A is able to act again matter.
+\end{enumerate}
+
+Search Restrictions
+\begin{enumerate}
+\item One-step lookahead.
+\item Bounded lookahead.
+\item Unbounded lookahead.
+\end{enumerate}
  \end{frame} 
  
  
  \begin{frame}
-\frametitle{DELETE ME}
+\frametitle{Utilitarianism Cases}
+
+\begin{itemize}
+\item With:
+\begin{enumerate}
+\item Only acting agent's state matters.
+\item One-step lookahead.
+\end{enumerate}
+\item It is sufficient to use the average or worst-case utility function of $u_i(s')$ where $s'=app(s,a)$.
+\item Constant time.
+\end{itemize}
 
  \end{frame} 
-
- \begin{frame}
-\frametitle{DELETE ME}
-
- \end{frame} 
- 
- 
- \begin{frame}
-\frametitle{DELETE ME}
-
- \end{frame} 
- 
  
  \begin{frame}
-\frametitle{DELETE ME}
+\frametitle{Utilitarianism Cases}
 
+\begin{itemize}
+\item With:
+\begin{enumerate}
+\item Only acting agent's state matters.
+\item Bounded lookahead.
+\end{enumerate}
+\item In words: we want to maximize the \textbf{total} return of the acting agent over the $n$ time-steps.
+\item Requires knowledge of other agent actions: can use worst, average cases if $u$ of other agents is unknown.
+\item If $u$ function of other agents known: if that $u$ values have no dependance on anything but their own state/action/successor state values (i.e. independent of other agents) it's permissible action subset can be computed in constant time. 
+\item From this permissible action/state subset can use worst case or average case evaluations in terms of ethical value of resultant states.
+
+\end{itemize}
+
+ \end{frame} 
+  
+ \begin{frame}
+\frametitle{Utilitarianism Cases}
+\begin{itemize}
+\item With:
+\begin{enumerate}
+\item Only acting agent's state matters.
+\item Bounded lookahead.
+\end{enumerate}
+\item Generative model.
+\end{itemize}
+
+\[
+max_{a_i \in A_i} \left( \sum^n_{i=i+numAgents} u(s_i,a_i) \right)
+\]
+
+$n$: total number of (action, state) pairs in the bound.
+\[
+s_i=app(s_{i-1},a_{i-1})
+\]
  \end{frame} 
  
  
  \begin{frame}
-\frametitle{DELETE ME}
+\frametitle{Utilitarianism Cases}
+\begin{itemize}
+\item With:
+\begin{enumerate}
+\item Only the state in which A is able to act again matters.
+\item One-step lookahead.
+\end{enumerate}
+\item For agent $k$:
+\end{itemize}
+\[
+O_k = max_{{a_i \in O_{k+1}}} max_{a_i \in O_k}   
+\]
+\[
+O_{k+n} = u(s')
+\]
 
+\begin{itemize}
+\item Very high computational complexity.
+\item Can make use of properties of the $u$ function of other agents to only search permissible states for those agents.
+\end{itemize}
+
+ \end{frame} 
+ 
+%----------------------Do No Harm--------------------------------------------------- 
+ \begin{frame}
+\frametitle{Do No Harm}
+\begin{itemize}
+\item Removing any subset of the actions in the sequence of actions would not prevent any bad variable assignments.
+\item Uses $u(v=d)$ to give an ethical utility to individual variables.
+\end{itemize}
+
+For the library example:
+\begin{itemize}
+\item The bad effect of B failing only happens when A takes the English book.
+\item The bad effect of A failing only happens if B takes both books.
+\end{itemize}
  \end{frame} 
  
  
  \begin{frame}
-\frametitle{DELETE ME}
+\frametitle{Do No Harm Cases}
+
+Lookahead
+\begin{itemize}
+\item One-step lookahead.
+\item Bounded lookahead.
+\item Unbounded lookahead.
+\end{itemize}
+
+Agent evaluations
+\begin{itemize}
+\item Evaluate only the final state $s'$ before the acting agent is able to act again.
+\item Evaluate only the $s'$ states resulting from the acting agent's actions.
+\item Evaluate the $s'$ states resulting from every agent's actions.
+\end{itemize}
 
  \end{frame} 
+ 
+
+%----------------------EXTENSIONS------------------------------------------------
+%----------------------------------------------------------------------------------
+
+%----------------------Extending Pi----------------------------------------------------- 
+ \begin{frame}
+\frametitle{Extensions}
+Previously:
+\[
+\Pi = (V, O, I, \gamma, u, T)
+\]
+
+Now Define:
+\[
+\Pi = (V, O, I, \gamma, u, T, V, W)
+\]
+
+\begin{itemize}
+\item $W$ assigns an agent, or set of agents to some set (or subset of sets) $w$.
+\item $u$ is now an order list of \textit{utility vectors}.
+\item $V$ is an ordering function that gives precedent to classes in $W$.
+\end{itemize}
+
+ \end{frame} 
+ 
+\begin{frame}
+\frametitle{Extensions Motivation}
+\begin{itemize}
+\item Our ethical dealings with people are not uniform.
+\item We may apply utilitarian ethics wrt. our own happiness, do-no-harm ethics to friends, Deontic ethics to strangers, and inversions of any of these to our enemies.
+\item We may even combine these ethics and decide to act with utilitarian ethics provided none of the actions we take are illegal (deontically impermissible).
+\item So instead of assigning ethical utility according to only a single principle, it is possible to determine the effect of a single action or consequence in terms of multiple ethical principals at once.
+\end{itemize}
+ \end{frame}  
+ 
+ 
+ 
+\begin{frame}
+\frametitle{Extensions}
+\begin{itemize}
+
+\item Thus, $u$ becomes a set of vectors of utility functions corresponding to how each agent interprets each event wrt. to its ethical interpretations.
+\item $W$ maps (agent, action, state, variables) tuples or tuple subsets to their classes (e.g. friend, enemy, self). This determines which functions within $u$ will ethically evaluate the tuple.
+\item $V$ provides an ordering for the precedence (importance) of different ethical systems. Thus it may specify that utilitarian ethics are superseded by deontic ethics and so only states that meet the deontic criteria are candidate states for the utilitarian evaluation.
+\item $V$ is not essential to the planning task, but provides a consistent way to evaluate tuples. Without it final states would not be consistent across runs.
+\end{itemize}
+ \end{frame}
  
  
  \begin{frame}
-\frametitle{DELETE ME}
+\frametitle{Extensions: Trolley Problem}
+\begin{itemize}
+\item Can divide people on track into 6 distinct agents (all with action $O_{doNothing}$).
+\item The actor pulling the lever is also an agent.
+\item $W$ may place the acting agent into its own distinct group (actor).
+\item $W$ also places all track agents into a group (victim).
+\item $u$ Ethical value of actions can now be evaluated (as normal) by considering the moral effect of agents according the ethical system under consideration.
+\end{itemize}
+\end{frame}
 
- \end{frame} 
+ \begin{frame}
+\frametitle{Extensions: Trolley Problem with Friend}
+\begin{itemize}
+\item Consider now that the one person on the track is your friend.
+\item You consider the ethical effect of actions affecting your friend to be of greater significance than those affecting normal victims.
+\item $W$ still places all track agents into a group (victim).
+\item $W$ also places your friend into a special group (friend).
+\item $V$ allocates the friend class a greater priority.
+
+\end{itemize}
+
+ \end{frame}
  
  
+ \begin{frame}
+\frametitle{Extensions: Trolley Problem with Friend}
+\begin{itemize}
+\item Now ethical evaluation of the states will first generate only candidate states that are not ethically harmful to the friend class. From these candidate states that are not harmful to the victim class can be generated.
+\item If no such state/action exists for the victim class, but does for the friend, and an action is forced, then the idea of \textit{the least unethical choice} comes into effect.
+\end{itemize}
+ \end{frame}
  
  
+ \begin{frame}
+\frametitle{Extensions}
+ \end{frame}
+  
+  
+  \begin{frame}
+\frametitle{Extensions}
+ \end{frame}
  
  
+ \begin{frame}
+\frametitle{Extensions}
+ \end{frame}
+ 
+ 
+ \begin{frame}
+\frametitle{Extensions}
+ \end{frame}
+ 
+ 
+ \begin{frame}
+\frametitle{Extensions}
+ \end{frame}
  
  
  
