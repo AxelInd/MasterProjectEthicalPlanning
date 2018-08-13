@@ -1,0 +1,125 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{algorithm2e}
+\begin{document}
+
+\title{Introduction to \LaTeX{}}
+\author{Author's Name}
+
+\maketitle
+
+\section{Planning Task}
+\begin{equation}
+\pi = (V, I, O, \gamma)
+\end{equation}
+
+\begin{itemize}
+\item $V$: finite set of state variables.
+\item $I$: initial state varaible evaluation.
+\item $O$: set of operators of the form $(\chi, e)$
+\item $\gamma$: goal variable valuations.
+\end{itemize}
+
+\section{Moral Planning Task}
+\begin{equation}
+\pi = (V, I, O, \gamma, u)
+\end{equation}
+
+\begin{itemize}
+\item $u$: A moral utility function (returning a double). $u$ can provide a moral label to any combination of actions, states, and variable assignments.
+\end{itemize}
+
+\section{Combined Moral Planning Task}
+Assuming sequential turns:
+
+\begin{equation}
+\Pi=(A, \Xi, T)
+\end{equation}
+
+\begin{itemize}
+\item $\Xi=((A_1,\pi_1), ... , (A_n, \pi_n))$ : applies indexable labels to each agent in the task.
+\item $T$: Run-time or compile-time turn selection function that assigns the \textit{active agent} at time $t$:
+\begin{itemize}
+\item Compile-Time $T$: parameters are $(A, \Xi)$, returns vector of agent turn probabilities for times $1,...,T-1$. For independent turns, final result is $n \times T$ matrix. Problem with branching probabilities when actions have dependence on previous actions (as hard as reinforcement learning [would have to return transition matrix for each probability]).
+\item Run-Time $T$: returns vector of transition probabilities given some combination of: current state ($s$), $\Xi$, $A$, and previous (turn agents, action, state sets). (Probably easier than compile-time for cases where transition probabilities are state-dependant).
+\end{itemize}
+\end{itemize}
+
+\section{Evaluation Procedure Run-time}
+Given $\Pi=(A, \Xi, T)$:
+
+\subsubsection*{Gaol-invariant}
+When the goal does not affect agent decisions:
+\begin{enumerate}
+\item Determine current active agent $X$. $X = A[argmax T(\Xi)]$.
+\item Determine applicable action set $O_{app} \in O_X$.
+\item Determine ethical and applicable action set $O_{e} \in O_{app}$.
+\item Randomly select and apply some $o \in O_{app}$.
+\item Repeat.
+
+\end{enumerate}
+
+\section{Multi-Agent Ethical Principles}
+NB: for this simplified ethical approach we assume that the agent is able to call a \textit{predict function} $P(A_i, s, \Xi)$ which returns the next action $a'$ another agent $X'$ will take using relevant information about that agent's $s$ and $\pi_X$. Not doing this leads to highly complex recursive equations which I hope to tackle later.
+
+\subsection{Deontological Approach}
+For the deontological approach it is sufficient for active agent $X$ to select $o \in O_X$ such that $u_X(o) \geq 0$.
+
+
+\subsection{Next state before active agent acts again}
+Remember, we assume $P(A_i, s, \Xi)$ is known (or feasible to compute) and artificially bound the maximum number of time steps T.
+
+Introduce function $Q$ which determines the final state before the current active agent is able to act again:
+\newline
+
+\begin{algorithm}[H]
+\SetAlgoLined
+ currentAgent = A[argmax(T(currentState,$\Xi$))]\;
+ \While{currentAgent!=activeAgent}{
+  currentState=app(currentState, P(currentAgent, currentState, $\Xi$))\;
+  currentAgent= A[argmax(T(currentState,$\Xi$))]\;
+ }
+ \caption{Final state before active agent can act again}
+ \Return currentState\;
+\end{algorithm}
+
+Looks daunting, but has complexity linear in the number of agents (when taking turns). $O(n)$. Space complexity is constant (or at least linear in the number of variables) if current state denotes a single state, rather than a set of states based on probabilities.
+
+\subsection{Utilitarianism}
+
+\subsubsection*{Maximize own resultant states}
+When bounded, the ethically permissible action for agent $X$ is to find an applicable action which maximizes:
+\[max \sum_{t=0, t+n}^T  u_X(s_t,o_t)\]
+
+\[
+o^*=argmax_{o \in O_X} \left[max \sum_{t=0, t+n}^T  u_X(Q(...),o_t) \right]
+\]
+
+\subsubsection*{Maximize all agent resultant states}
+In this formulation the utility of all agent state action pairs is considered. (Note that we still only consider utility as defined by the active agent.)
+\[
+o^*=argmax_{o \in O_X} \left[max \sum_{t=0, t+1}^T  u_{X}(s_T, o \in O_{T[...]}) \right]
+\]
+
+For this case we can modify the Q algorithm to create a new function R which returns the total utility of the non-active agents, under the same assumptions as in the Q algorithm.
+\newline
+
+\begin{algorithm}[H]
+\SetAlgoLined
+totalMoralUtility=0\;
+ currentAgent = A[argmax(T(currentState,$\Xi$))]\;
+ \While{currentAgent!=activeAgent}{
+  totalMoralUtility=totalMoralUtility+u(currentState, P(currentAgent, currentState, $\Xi$))\;
+  currentState=app(currentState, P(currentAgent, currentState, $\Xi$))\;
+  
+  currentAgent= A[argmax(T(currentState,$\Xi$))]\;
+ }
+ \caption{Total moral utility before active agent can act again}
+ \Return totalMoralUtility\;
+\end{algorithm}
+ 
+\[
+o^*=argmax_{o \in O_X} \left[max \sum_{t=0, t+n}^T  u_X(Q(...),o_t) + max \sum_{t=0, t+n}^T R(...)\right]
+\]
+
+\end{document}
