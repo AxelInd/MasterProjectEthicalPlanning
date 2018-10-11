@@ -36,6 +36,21 @@
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Multi-agent Action Plan}
+\begin{definition}
+A multi-agent plan $\pi$ is a sequence of tuples of the form $(o_i,l_x)$ where $o_i \in O_{l_x}$ and $l_x \in $ agent labels.
+\end{definition}
+\end{frame}
+
+\begin{frame}
+\frametitle{Single-agent action plan to Multi-agent Action Plan}
+\begin{itemize}
+\item Given: single-agent action plan $\pi$.
+\item Create arbitrary label $l_x$.
+\item $\forall o_i \in \pi$, $(o_i, l_x) \in \pi'$.
+\end{itemize}
+\end{frame}
  
 \begin{frame}
 \frametitle{T: Scheduling Turn-Taking}
@@ -117,7 +132,7 @@ What constitutes a morally permissible planning task?
 A single-agent plan $\pi$ is morally permissible, according to the deontological principle, iff for all $a_i$, $u(a_i) \geq 0$
 \end{definition}
 \begin{itemize}
-\item By this definition, as in the single-agent case, all possible plans are permissable as no action in this example is intrinsically bad.
+\item By this definition, as in the single-agent case, all possible plans are permissible as no action in this example is intrinsically bad.
 \item Things change with our second example.
 \end{itemize}
 \end{frame}
@@ -174,6 +189,9 @@ s_0 = (man=alive \land men=alive \land tram = start \land, land leverB = r)
 \end{frame}
 
 
+%=======================DEONTIC=========================================================
+
+
 \begin{frame}
 \frametitle{Example 2 analysis}
 \begin{definition}
@@ -188,7 +206,32 @@ A plan $\pi$ is morally permissible, according to the deontological principle, i
 \end{frame}
 
 \begin{frame}
-\frametitle{Multi-agent Moral Permissibility}
+\frametitle{Multi-agent Moral Permissibility (Naive Formulation)}
+\begin{definition}
+A multi-agent plan $\pi$ is morally permissible according to the deontological principle iff, for all agent-action pairs $(X,a_i)$, $u(a_i) \geq 0$.
+\end{definition}
+
+
+\begin{center}
+\begin{tabular}{ |c|c| } 
+ \hline
+ $\pi=$ &  Overall \\ 
+ \hline
+ $(A,push), (B, pull)$ & $\bot$\\ 
+ \hline
+ $(A,push), (B, \lnot pull)$ & $\bot$\\ 
+ \hline
+ $(A,\lnot push), (B, pull)$ & $\top$\\ 
+ \hline
+ $(A,\lnot push), (B, \lnot pull)$ & $\top$\\ 
+ \hline
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Multi-agent Moral Permissibility (Extended Formulation)}
 \begin{definition}
 A multi-agent plan $\pi$ is morally permissible wrt. an Agent X, according to the deontological principle iff, for all agent-action pairs $(X,a_i)$, $u(a_i) \geq 0$.
 \end{definition}
@@ -216,8 +259,71 @@ A multi-agent plan $\pi$ is morally permissible, according to the deontological 
 
 \end{frame}
 
+\begin{frame}
+\frametitle{Multi-agent deontic expressiveness}
+\begin{theorem}
+Multi-agent action plans are order-independent in the deontic case of ethical evaluation.
+\end{theorem}
+\begin{proof}
+Given a deontically valid multi-agent action plan $\pi$, by definition: $\nexists_{a_i \in \pi} u(a_i) \leq 0$.\\
+By contradiction:\\
+Assume the above holds for $\pi$ but not for $\pi'$, which is a permutation of $\pi$.\\
+Then $\exists_{a\in \pi'} u(a_i)<0$.\\
+But $\forall_{x_i \in \pi'} x_i \in \pi$ (by definition of permutation).\\
+Therefore, $\exists_{a_i \in \pi} u(a_i)<0$.\\
+A contradiction.
+\end{proof}
+\end{frame}
 
 
+\begin{frame}
+\frametitle{Multi-agent deontic expressiveness}
+\begin{theorem}
+The multi-agent extended case of the deontic principle is equivalent to the multi-agent naive case of the deontic principle.
+\end{theorem}
+\begin{proof}
+For a multi-agent action plan $\pi$:
+$f(\pi,X)=\forall_{(a_i,X) \in \pi} u(a_i)\geq 0$. (extended case definition wrt. Agent $X$)\\
+$g(\pi) = \forall_{a_i \in \pi} u(a_i)\geq 0$. (naive case definition)\\
+We show $g(\pi)=\forall_{X \in L} f(\pi, L)$.\\
+By previous proof it is sufficient to show: $\cup_{X \in L} \textrm{subset}(\pi,X) \cup \{\}=\textrm{set}(\pi)$\\
+Specifically we show:  $\cup_{X \in L} \textrm{subset}(\pi,X) \cup \{\} \subseteq \textrm{set}(\pi)$ and $ \textrm{set}(\pi) \subseteq \cup_{X \in L} \textrm{subset}(\pi,X) \cup \{\} $.
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\frametitle{Multi-agent deontic expressiveness}
+\begin{theorem}
+$\cup_{X \in L} \textrm{subset}(\pi,X) \cup \{\} \subseteq \textrm{set}(\pi)$
+\end{theorem}
+\begin{proof}
+Would be invalid iff:
+\begin{itemize}
+\item There is an agent, operator pair in $\cup_{X \in L} \textrm{subset}(\pi,X) \cup \{\}$ not in $ \textrm{set}(\pi)$.
+\end{itemize}
+By contradiction:\\
+Assume $\exists_{(a_i,X) \in \textrm{subset}(\pi,X)} X \notin \textrm{set}(\pi)$.\\
+But $\textrm{subset}(\pi,X)$ is simply a subset of $\pi$.\\
+A contradiction.
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\frametitle{Multi-agent deontic expressiveness}
+\begin{theorem}
+$\textrm{set}(\pi) \subseteq \cup_{X \in L} \textrm{subset}(\pi,X) \cup \{\}$
+\end{theorem}
+\begin{proof}
+Would be invalid iff:
+\begin{itemize}
+\item There is an agent, operator pair in $ \textrm{set}(\pi)$ not in $\cup_{X \in L} \textrm{subset}(\pi,X) \cup \{\}$.\\
+However $\cup_{X \in L} \textrm{subset}(\pi,X) \cup \{\}$ is a true partition of $\pi$ (by definition).
+
+
+
+\end{itemize}
+\end{proof}
+\end{frame}
 
 \begin{frame}
 \frametitle{Do-no-harm in multi-agent planning}
