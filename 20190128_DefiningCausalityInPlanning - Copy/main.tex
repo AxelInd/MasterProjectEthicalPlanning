@@ -128,6 +128,8 @@ And if $\phi$ no longer holds in the final state, we write:
 (\pi, \Xi) \models [\pi' \leftarrow \vec{o'}](s_n \not\models \phi)
 \]
 
+Finally, let $(\pi-\pi')$ denote the plan obtained by setting all non-$\epsilon$ actions in $\pi'$ to $\epsilon$ in $\pi$.
+
 \section{Mathematical Preliminaries HP Causality}
 
 @TODOall  Discuss the idea of causes. Provide details about the causal setting. Discuss counterfactual reasoning.
@@ -155,6 +157,7 @@ Intuitively the first two requirements are: the possible cause must actually hav
 
 
 
+\newpage
 
 \section{HP-Causality Planning}
 The HP causality definitions above are restricted to the identification of variable causes, and as such, are not suitable for use in a planning domain where questions posed may also require the identification of a subset of actions or agents as causes.
@@ -163,44 +166,38 @@ For this reasons I propose changed definitions of the HP-causality models which 
 
 \subsection{But-for Causality Planning}
 
-TODOpara describe the following ideas: alternative applicable actions, the domain of allowable actions (specifically define an operator $\mapsto$ that describes if a vector of actions occurs in the same order in an action plan). Need some way of specifying that an action maps to a specific action assignment $a_i \models o_i$. Specifically: $\pi' \mapsto \pi$ means that the agent order in $\pi'$ could be achieved by deleting some actions in $\pi$. $(\pi' \models \vec{o}) \mapsto \pi$ means that the agent order AND action labels could be achieved by deleting some actions of $\pi$. Discuss counterfactual reasoning in planning paradigm. Define the idea of ($\pi-\pi'$ to explain the action plan without the actions slots $\pi'$ in it (or just set to empty actions).
-
-\begin{defn} Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow \vec{o}$ is a but-for cause of some final variable assignment $s_n \models \phi$ iff the following 3 conditions hold:
-\begin{enumerate}
-\item  $(\pi' \models \vec{o}) \mapsto \pi$ and $s_n \models \phi$.
-\item $BF2$: There is a setting $\vec{o'}$ of the action slots in $\pi'$ such that:
-\[
-\pi \models [\pi' \leftarrow \vec{o'}](s_n \not\models \phi)
-\]
-\item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
-\end{enumerate}
-
-\end{defn}
-
-
 \subsection{HP-Causality Modified Planning}
+
+\subsubsection*{But-for Planning}
 \begin{defn} 
 
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow \vec{o}$ is a but-for cause of some final variable assignment $s_n \models \phi$ iff the following 3 conditions hold:
 \begin{enumerate}
-\item $(M,\vec{u}) \models (\vec{X}=\vec{x})$ and $(M,\vec{u}) \models \psi$.
-\item $MC2(a^m)$: There is a set $\vec{W}$ of \textbf{actions} in $\pi$ and a setting $\vec{x'}$ of the \textbf{alternative applicable actions} in $\vec{X}$ such that if $(M,\vec{u}) \models \vec{W} = \vec{w^*}$, then:
+\item  $\vec{o} \mapsto \pi$, $\pi' \models \vec{o}$ and $s_n \models \phi$.
+\item $BF2$: There is a setting $\vec{o'}$ of the applicable actions in $\vec{\pi'}$ such that:
 \[
-(M,\vec{u}) \models [\vec{X} \leftarrow \vec{x'}, \vec{W} \leftarrow \vec{w^*}] \neg \phi
-\]
-\item $\vec{X}$ is minimal. There is no strict subset of $\vec{X}$ that satisfies the previous 2 conditions.
-\end{enumerate}
-
-\end{defn}
-
-\begin{defn} Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $(\pi' \models \vec{o_i}) \mapsto \pi$, is an actual cause cause of some final variable assignment $s_n \models \phi$ iff the following 3 conditions hold:
-\begin{enumerate}
-\item  $(\pi' \models \vec{o_i}) \mapsto \pi$ and $s_n \models \phi$.\footnote{Already mentioned at start of definition. Remove?}
-\item $BF2$: There is a setting $\vec{o'}$ of the \textbf{alternative applicable actions} in $\vec{\pi'}$, and a setting $W \mapsto (\pi  - \pi')$ such that:
-\[
-\pi \models [\pi' \leftarrow \vec{o'}, W \leftarrow \vec{w^\star}](s_n \not\models \phi)
+(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}](s_n \not\models \phi)
 \]
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
 \end{enumerate}
+
+
+\end{defn}
+
+\subsubsection*{Modified Planning}
+\begin{defn}
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow \vec{o}$ is a cause of some final variable assignment $s_n \models \phi$ according to the modified planning definition iff the following 3 conditions hold:
+\begin{enumerate}
+\item  $\vec{o} \mapsto \pi$, $\pi' \models \vec{o}$ and $s_n \models \phi$.
+\item $BF2$: There is a setting $\vec{o'}$ of the applicable actions in $\vec{\pi'}$, and a setting of $W \mapsto (\pi  - \pi')$ such that:
+\[
+(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}, W \leftarrow \vec{w^\star}](s_n \not\models \phi)
+\]
+\item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
+\end{enumerate}
+
+
+(Where $W\leftarrow \vec{w^\star}$ denotes fixing all non-$\epsilon$ action slots in $W$ to their original actions.)
 
 \end{defn}
 
