@@ -184,6 +184,60 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 
 \end{defn}
 
+\subsubsection*{Original Planning}
+\begin{defn}
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow \vec{o}$ is a cause of some final variable assignment $s_n \models \phi$ according to the Original planning definition iff the following 3 conditions hold:
+\begin{enumerate}
+\item  $\vec{o} \mapsto \pi$, $\pi' \models \vec{o}$ and $s_n \models \phi$.
+
+
+
+\item $BF2(a)$: There is partition of $E$ (the endogenous actions) into two disjoint subplans $Z \mapsto \pi$ and $W \mapsto (\pi - Z)$ with $\pi' \mapsto Z$ and a setting $o'$ and $w$ of the actions in $\pi$ and $W$ respectively such that
+
+\[
+(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}, W \leftarrow \vec{w^\star}](s_n \not\models \phi)
+\]
+
+\item $BF2(b^o)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then for all subplans $Z' \mapsto (Z - \pi')$ we have
+
+\[
+(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w, Z \leftarrow z^\star](s_n \models \phi)
+\]
+
+\item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 3 conditions.
+\end{enumerate}
+\end{defn}
+
+(Where $W\leftarrow \vec{w^\star}$ and $Z\leftarrow \vec{z^\star}$ denotes fixing all non-$\epsilon$ action slots in $W$ and $Z$ to their original actions.)
+
+
+
+\subsubsection*{Updated Planning}
+\begin{defn}
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow \vec{o}$ is a cause of some final variable assignment $s_n \models \phi$ according to the Original planning definition iff the following 3 conditions hold:
+\begin{enumerate}
+\item  $\vec{o} \mapsto \pi$, $\pi' \models \vec{o}$ and $s_n \models \phi$.
+
+
+
+\item $BF2(a)$: There is partition of $E$ (the endogenous actions) into two disjoint subplans $Z \mapsto \pi$ and $W \mapsto (\pi - Z)$ with $\pi' \mapsto Z$ and a setting $o'$ and $w$ of the actions in $\pi$ and $W$ respectively such that
+
+\[
+(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}, W \leftarrow \vec{w^\star}](s_n \not\models \phi)
+\]
+
+\item $BF2(b^u)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then \textit{for all} subplans $W' \mapsto W$ and $Z' \mapsto (Z - \pi')$ we have
+
+\[
+(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w, Z \leftarrow z^\star](s_n \models \phi)
+\]
+
+\item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 3 conditions.
+\end{enumerate}
+\end{defn}
+
+(Where $W\leftarrow \vec{w^\star}$ and $Z\leftarrow \vec{z^\star}$ denotes fixing all non-$\epsilon$ action slots in $W$ and $Z$ to their original actions.)
+
 \subsubsection*{Modified Planning}
 \begin{defn}
 Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow \vec{o}$ is a cause of some final variable assignment $s_n \models \phi$ according to the modified planning definition iff the following 3 conditions hold:
@@ -248,14 +302,7 @@ The following table shows which classes causes my definition of causality can id
 \subsection{HP Responsibility and Blameworthiness}
 \subsection{Extending Responsibility and Blameworthiness to Planning}
 
-\section{Introducing Machiavellianism}
-\textit{ “... every prince should strive to be considered kind rather than cruel.”}
 
-Based on The Price. Two requirements should not perform any action another agent would consider unethical, should be utilitarian otherwise.
-
-Using epistemic states, leave variable assignments that others cannot see unbounded.
- 
- 
 \section{Examples}
 
 \section{Conclusion}
