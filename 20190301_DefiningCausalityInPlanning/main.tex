@@ -203,7 +203,7 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 \item $BF2(b^o)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then for all subplans $Z' \mapsto (Z - \pi')$ we have
 
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o, W \leftarrow w', Z' \leftarrow z^\star](s_n \models \phi)
+(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w', Z' \leftarrow z^\star](s_n \models \phi)
 \]
 
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 3 conditions.
@@ -231,7 +231,7 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 \item $BF2(b^u)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then \textit{for all} subplans $W' \mapsto W$ and $Z' \mapsto (Z - \pi')$ we have
 
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o, W' \leftarrow w', Z \leftarrow z^\star](s_n \models \phi)
+(\pi, \Xi) \models [\pi' \leftarrow o', W' \leftarrow w', Z \leftarrow z^\star](s_n \models \phi)
 \]
 
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 3 conditions.
@@ -242,25 +242,25 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 
 \subsubsection*{Modified Planning}
 \begin{defn}
-Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow o$ is a cause of some final variable assignment $s_n \models \phi$ according to the modified planning definition iff the following 3 conditions hold:
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow \vec{o}$ is a cause of some final variable assignment $s_n \models \phi$ according to the modified planning definition iff the following 3 conditions hold:
 \begin{enumerate}
-\item  $o \mapsto \pi$, $\pi' \models o$ and $s_n \models \phi$.
-\item $BF2$: There is a setting $o'$ of the applicable actions in $\pi'$, and a setting of $W \mapsto (\pi  - \pi')$ such that:
+\item  $\vec{o} \mapsto \pi$, $\pi' \models \vec{o}$ and $s_n \models \phi$.
+\item $BF2$: There is a setting $\vec{o'}$ of the applicable actions in $\vec{\pi'}$, and a setting of $W \mapsto (\pi  - \pi')$ such that:
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w^\star](s_n \not\models \phi)
+(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}, W \leftarrow \vec{w^\star}](s_n \not\models \phi)
 \]
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
 \end{enumerate}
 
 
-(Where $W\leftarrow w^\star$ denotes fixing all non-$\epsilon$ action slots in $W$ to their original actions.)
+(Where $W\leftarrow \vec{w^\star}$ denotes fixing all non-$\epsilon$ action slots in $Z$ to their original actions.)
 
 \end{defn}
 
 \subsubsection*{Agent Causes}
 Sometimes we may desire to know if a specific agent or subset of agents caused a particular variable assignment to occur. This allows for statements such as ``Person $X$ is solely responsible for event $\phi$".
 \begin{defn}
-A subset of agents $\vec{A}$ is a cause of $\phi$ iff there exists some cause $\pi'=o$ of $\phi$ such that every agent in $\vec{A}$ is a label of at least one action in $\vec{X}$, further, only agents mentioned in $\vec{A}$ can perform actions in $\pi'$.
+A subset of agents $\vec{A}$ is a cause of $\phi$ iff there exists some cause $\vec{X}=\vec{x}$ of $\phi$ such that every agent in $\vec{A}$ is a label of at least one action in $\vec{X}$, further, only agents mentioned in $\vec{A}$ are action labels in $\vec{X}$.
 \end{defn}
 
 

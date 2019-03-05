@@ -88,9 +88,9 @@ But this reasoning is simplistic. What if the boy's grades were so bad that he w
 
 For this paper we consider a slightly more robust choice of actions. Instead of introducing the empty action, we consider the full set of applicable actions available to an agent in a given state. In order to concisely capture the minutia of this kind of counterfactual reasoning we borrow intuition from the causality framework of @TODOrefHP and introduce our own framework.
 
-Given a single-agent planning task $\Pi=(V, A, s_0, s_\star)$ and plan $\pi<a_1,...,a_n>$, we define the \textit{causal plan setting} (CSP) $(\pi,\Pi)$. Intuitively the CSP corresponds to the full set of information we have involving the problem. It describes the goal, constraints, and exogenous circumstances that drove the sequence of actions that actually occurred.
+Given a single-agent planning task $\Pi=(V, A, s_0, s_\star)$ and plan $\pi<a_1,...,a_n>$, we define the \textit{causal plan setting} (CPS) $(\pi,\Pi)$. Intuitively the CPS corresponds to the full set of information we have involving the problem. It describes the goal, constraints, and exogenous circumstances that drove the sequence of actions that actually occurred.
 
-Let $s_n$ denote the final state of the agent after each action in the planning task has been applied\footnote{Although we have stated that plans using conflicting exogenous actions do not necessarily result in a single deterministic final state, our intuition for causality allows us to treat the plan and final state as known quantities examined after the fact. Thus we ensure that there is only one state final state $s_n$}. The variable assignment for which we would like to identify the cause $\phi$ is always such that $s_n \models \phi$ in the CSP. The relationship between the $CSP$ and $\phi$ is described as follows:
+Let $s_n$ denote the final state of the agent after each action in the planning task has been applied\footnote{Although we have stated that plans using conflicting exogenous actions do not necessarily result in a single deterministic final state, our intuition for causality allows us to treat the plan and final state as known quantities examined after the fact. Thus we ensure that there is only one state final state $s_n$}. The variable assignment for which we would like to identify the cause $\phi$ is always such that $s_n \models \phi$ in the CPS. The relationship between the $CPS$ and $\phi$ is described as follows:
 
 \[
 (\pi, \Pi) \models (s_n \models \phi)
@@ -103,7 +103,7 @@ Let $\pi'\mapsto \pi$ denote a situation in which all elements in $\pi'$ are act
 $\pi' \leftarrow \vec{o'}$ is the setting of every non-$\epsilon$ action slot $a_k$ to the singleton action $\vec{o'}[k]$.
 
 
-A counterfactual consideration on a CSP asks the question ``What if some subset of actions $\pi'$ in $\pi$ had been given the values $\vec{o'}$?". If changing the values of $\vec{o'}$ still results in the values $\phi$ in the final state, we write:
+A counterfactual consideration on a CPS asks the question ``What if some subset of actions $\pi'$ in $\pi$ had been given the values $\vec{o'}$?". If changing the values of $\vec{o'}$ still results in the values $\phi$ in the final state, we write:
 
 \[
 (\pi, \Pi) \models [\pi' \leftarrow \vec{o'}](s_n \models \phi)
@@ -116,7 +116,7 @@ If, on the other hand, $\phi$ no longer holds in the final state, we write:
 \]
 
 
-A \textit{multiagent causal plan setting} (MCPS) works in an analogous way. The MCSP $(\pi,\Xi)$ is the multi-agent planning task combined with the executed plan. Actions slots now also encompass allowable actions by other agents at a given timeslot (remember that which agents may act at that time slot is determined by the scheduling function $T$).
+A \textit{multiagent causal plan setting} (MCPS) works in an analogous way. The MCPS $(\pi,\Xi)$ is the multi-agent planning task combined with the executed plan. Actions slots now also encompass allowable actions by other agents at a given timeslot (remember that which agents may act at that time slot is determined by the scheduling function $T$).
 
 A counterfactual consideration on a MCPS in which setting the actions slots described by $\pi'$ to the actions $\vec{o'}$ still results in the values $\phi$ in the final state, we write:
 
@@ -130,26 +130,114 @@ And if $\phi$ no longer holds in the final state, we write:
 (\pi, \Xi) \models [\pi' \leftarrow \vec{o'}](s_n \not\models \phi)
 \]
 
-Finally, let $(\pi-\pi')$ denote the plan obtained by setting all non-$\epsilon$ actions in $\pi'$ to $\epsilon$ in $\pi$.
+Finally, let $(\pi-\pi')$ denote the plan obtained by setting all non-$\epsilon$ actions slots in $\pi'$ to $\epsilon$ in $\pi$. For example, given $\pi=(a_1,a_2,a_3)$ and $\pi'=(\epsilon, a_2, \epsilon)$, $(\pi-\pi')=(a_1, \epsilon, a_3)$, where $a_i$ is an action slot.
 
 \section{Mathematical Preliminaries HP Causality}
 
 @TODOall  Discuss the idea of causes. Provide details about the causal setting. Discuss counterfactual reasoning.
 
+Halpern and Pearl @TODOref set out to define the cause of variable assignments in the final world. In order to do this they required a rigid and consistent set of operations on representations of the real world.
+
+The first step in the HP approach is to define the \textit{model}. Using this model, it is possible to make statements such as ``$A$ is the cause of $B$ in  model $M$ according to some definition of causality $X$." Though we might disagree on precisely which definition of causality to use, we should still achieve unambiguous solutions when that definition is applied. 
+
+A model makes use of set of \textit{variables} which may take on various values. In our running example, the boy doing his homework may be a variable $HW$ where $HW=1$ may denote the boy doing his homework and $HW=0$ denotes that he has not done his homework. The concept of variables in HP-causality is analogous to that which we have described in planning. However, in HP-causality there is no separation of actions from variables. Thus, as well as having discrete values assigned \textit{a priori}, variable assignments can also occur as the result of \textit{structural equations}. When all variable domains are binary ($X \in \{0,1\}$), any structural equations can be expressed as $X=\phi$ where
+
+\[
+\phi= \phi | \phi' | max(\phi, \phi') | min(\phi, \phi') 
+\]
+
+Intuitively the $max()$ and $min()$ operations capture the $\land$ and $\lor$ operations defined in planning, respectively. And, indeed, the same symbols are often used in HP-causality models.
+
+Halpern and Pearl define \textit{exogenous variables} and \textit{endogenous variable}. Exogenous variables are those variables whose value is determined by factors outside the model. Endogenous variables, by contrast, are defined by structural equations within the model.
+
+Halpern and Pearl enforce an independence criteria on structural equations, so that the sequence in which that are considered does not matter and the final variable assignments are still deterministically defined. To evaluate a causality model, one first assigns the exogenous variables, and then iterates through the structural equation (updating variables at each step) until no new variable assignments occur (@TODOdiagram).
+
+A causal setting $(M,u)$ is the world described by the structural equations of the model $M$ and the exogenous variables $u$. For a given set of variables $phi$ the causal setting exactly describes the value of all those variables after calculation of all structural equations. We write
+
+\[
+(M,u) \models \phi
+\]
+
+The final information needed to describe causality in causal settings is a way to represent counterfactual reasoning. To represent the idea of ``What would happen if some feature of the world were other than it is", we use variable alternate variable assignments $x'$ for some set of variables $X$. Thus, if changing $X$ to $x'$ prime still results in variable assignments $\phi$ we write
+
+\[
+(M,u)\models [X\leftarrow x']\phi
+\]
+
+And if $\phi$ no longer holds after the assignment we write
+
+\[
+(M,u)\models [X\leftarrow x']\lnot \phi
+\]
 
 %-----------------------------HP CAUSALITY----------------------------------------
 \section{HP-Causality}
 This section briefly describes the notion of HP-causality and the three main definitions. @TODO must include 2 other definition and description of how inserting counterfactuals works.
 
-\subsection{The Modified definition of HP-Causality}
-\begin{defn}$\vec{X}=\vec{x}$ is an actual cause of $\phi$ in the causal setting $(M,\vec{u})$ iff the following 3 conditions hold:
+
+\subsection{The Original definition of HP-Causality}
+\begin{defn}$X=x$ is an actual cause of $\phi$ in the causal setting $(M,u)$ according to the original causality definition iff the following 3 conditions hold:
 \begin{enumerate}
-\item $(M,\vec{u}) \models (\vec{X}=\vec{x})$ and $(M,\vec{u}) \models \phi$.
-\item $AC2(a^m)$: There is a set $\vec{W}$ of variables in $V$ and a setting $\vec{x'}$ of the variables in $\vec{X}$ such that if $(M,\vec{u}) \models \vec{W} = \vec{w^*}$, then:
+\item $(M,u) \models (X=x)$ and $(M,u) \models \phi$.
+\item $AC2(a)$: There is a partition of $V$ (the endogenous variables) into two disjoint subsets $Z$ and $W$ with $X'\subseteq Z'$ and a setting $x'$ and $w$ of the variables in $X$ and $W$, respectively, such that
+
 \[
-(M,\vec{u}) \models [\vec{X} \leftarrow \vec{x'}, \vec{W} \leftarrow \vec{w^*}] \neg \phi
+(M,u) \models [X\leftarrow x', W\leftarrow w]\lnot \phi
+\] 
+
+\item $AC2(b^o)$: If $z^\star$ is such that $(M,u)\models Z = z^\star$, then for all subsets $Z'$ of $Z-X$, we have
+
+\[
+(M,u) \models [X\leftarrow x, W \leftarrow w, Z' \leftarrow z^\star]\phi
+\] 
+
+\item $X$ is minimal, there is no strict subset of $X'$ of $X$ such that $X' = x'$ satisfies the above conditions.
+\end{enumerate}
+
+\end{defn}
+
+\subsection{The Updated definition of HP-Causality}
+\begin{defn}$X=x$ is an actual cause of $\phi$ in the causal setting $(M,u)$ according to the updated causality definition iff the following 3 conditions hold:
+\begin{enumerate}
+\item $(M,u) \models (X=x)$ and $(M,u) \models \phi$.
+\item $AC2(a)$: There is a partition of $V$ (the endogenous variables) into two disjoint subsets $Z$ and $W$ with $X'\subseteq Z'$ and a setting $x'$ and $w$ of the variables in $X$ and $W$, respectively, such that
+
+\[
+(M,u) \models [X\leftarrow x', W\leftarrow w]\lnot \phi
+\] 
+
+\item $AC2(b^u)$: If $z^\star$ is such that $(M,u)\models Z = z^\star$, then for all subsets $Z'$ of $Z-X$ and $W'$ of $W$, we have
+
+\[
+(M,u) \models [X\leftarrow x, W' \leftarrow w, Z' \leftarrow z^\star]\phi
+\] 
+
+\item $X$ is minimal, there is no strict subset of $X'$ of $X$ such that $X' = x'$ satisfies the above conditions.
+\end{enumerate}
+
+\end{defn}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{The Modified definition of HP-Causality}
+\begin{defn}$X=x$ is an actual cause of $\phi$ in the causal setting $(M,u)$ iff the following 3 conditions hold:
+\begin{enumerate}
+\item $(M,u) \models (X=x)$ and $(M,u) \models \phi$.
+\item $AC2(a^m)$: There is a set $\vec{W}$ of variables in $V$ and a setting $x'$ of the variables in $X$ such that if $(M,u) \models W = w^*$, then:
+\[
+(M,u) \models [X \leftarrow x', W \leftarrow w^*] \neg \phi
 \]
-\item $\vec{X}$ is minimal. There is no strict subset of $\vec{X}$ that satisfies the previous 2 conditions.
+\item $X$ is minimal. There is no strict subset of $X$ that satisfies the previous 2 conditions.
 \end{enumerate}
 
 \end{defn}
@@ -203,7 +291,7 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 \item $BF2(b^o)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then for all subplans $Z' \mapsto (Z - \pi')$ we have
 
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o, W \leftarrow w', Z' \leftarrow z^\star](s_n \models \phi)
+(\pi, \Xi) \models [\pi \leftarrow o, W \leftarrow w', Z' \leftarrow z^\star](s_n \models \phi)
 \]
 
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 3 conditions.
@@ -231,7 +319,7 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 \item $BF2(b^u)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then \textit{for all} subplans $W' \mapsto W$ and $Z' \mapsto (Z - \pi')$ we have
 
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o, W' \leftarrow w', Z \leftarrow z^\star](s_n \models \phi)
+(\pi, \Xi) \models [\pi \leftarrow o, W' \leftarrow w', Z \leftarrow z^\star](s_n \models \phi)
 \]
 
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 3 conditions.
@@ -242,25 +330,25 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 
 \subsubsection*{Modified Planning}
 \begin{defn}
-Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow o$ is a cause of some final variable assignment $s_n \models \phi$ according to the modified planning definition iff the following 3 conditions hold:
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow \vec{o}$ is a cause of some final variable assignment $s_n \models \phi$ according to the modified planning definition iff the following 3 conditions hold:
 \begin{enumerate}
-\item  $o \mapsto \pi$, $\pi' \models o$ and $s_n \models \phi$.
-\item $BF2$: There is a setting $o'$ of the applicable actions in $\pi'$, and a setting of $W \mapsto (\pi  - \pi')$ such that:
+\item  $\vec{o} \mapsto \pi$, $\pi' \models \vec{o}$ and $s_n \models \phi$.
+\item $BF2$: There is a setting $\vec{o'}$ of the applicable actions in $\vec{\pi'}$, and a setting of $W \mapsto (\pi  - \pi')$ such that:
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w^\star](s_n \not\models \phi)
+(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}, W \leftarrow \vec{w^\star}](s_n \not\models \phi)
 \]
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
 \end{enumerate}
 
 
-(Where $W\leftarrow w^\star$ denotes fixing all non-$\epsilon$ action slots in $W$ to their original actions.)
+(Where $W\leftarrow \vec{w^\star}$ denotes fixing all non-$\epsilon$ action slots in $Z$ to their original actions.)
 
 \end{defn}
 
 \subsubsection*{Agent Causes}
 Sometimes we may desire to know if a specific agent or subset of agents caused a particular variable assignment to occur. This allows for statements such as ``Person $X$ is solely responsible for event $\phi$".
 \begin{defn}
-A subset of agents $\vec{A}$ is a cause of $\phi$ iff there exists some cause $\pi'=o$ of $\phi$ such that every agent in $\vec{A}$ is a label of at least one action in $\vec{X}$, further, only agents mentioned in $\vec{A}$ can perform actions in $\pi'$.
+A subset of agents $\vec{A}$ is a cause of $\phi$ iff there exists some cause $\vec{X}=\vec{x}$ of $\phi$ such that every agent in $\vec{A}$ is a label of at least one action in $\vec{X}$, further, only agents mentioned in $\vec{A}$ are action labels in $\vec{X}$.
 \end{defn}
 
 
