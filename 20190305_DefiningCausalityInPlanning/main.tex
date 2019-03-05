@@ -98,7 +98,11 @@ Let $s_n$ denote the final state of the agent after each action in the planning 
 
 An \textit{action slot} $q(\pi,k)$ denotes the domain of possible actions at a given position. For example, if $\pi=(a_1,a_2,a_3)$, $q(\pi,1)$ identifies the position occupied by $a_1$, thus containing action $a_1$ and any other action that could have been performed by any agent at that moment.
 
-Let $\pi'\mapsto \pi$ denote a situation in which all elements in $\pi'$ are action slots in $\pi$ which could have occurred in the same order or else are the empty action. Specifically, for all $a_k \in \pi'$, $a \in q(\pi,k) \cup \epsilon$. The operation $\pi'\mapsto \pi$ is henceforth abbreviated to the symbol $\pi'$.
+Let $\pi'\subseteq \pi$ denote a situation in which all elements in $\pi'$ are action slots in $\pi$ which could have occurred in the same order or else are the empty action. Specifically, for all $a_k \in \pi'$, $a \in q(\pi,k) \cup \epsilon$. The operation $\pi'\subseteq \pi$ is henceforth abbreviated to the symbol $\pi'$.
+
+@TODOdescribe $o \subseteq \pi$
+
+@TODOdescribe finally instead of $models$
 
 $\pi' \leftarrow \vec{o'}$ is the setting of every non-$\epsilon$ action slot $a_k$ to the singleton action $\vec{o'}[k]$.
 
@@ -261,9 +265,9 @@ For this reasons I propose changed definitions of the HP-causality models which 
 \subsubsection*{But-for Planning}
 \begin{defn} 
 
-Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow o$ is a but-for cause of some final variable assignment $s_n \models \phi$ iff the following 3 conditions hold:
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ is a but-for cause of some final variable assignment $s_n \models \phi$ iff the following 3 conditions hold:
 \begin{enumerate}
-\item  $o \mapsto \pi$, $\pi' \models o$ and $s_n \models \phi$.
+\item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
 \item $BF2$: There is a setting $\vec{o'}$ of the non-$\epsilon$ action slots in $\pi'$ such that:
 \[
 (\pi, \Xi) \models [\pi' \leftarrow o'](s_n \not\models \phi)
@@ -276,19 +280,19 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 
 \subsubsection*{Original Planning}
 \begin{defn}
-Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow o$ is a cause of some final variable assignment $s_n \models \phi$ according to the Original planning definition iff the following 3 conditions hold:
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ is a cause of some final variable assignment $s_n \models \phi$ according to the Original planning definition iff the following 3 conditions hold:
 \begin{enumerate}
-\item  $o \mapsto \pi$, $\pi' \models o$ and $s_n \models \phi$.
+\item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
 
 
 
-\item $BF2(a)$: There is a partition of $E$ (the \textit{endogenous} actions) into two disjoint subplans $Z \mapsto \pi$ and $W \mapsto (\pi - Z)$ with $\pi' \mapsto Z$ and a setting $o'$ and $w'$ of the actions in $\pi'$ and $W$ respectively such that
+\item $BF2(a)$: There is a partition of $E$ (the \textit{endogenous} actions) into two disjoint subplans $Z \subseteq \pi$ and $W \subseteq (\pi - Z)$ with $\pi' \subseteq Z$ and a setting $o'$ and $w'$ of the actions in $\pi'$ and $W$ respectively such that
 
 \[
 (\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](s_n \not\models \phi)
 \]
 
-\item $BF2(b^o)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then for all subplans $Z' \mapsto (Z - \pi')$ we have
+\item $BF2(b^o)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then for all subplans $Z' \subseteq (Z - \pi')$ we have
 
 \[
 (\pi, \Xi) \models [\pi \leftarrow o, W \leftarrow w', Z' \leftarrow z^\star](s_n \models \phi)
@@ -304,19 +308,19 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 
 \subsubsection*{Updated Planning}
 \begin{defn}
-Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow o$ is a cause of some final variable assignment $s_n \models \phi$ according to the Original planning definition iff the following 3 conditions hold:
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ is a cause of some final variable assignment $s_n \models \phi$ according to the Original planning definition iff the following 3 conditions hold:
 \begin{enumerate}
-\item  $o \mapsto \pi$, $\pi' \models o$ and $s_n \models \phi$.
+\item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
 
 
 
-\item $BF2(a)$: There is partition of $E$ (the endogenous actions) into two disjoint subplans $Z \mapsto \pi$ and $W \mapsto (\pi - Z)$ with $\pi' \mapsto Z$ and a setting $o'$ and $w'$ of the actions in $\pi$ and $W$ respectively such that
+\item $BF2(a)$: There is partition of $E$ (the endogenous actions) into two disjoint subplans $Z \subseteq \pi$ and $W \subseteq (\pi - Z)$ with $\pi' \subseteq Z$ and a setting $o'$ and $w'$ of the actions in $\pi$ and $W$ respectively such that
 
 \[
 (\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](s_n \not\models \phi)
 \]
 
-\item $BF2(b^u)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then \textit{for all} subplans $W' \mapsto W$ and $Z' \mapsto (Z - \pi')$ we have
+\item $BF2(b^u)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then \textit{for all} subplans $W' \subseteq W$ and $Z' \subseteq (Z - \pi')$ we have
 
 \[
 (\pi, \Xi) \models [\pi \leftarrow o, W' \leftarrow w', Z \leftarrow z^\star](s_n \models \phi)
@@ -330,10 +334,10 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 
 \subsubsection*{Modified Planning}
 \begin{defn}
-Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \mapsto \pi$, $\pi' \leftarrow \vec{o}$ is a cause of some final variable assignment $s_n \models \phi$ according to the modified planning definition iff the following 3 conditions hold:
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow \vec{o}$ is a cause of some final variable assignment $s_n \models \phi$ according to the modified planning definition iff the following 3 conditions hold:
 \begin{enumerate}
-\item  $\vec{o} \mapsto \pi$, $\pi' \models \vec{o}$ and $s_n \models \phi$.
-\item $BF2$: There is a setting $\vec{o'}$ of the applicable actions in $\vec{\pi'}$, and a setting of $W \mapsto (\pi  - \pi')$ such that:
+\item  $\vec{o} \subseteq \pi$, $\pi' \models \vec{o}$ and $s_n \models \phi$.
+\item $BF2$: There is a setting $\vec{o'}$ of the applicable actions in $\vec{\pi'}$, and a setting of $W \subseteq (\pi  - \pi')$ such that:
 \[
 (\pi, \Xi) \models [\pi' \leftarrow \vec{o'}, W \leftarrow \vec{w^\star}](s_n \not\models \phi)
 \]
@@ -341,7 +345,7 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 \end{enumerate}
 
 
-(Where $W\leftarrow \vec{w^\star}$ denotes fixing all non-$\epsilon$ action slots in $Z$ to their original actions.)
+(Where $W\leftarrow \vec{w^\star}$ denotes fixing all non-$\epsilon$ action slots in $W$ to their original actions.)
 
 \end{defn}
 
@@ -398,6 +402,25 @@ The following table shows which classes causes my definition of causality can id
 \fi
 
 \section{Examples}
+\subsection{Forest Fire}
+\subsubsection*{General Description}
+Imagine a scenario in which we are in a dry field. We drop a lit match just as lightning strikes the field. A forest fire occurs. What is the cause of the forest fire? Was it dropping the match? Was it the lightning strike? Was it both? Or was it perhaps neither?
 
+\subsubsection*{HP Causality}
+
+\subsubsection*{Planning Causality}
+
+\subsection{Rock Throwing}
+\subsubsection*{General Description}
+Imagine a scenario in which Bill and Sue come across a bottle sitting on a windowsill. Being naughty children, they both pick up stones and throw them at the bottle. The bottle shatters. Who is responsible in this scenario?
+
+Intuitively this problem can be modelled in an identical manner to the Forest Fire example, but in his book Halpern suggested a different way to model this problem which allows us to differentiate causes more clearly. He argues that one stone (we will assume Sue's) will certainly strike the bottle before the other and, as a consequence, there is a more complex model of this problems which allows differentiation between the two agents.
+
+\subsubsection*{HP Causality}
+
+\subsubsection*{Planning Causality}
+
+
+@TODOexample overdetermination
 \section{Conclusion}
 \end{document}
