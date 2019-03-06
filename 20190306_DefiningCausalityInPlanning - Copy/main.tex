@@ -97,7 +97,7 @@ Let $s_n$ denote the final state of the agent after each action in the planning 
 (\pi, \Pi) \models (\Diamond \phi)
 \]
 
-Where $\Diamond \phi$ is symbol borrowed from linear temporal logic (LTL) @TODOref, and means that $\phi$ holds in the final state after execution of the plan (analogous to $s_n \models \phi$).
+Where $\Diamond \phi$ is a symbol borrowed from linear temporal logic (LTL) \cite{galton1987temporal}, and means that $\phi$ holds in the final state after execution of the plan (analogous to $s_n \models \phi$).
 
 An \textit{action slot} $q(\pi,k)$ denotes the domain of possible actions at a given position. For example, if $\pi=(a_1,a_2,a_3)$, $q(\pi,1)$ identifies the position occupied by $a_1$, thus containing action $a_1$ and any other action that could have been performed by any agent at that moment.
 
@@ -407,6 +407,8 @@ The following table shows which classes causes my definition of causality can id
 \subsubsection*{General Description}
 Imagine a scenario in which we are in a dry field. We drop a lit match just as lightning strikes the field. A forest fire occurs. What is the cause of the forest fire? Was it dropping the match? Was it the lightning strike? Was it both? Or was it perhaps neither?
 
+Halpern notes that two intuitive possible relations between the forest fire and the lightning and matches make sense. It may be the case that either of the lightning or the dropped match is sufficient to cause the fire (the \textit{disjunctive model}); or else it may be that both are required for the fire to start (the \textit{conjunctive model}).
+
 \subsubsection*{HP Causality}
 
 \subsubsection*{Planning Causality}
@@ -417,7 +419,17 @@ Imagine a scenario in which Bill and Sue come across a bottle sitting on a windo
 
 Intuitively this problem can be modelled in an identical manner to the Forest Fire example, but in \cite{halpern2005causes} Halpern suggests a different way to model this problem which allows us to differentiate causes more clearly. He argues that one stone (we will assume Sue's) will certainly strike the bottle before the other and, as a consequence, there is a more complex model of this problem which allows differentiation between the two agents.
 
+
+
 \subsubsection*{HP Causality}
+
+We use the variables $FF$, $MD$, and $L$ to represent the forest fire, the match being dropped, and lightning striking, respectively. These are the endogenous variables. As always, $u=(u_1, u_2)$ is the vector of the exogenous variables. The because we wish to actively manipulate our potential causes, we assign them to the exogenous variables. Thus, $MD \leftarrow u_1$, and $L \leftarrow u_2$. The structural equation expressing whether a forest fire occurs is $FF\leftarrow(MD \lor L)$ in the disjunctive case and $FF \leftarrow (MD \land L)$ in the conjunctive case.
+
+\textit{Disjunctive Model}: Using the original definition of HP-causality and setting $X:=MD$ and $W:=L$ we find that setting $X \leftarrow \bot$ and $W \leftarrow \bot$ results in $FF=\bot$, satisfying $AC2(a)$. It follows that when $X$  is allowed to retain its original value ($MD=\top$), and $W$ is kept at the counterfactual value ($L=\bot$), then $\phi$ still occurs ($FF=\top$). This holds true for any value of $Z'$ which can only be the empty set. We achieve the same result using the updated definition of HP-causality. But in the modified definition holding setting $X \leftarrow x'$ and fixing some other variables $W$ to their original value will not affect the value of $\phi$. Thus $MD=\top$ is not a cause of $FF$ in this definition. However, the pair of variables $MD=\top$ and $L=\top$ together are a cause.
+
+\textit{Conjunctive Model}: In this example $AC2(a)$ is satisfied by simply changing the value of $X$ and setting $X:=MD$ and leaving $W$ empty. $AC2(b^o)$ is satisfied by this assignment too. The updated version of HP causality holds with identical logic (because $W$ is empty). And finally, (because $X$ is a but-for cause) it follows that $X$ is a cause according to the modified definition too.
+
+@TODOincludeimages
 
 \subsubsection*{Planning Causality}
 
