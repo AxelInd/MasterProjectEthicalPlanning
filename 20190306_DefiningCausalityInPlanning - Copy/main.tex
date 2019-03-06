@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 
 \usepackage{amsthm}
+\usepackage{amssymb,graphicx}
 
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section] % reset theorem numbering for each chapter
@@ -19,7 +20,7 @@
 \maketitle
 
 \begin{abstract}
-HP-Causality (@TODO reference) allows us to determine which variable values are causes of certain other final variable values. The normal HP-Causality approach is limited to a structural equation representations of the problem under consideration. This paper describes a multi-agent planning approach to defining causality. Extensions to the Original, Updated, and Modified definitions of HP-Causality to planning are formalised and discussed.
+The causality proposed by Halpern and Pearl \cite{halpern2005causes} allows us to determine which variable values are causes of certain other final variable values according to a variety of definitions. The normal HP-Causality approach is limited to a structural equation representations of the problem under consideration. This paper describes a multi-agent planning approach to defining causality. Extensions to the Original, Updated, and Modified definitions of HP-Causality to planning are formalised and discussed.
 \end{abstract}
 
 %-----------------------------INTRODUCTION----------------------------------------
@@ -80,21 +81,23 @@ For the purposes of readability, the rest of this paper will assume unique opera
 
 \subsection{Counterfactual Reasoning in Planning}
 
-Counterfactual reasoning concerns the question: ''What would happen if some feature of the world were other than it is?", and is an important part of many approaches to causality @TODOrefhp. For example, we can intuitively grasp concepts such as: ``\textit{if the boy had not done his homework, he would not have passed}", which deal with a world different from the one in which we exist. Thus, without going into the minutia of defining causality, as will be done later, we have some intuition that not doing his homework, may have been cause of his failure.
+Counterfactual reasoning concerns the question: ''What would happen if some feature of the world were other than it is?", and is an important part of many approaches to causality \cite{halpern2005causes}. For example, we can intuitively grasp concepts such as: ``\textit{if the boy had not done his homework, he would not have passed}", which deal with a world different from the one in which we exist. Thus, without going into the minutia of defining causality, as will be done later, we have some intuition that not doing his homework, may have been cause of his failure.
 
 But this reasoning is simplistic. What if the boy's grades were so bad that he would have failed anyway? Could we still consider not doing his homework to be a cause of failure? Our intuitions of cause differ from scenario to scenario, and for this reason we consider four distinct definitions of causality in this paper.
 
 @TODOref introduce and justify a simple counterfactual reasoning procedure for single-agent plans. Specifically it asks what would have happened if some action had not occured and the agent had instead done nothing? In the context of a planning task the authors note that is not sufficient to replace the action slot pair $(a_j, o_j)$ in question with the empty action $\epsilon=(\top, \bot)$ to make $(a_j, \epsilon)$, because that action may have caused variable assignment $v=d$ and without that assignment some later action $a_{j+k}$ may no longer be permissible. The authors, instead, allow impermissible actions to be considered during counterfactual reasoning. That is, they assume that, provided the plan was initially valid, we should allow all other actions to occur as they had before, regardless of violated preconditions.
 
-For this paper we consider a slightly more robust choice of actions. Instead of introducing the empty action, we consider the full set of applicable actions available to an agent in a given state. In order to concisely capture the minutia of this kind of counterfactual reasoning we borrow intuition from the causality framework of @TODOrefHP and introduce our own framework.
+For this paper we consider a slightly more robust choice of actions. Instead of introducing the empty action, we consider the full set of applicable actions available to an agent in a given state. In order to concisely capture the minutia of this kind of counterfactual reasoning we borrow intuition from the causality framework of \cite{halpern2005causes} and introduce our own framework.
 
 Given a single-agent planning task $\Pi=(V, A, s_0, s_\star)$ and plan $\pi<a_1,...,a_n>$, we define the \textit{causal plan setting} (CPS) $(\pi,\Pi)$. Intuitively the CPS corresponds to the full set of information we have involving the problem. It describes the goal, constraints, and exogenous circumstances that drove the sequence of actions that actually occurred.
 
-Let $s_n$ denote the final state of the agent after each action in the planning task has been applied\footnote{Although we have stated that plans using conflicting exogenous actions do not necessarily result in a single deterministic final state, our intuition for causality allows us to treat the plan and final state as known quantities examined after the fact. Thus we ensure that there is only one state final state $s_n$}. The variable assignment for which we would like to identify the cause $\phi$ is always such that $s_n \models \phi$ in the CPS. The relationship between the $CPS$ and $\phi$ is described as follows:
+Let $s_n$ denote the final state of the agent after each action in the planning task has been applied\footnote{Although we have stated that plans using conflicting exogenous actions do not necessarily result in a single deterministic final state, our intuition for causality allows us to treat the plan and final state as known quantities examined after the fact. Thus we ensure that there is only one state final state $s_n$}. The variable assignment for which we would like to identify the cause $\phi$ is always such that $s_n \models \phi$ in the CPS. The relationship between the $CPS$ and $\phi$ is described as
 
 \[
-(\pi, \Pi) \models (s_n \models \phi)
+(\pi, \Pi) \models (\Diamond \phi)
 \]
+
+Where $\Diamond \phi$ is symbol borrowed from linear temporal logic (LTL) @TODOref, and means that $\phi$ holds in the final state after execution of the plan (analogous to $s_n \models \phi$).
 
 An \textit{action slot} $q(\pi,k)$ denotes the domain of possible actions at a given position. For example, if $\pi=(a_1,a_2,a_3)$, $q(\pi,1)$ identifies the position occupied by $a_1$, thus containing action $a_1$ and any other action that could have been performed by any agent at that moment.
 
@@ -102,21 +105,19 @@ Let $\pi'\subseteq \pi$ denote a situation in which all elements in $\pi'$ are a
 
 @TODOdescribe $o \subseteq \pi$
 
-@TODOdescribe finally instead of $models$
-
 $\pi' \leftarrow \vec{o'}$ is the setting of every non-$\epsilon$ action slot $a_k$ to the singleton action $\vec{o'}[k]$.
 
 
 A counterfactual consideration on a CPS asks the question ``What if some subset of actions $\pi'$ in $\pi$ had been given the values $\vec{o'}$?". If changing the values of $\vec{o'}$ still results in the values $\phi$ in the final state, we write:
 
 \[
-(\pi, \Pi) \models [\pi' \leftarrow \vec{o'}](s_n \models \phi)
+(\pi, \Pi) \models [\pi' \leftarrow \vec{o'}](\Diamond \phi)
 \]
 
 If, on the other hand, $\phi$ no longer holds in the final state, we write:
 
 \[
-(\pi, \Pi) \models [\pi' \leftarrow \vec{o'}](s_n \not\models \phi)
+(\pi, \Pi) \models [\pi' \leftarrow \vec{o'}](\lnot \Diamond \phi)
 \]
 
 
@@ -125,13 +126,13 @@ A \textit{multiagent causal plan setting} (MCPS) works in an analogous way. The 
 A counterfactual consideration on a MCPS in which setting the actions slots described by $\pi'$ to the actions $\vec{o'}$ still results in the values $\phi$ in the final state, we write:
 
 \[
-(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}](s_n \models \phi)
+(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}](\Diamond \phi)
 \]
 
 And if $\phi$ no longer holds in the final state, we write:
 
 \[
-(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}](s_n \not\models \phi)
+(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}](\lnot \Diamond \phi)
 \]
 
 Finally, let $(\pi-\pi')$ denote the plan obtained by setting all non-$\epsilon$ actions slots in $\pi'$ to $\epsilon$ in $\pi$. For example, given $\pi=(a_1,a_2,a_3)$ and $\pi'=(\epsilon, a_2, \epsilon)$, $(\pi-\pi')=(a_1, \epsilon, a_3)$, where $a_i$ is an action slot.
@@ -140,7 +141,7 @@ Finally, let $(\pi-\pi')$ denote the plan obtained by setting all non-$\epsilon$
 
 @TODOall  Discuss the idea of causes. Provide details about the causal setting. Discuss counterfactual reasoning.
 
-Halpern and Pearl @TODOref set out to define the cause of variable assignments in the final world. In order to do this they required a rigid and consistent set of operations on representations of the real world.
+Halpern and Pearl \cite{halpern2005causes} set out to define the cause of variable assignments in the final world. In order to do this they required a rigid and consistent set of operations on representations of the real world.
 
 The first step in the HP approach is to define the \textit{model}. Using this model, it is possible to make statements such as ``$A$ is the cause of $B$ in  model $M$ according to some definition of causality $X$." Though we might disagree on precisely which definition of causality to use, we should still achieve unambiguous solutions when that definition is applied. 
 
@@ -176,7 +177,7 @@ And if $\phi$ no longer holds after the assignment we write
 
 %-----------------------------HP CAUSALITY----------------------------------------
 \section{HP-Causality}
-This section briefly describes the notion of HP-causality and the three main definitions. @TODO must include 2 other definition and description of how inserting counterfactuals works.
+This section briefly describes the notion of HP-causality and the three main definitions. @TODO must include two other definition and description of how inserting counterfactuals works.
 
 
 \subsection{The Original definition of HP-Causality}
@@ -270,7 +271,7 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 \item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
 \item $BF2$: There is a setting $\vec{o'}$ of the non-$\epsilon$ action slots in $\pi'$ such that:
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o'](s_n \not\models \phi)
+(\pi, \Xi) \models [\pi' \leftarrow o'](\lnot \Diamond \phi)
 \]
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
 \end{enumerate}
@@ -289,13 +290,13 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 \item $BF2(a)$: There is a partition of $E$ (the \textit{endogenous} actions) into two disjoint subplans $Z \subseteq \pi$ and $W \subseteq (\pi - Z)$ with $\pi' \subseteq Z$ and a setting $o'$ and $w'$ of the actions in $\pi'$ and $W$ respectively such that
 
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](s_n \not\models \phi)
+(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](\lnot \Diamond \phi)
 \]
 
 \item $BF2(b^o)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then for all subplans $Z' \subseteq (Z - \pi')$ we have
 
 \[
-(\pi, \Xi) \models [\pi \leftarrow o, W \leftarrow w', Z' \leftarrow z^\star](s_n \models \phi)
+(\pi, \Xi) \models [\pi \leftarrow o, W \leftarrow w', Z' \leftarrow z^\star](\Diamond \phi)
 \]
 
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 3 conditions.
@@ -317,13 +318,13 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 \item $BF2(a)$: There is partition of $E$ (the endogenous actions) into two disjoint subplans $Z \subseteq \pi$ and $W \subseteq (\pi - Z)$ with $\pi' \subseteq Z$ and a setting $o'$ and $w'$ of the actions in $\pi$ and $W$ respectively such that
 
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](s_n \not\models \phi)
+(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](\lnot \Diamond \phi)
 \]
 
 \item $BF2(b^u)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then \textit{for all} subplans $W' \subseteq W$ and $Z' \subseteq (Z - \pi')$ we have
 
 \[
-(\pi, \Xi) \models [\pi \leftarrow o, W' \leftarrow w', Z \leftarrow z^\star](s_n \models \phi)
+(\pi, \Xi) \models [\pi \leftarrow o, W' \leftarrow w', Z \leftarrow z^\star](\Diamond \phi)
 \]
 
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 3 conditions.
@@ -339,7 +340,7 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 \item  $\vec{o} \subseteq \pi$, $\pi' \models \vec{o}$ and $s_n \models \phi$.
 \item $BF2$: There is a setting $\vec{o'}$ of the applicable actions in $\vec{\pi'}$, and a setting of $W \subseteq (\pi  - \pi')$ such that:
 \[
-(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}, W \leftarrow \vec{w^\star}](s_n \not\models \phi)
+(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}, W \leftarrow \vec{w^\star}](\lnot \Diamond \phi)
 \]
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
 \end{enumerate}
@@ -414,7 +415,7 @@ Imagine a scenario in which we are in a dry field. We drop a lit match just as l
 \subsubsection*{General Description}
 Imagine a scenario in which Bill and Sue come across a bottle sitting on a windowsill. Being naughty children, they both pick up stones and throw them at the bottle. The bottle shatters. Who is responsible in this scenario?
 
-Intuitively this problem can be modelled in an identical manner to the Forest Fire example, but in his book Halpern suggested a different way to model this problem which allows us to differentiate causes more clearly. He argues that one stone (we will assume Sue's) will certainly strike the bottle before the other and, as a consequence, there is a more complex model of this problem which allows differentiation between the two agents.
+Intuitively this problem can be modelled in an identical manner to the Forest Fire example, but in \cite{halpern2005causes} Halpern suggests a different way to model this problem which allows us to differentiate causes more clearly. He argues that one stone (we will assume Sue's) will certainly strike the bottle before the other and, as a consequence, there is a more complex model of this problem which allows differentiation between the two agents.
 
 \subsubsection*{HP Causality}
 
@@ -423,4 +424,17 @@ Intuitively this problem can be modelled in an identical manner to the Forest Fi
 
 @TODOexample overdetermination
 \section{Conclusion}
+
+
+
+
+
+
+
+
+\bibliography{bibliography} 
+\bibliographystyle{ieeetr}
+
+
+
 \end{document}
