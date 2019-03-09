@@ -184,8 +184,35 @@ And if $\phi$ no longer holds after the assignment we write
 \section{HP-Causality}
 This section briefly describes the notion of HP-causality and the three main definitions. @TODO must include two other definition and description of how inserting counterfactuals works.
 
+\subsection{But-for Causality}
+
+But-for causality is perhaps the simplest and most intuitive definition of causality. For a selected set of variables $X$ it asks ``If some, or all, of the variables in $X$ were set to different values, would effect $\phi$ still occur?"
+
+\begin{defn}$X=x$ is a but-for cause of $\phi$ in the causal setting $(M,u)$ iff the following 3 conditions hold:
+\begin{enumerate}
+\item $(M,u) \models (X=x)$ and $(M,u) \models \phi$.
+\item $AC2(bf)$: There is a setting $x'$ of the variables in $X$ such that
+
+\[
+(M,u) \models [X\leftarrow x']\lnot \phi
+\] 
+
+\item $X$ is minimal, there is no strict subset of $X'$ of $X$ such that $X' = x'$ satisfies the above conditions.
+\end{enumerate}
+
+\end{defn}
+
+
+
+
+
 
 \subsection{The Original definition of HP-Causality}
+
+But-for causality is very effective at capturing the most basic intuition about causality, but fails to account for cases where some variables $X$ may have become but-for causes if the values of other variables in the causal setting were different.
+
+The intuition of the original definition of causality (\cite{halpern2005causes}) is somewhat more complex than that of but-for causality, but it captures a far more nuanced intuition of causality.
+
 \begin{defn}$X=x$ is an actual cause of $\phi$ in the causal setting $(M,u)$ according to the original causality definition iff the following 3 conditions hold:
 \begin{enumerate}
 \item $(M,u) \models (X=x)$ and $(M,u) \models \phi$.
@@ -428,6 +455,7 @@ We use the variables $FF$, $MD$, and $L$ to represent the forest fire, the match
 
 \subsubsection*{Planning Causality}
 
+
 \subsection{Rock Throwing}
 \subsubsection*{General Description}
 Imagine a scenario in which Bill and Sue come across a bottle sitting on a windowsill. Being naughty children, they both pick up stones and throw them at the bottle. The bottle shatters. Who is responsible in this scenario?
@@ -445,9 +473,78 @@ All three variants of HP-causality identify $ST$ as a cause of $BS$, they also a
 
 
 \subsubsection*{Planning Causality}
+To describe these examples in the multi-agent planning domain the scenario must be described in terms of an action plan, and multi-agent planning task. This information we can perform counterfactual reasoning on the CPS.
 
+One possible representation of the multi-agent planning task $\Xi=<A, \Pi, T, E>$ is as follows. $A=(Bill, Sue)$, $\Pi=(\Pi_{Bill},\Pi_{Sue})$, $T= (Bill, Sue)$ @TODOexogenousactionshere?.
 
-@TODOexample overdetermination
+\[
+\Pi_{Bill}=(V, A_{Bill}, s_0, s_{\star Bill})
+\]
+
+\[
+V = {billThrew, sueThrew, billHit, sueHit, bottleShattered}
+\]
+
+\[
+A_{Bill}=\{ThrowBill = (\top, billyThrew = \top), {DontThrowBill=(\top, \bot)} \}
+\]
+
+\[
+s_0 = \{\lnot billThrew, \lnot sueThrew, \lnot billHit, \lnot sueHit, \lnot bottleShattered \}
+\]
+
+\[ s_{\star Bill} = \{bottleShattered\} \]
+
+\[
+\Pi_{Sue}=(V, A_{Sue}, s_0, s_{\star Sue})
+\]
+
+\[
+A_{Sue}=\{ThrowSue = (\top, sueThrew = \top), {DontThrowSue=(\top, \bot)} \}
+\]
+
+The exogenous variables in this situation are only applicable at time point 2 (after both Sue and Bill have taken an action) follows
+
+\[
+HitsSue = (sueThrew, sueHit = \top)
+\]
+
+\[
+HitsBill = (billThrew \land \lnot sueThrew, billHit = \top)
+\]
+
+\[
+BottleShatters = (sueHit \lor billHit, bottleShattered = \top)
+\]
+
+The action plan describing the example is as follows
+
+\[
+\pi_1=(ThrowBill, ThrowSue)
+\]
+
+The inclusion of exogenous actions results in the following action plan
+
+\[
+\pi = (ThrowBill, ThrowSue, SueHits, BillHits, BottleShatters)
+\]
+
+It is important to note that, if exogenous action sequences were unconstrained, any combination of any number of the actions $SueHits$, $BillHits$, and $BottleShatters$ could occur (provided they result in a state change).
+
+With this formulation of the action plan and MCSP and knowledge that we wish to model causes that result in $bottleShattered$ ($\phi=bottleShattered$), it is now possible to model the actual world 
+
+\[
+(\Xi, \pi) \models (\Diamond \phi)
+\]
+
+Using this formulation it is immediately apparent that $ThrowSue$ is not a but-for cause of $phi$ in the causal setting, there is no setting of the first action slot (Sue's actions) in $\pi$ that does not cause $bottleShattered=\top$.
+
+As always, the original and updated models of causality are more complex. Both these definitions limit the action slots that can be manipulated to the endogenous actions of each agent. Thus, setting $Z=q(\pi,1)$, $X=q(\pi,1)$, $o'=DontThrowSue$, $W=q(\pi,2)$, $w'=DontThrowBill$, and executing the exogenous actions as normal is sufficient to validate $BF2(a)$. $BF2(B^o)$ is easily satisfied because $Z'$ is empty, and keeping $ThrowSue=\top$ while holding $W\leftarrow w'$ still results in $bottleShattered=\top$. The updated definition results in similar conclusions.
+
+Our first real deviation from the conclusions of the standard HP causality model comes when we use the modified planning definition. $SueThrows$ is \textit{not} a cause according to this definition because there is no way to fix the remaining action slots to their original action which which would cause any value of $\pi'$ to result in $\lnot phi$.
+
+Intuitively this occurs because although $BillHits$ was inapplicable in the MCSP, there is no way of preventing it from firing when we counterfactually reason that Sue has not thrown in our current formulation. A simple extension to the modified planning definition allows us to solve this problem. By substituting an empty exogenous action $Empty=(\top, \bot)$ wherever an exogenous action is inapplicable in $\pi$, we can now show $ThrowSue$ is a cause of $\phi$ in the MCSP.
+
 \section{Conclusion}
 
 
