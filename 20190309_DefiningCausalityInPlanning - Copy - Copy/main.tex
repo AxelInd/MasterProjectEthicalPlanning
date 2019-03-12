@@ -21,22 +21,24 @@
 \maketitle
 
 \begin{abstract}
-The causality proposed by Halpern and Pearl \cite{halpern2005causes} allows us to determine which variable values are causes of certain other final variable values according to a variety of definitions. The normal HP-Causality approach is limited to a structural equation representations of the problem under consideration. This paper describes a multi-agent planning approach to defining causality. Extensions to the Original, Updated, and Modified definitions of HP-Causality to planning are formalised and discussed.
+The causality proposed by \cite{halpern2005causes} allows us to determine which variable values are causes of certain other final variable values according to a variety of definitions. The normal HP-Causality approach is limited to a structural equation representations of the problem under consideration. This paper describes a multi-agent planning approach to defining causality. Extensions to the Original, Updated, and Modified definitions of HP-Causality to planning are formalised and discussed.
 \end{abstract}
 
 %-----------------------------INTRODUCTION----------------------------------------
-\section{Introduction}
+\section{Introduction} \label{sec:introduction}
 
 Halpern and Pearl \cite{halpern2005causes} introduced a framework for modelling and evaluating causality. This framework allows examination of modelled problems in terms of a number of standard and author-created definitions of causality.
 
 Though powerful and extensively cited in literature, Halpern's work has yet to be translated into an Artificial Intelligence Planning Setting. The purpose of this paper is to capture the spirit and results of this framework in a multi-agent planning domain. This extension allows us to directly identify agents as causes, rather than just individual variable assignments.
 
-Section @TODOsection describes the mathematical preliminaries of multi-agent planning (@TODOsection) and Halpern's causal models (@TODOsection). @TODOsection describes but-for causes, the original, updated, and modified formulations of HP-causality. @TODOsection provides direct interpretations of these definitions in the planning domain. @TODOsection examines several example which show the power of various causality definitions and contrasts the original HP-causality with the planning interpretation. Finally @TODOsection concludes this paper with a summary of its contributions and potential future work.
+In order to do this we must define a language for reasoning with counter-factuals in the Multi-agent Planning Domain and describe precisely what causation means in such a context.
+
+This paper, necessarily, begins with an extensive examination of HP-causality and the notion of counter-factual reasoning. Section~\ref{sec:singleAgentPlanning} and Section~\ref{sec:multiagentPlanning} describe the mathematical preliminaries of single and multi-agent planning respectively. Section~\ref{hpPreliminaries} describes Halpern's causal models. Section~\ref{sec:hpCausality} describes but-for causes, the original, updated, and modified formulations of HP-causality. Section~\ref{sec:hpCausalityPlanning} provides direct interpretations of these definitions in the planning domain. Section~\ref{sec:examples} examines several examples which show the power of various causality definitions and contrasts the original HP-causality with the planning interpretation. Finally Section~\ref{conclusion} concludes this paper with a summary of its contributions and potential future work.
 
 %-----------------------------PRELIMINARIES---------------------------------------
 \section{Planning Preliminaries}
 
-\subsection{Single Agent Planning Tasks}
+\subsection{Single Agent Planning Tasks} \label{sec:singleAgentPlanning}
 \subsubsection*{Language}
 A single-agent planning task is a 4-tuple $\Pi=(V, A, s_0, s_\star)$. Where $V$ denotes the set of variables and maps each to it's allowable values (or domain) such that, for some variable $v$, $v \in D_v$. A \textit{fact} is a pair $(v, d \in D_v)$. A conjunction of facts $v_1=d_1,...,v_k=d_k$ is \textit{consistent} if it contains no contradictory facts. That is, no pair of facts exists in this conjunction such that $v_j=d_j$ and $v_j \neq d_j$.
 
@@ -62,14 +64,14 @@ This paper will concern itself only with the third approach. $\Delta_{exo}(s)$ r
 
 A \textit{plan} $\pi=(a_1,...a_n)$ is a sequence of endogenous actions. In a typical plan it is sufficient to apply $a_1$ to the initials state $s_0$ to achieve the first state $s_1$ and then apply $a_2$, etc. However, to incorporate exogenous actions, $\Delta_{exo}(s)$ must be calculated at each time point in which an exogenous action may occur. If each action in $\pi$ (supplemented by appropriate intermediate states as a result of $\Delta_{exo}(s)$) is applicable to the preceding state, then the plan is called applicable. 
 
-It is worth noting that using the strict approach to exogenous actions above it does not simply suffice to show that some exogenous action in $\Delta_{exo}(s)$ will make the next endogenous action applicable. Instead all applicable exogenous actions must be considered, thus introducing branching complexity into the computation @TODOintroduceexampleofwhythismatters.
+It is worth noting that using the strict approach to exogenous actions above it does not simply suffice to show that some exogenous action in $\Delta_{exo}(s)$ will make the next endogenous action applicable. Instead all applicable exogenous actions must be considered, thus introducing branching complexity into the computation.
 
 
 
-\subsection{Multi-Agent Action Plans and Planning Tasks}
-Multi-agent planning tasks extend the intuition of single agent planning tasks as described @TODOsection to allow for consideration of a finite number of agents. Each agent may differ in their allowable actions and goals but are assumed share the same initial state and subsequent states after any endogenous or exogenous action occurs.
+\subsection{Multi-Agent Action Plans and Planning Tasks} \label{sec:multiagentPlanning}
+Multi-agent planning tasks extend the intuition of single agent planning tasks as described Section~\ref{hpPreliminaries} to allow for consideration of a finite number of agents. Each agent may differ in their allowable actions and goals but are assumed share the same initial state and subsequent states after any endogenous or exogenous action occurs.
 
-A multi-agent planning task $\Xi$ for $n$ agents is a 3-tuple as follows:
+A multi-agent planning task $\Xi$ for $n$ agents is a 4-tuple as follows:
 
 \[
 \Xi = <A, \Pi, T, E>
@@ -87,13 +89,13 @@ A multi-agent action plan $\pi=((A_x, \Pi_x[o]_1),...(A_y, \Pi_y[o]_n))$. Where 
 
 For the purposes of readability, the rest of this paper will assume unique operator names and omit agent labels and specification of the operators available for that agent. Thus, multi-agent planning tasks will be treated as $\pi=(o_1,...o_n)$, except where doing so would limit some required expressibility. 
 
-\subsection{Counterfactual Reasoning in Planning}
+\subsection{Counterfactual Reasoning in Planning} \label{sec:counterfactualPlanning}
 
 Counterfactual reasoning concerns the question: ''What would happen if some feature of the world were other than it is?", and is an important part of many approaches to causality \cite{halpern2005causes}. For example, we can intuitively grasp concepts such as: ``\textit{if the boy had not done his homework, he would not have passed}", which deal with a world different from the one in which we exist. Thus, without going into the minutia of defining causality, as will be done later, we have some intuition that not doing his homework, may have been cause of his failure.
 
 But this reasoning is simplistic. What if the boy's grades were so bad that he would have failed anyway? Could we still consider not doing his homework to be a cause of failure? Our intuitions of cause differ from scenario to scenario, and for this reason we consider four distinct definitions of causality in this paper.
 
-\cite{lind2019ethical} introduce and justify a simple counterfactual reasoning procedure for single-agent plans. Specifically it asks what would have happened if some action had not occured and the agent had instead done nothing? In the context of a planning task the authors note that is not sufficient to replace the action slot pair $(a_j, o_j)$ in question with the empty action $\epsilon=(\top, \bot)$ to make $(a_j, \epsilon)$, because that action may have caused variable assignment $v=d$ and without that assignment some later action $a_{j+k}$ may no longer be permissible. The authors, instead, allow impermissible actions to be considered during counterfactual reasoning. That is, they assume that, provided the plan was initially valid, we should allow all other actions to occur as they had before, regardless of violated preconditions.
+\cite{lind2019ethical} introduce and justify a simple counterfactual reasoning procedure for single-agent plans. Specifically it asks what would have happened if some action had not occurred and the agent had instead done nothing? In the context of a planning task the authors note that is not sufficient to replace the action slot pair $(a_j, o_j)$ in question with the empty action $\epsilon=(\top, \bot)$ to make $(a_j, \epsilon)$, because that action may have caused variable assignment $v=d$ and without that assignment some later action $a_{j+k}$ may no longer be permissible. The authors, instead, allow impermissible actions to be considered during counterfactual reasoning. That is, they assume that, provided the plan was initially valid, we should allow all other actions to occur as they had before, regardless of violated preconditions.
 
 For this paper we consider a slightly more robust choice of actions. Instead of introducing the empty action, we consider the full set of applicable actions available to an agent in a given state. In order to concisely capture the minutia of this kind of counterfactual reasoning we borrow intuition from the causality framework of \cite{halpern2005causes} and introduce our own framework.
 
@@ -147,9 +149,7 @@ And if $\phi$ no longer holds in the final state, we write:
 
 Finally, let $(\pi-\pi')$ denote the plan obtained by setting all non-$\epsilon$ actions slots in $\pi'$ to $\epsilon$ in $\pi$. For example, given $\pi=(a_1,a_2,a_3)$ and $\pi'=(\epsilon, a_2, \epsilon)$, $(\pi-\pi')=(a_1, \epsilon, a_3)$, where $a_i$ is an action slot.
 
-\section{Mathematical Preliminaries HP Causality}
-
-@TODOall  Discuss the idea of causes. Provide details about the causal setting. Discuss counterfactual reasoning.
+\section{Mathematical Preliminaries HP Causality} \label{hpPreliminaries}
 
 Halpern and Pearl \cite{halpern2005causes} set out to define the cause of variable assignments in the final world. In order to do this they required a rigid and consistent set of operations on representations of the real world.
 
@@ -186,10 +186,10 @@ And if $\phi$ no longer holds after the assignment we write
 \]
 
 %-----------------------------HP CAUSALITY----------------------------------------
-\section{HP-Causality}
+\section{HP-Causality} \label{sec:hpCausality}
 This section briefly describes the notion of HP-causality and the definitions and interpretations of But-For Causality, Original Causality, Updated Causality, and Modified Causality.
 
-\subsection{But-for Causality}
+\subsection{But-for Causality} \label{sec:butForPlanning}
 
 But-for causality is perhaps the simplest and most intuitive definition of causality. For a selected set of variables $X$ it asks ``If some, or all, of the variables in $X$ were set to different values, would effect $\phi$ still occur?"
 
@@ -212,7 +212,7 @@ But-for causality is perhaps the simplest and most intuitive definition of causa
 
 
 
-\subsection{The Original definition of HP-Causality}
+\subsection{The Original definition of HP-Causality} \label{sec:orginal}
 
 But-for causality is very effective at capturing the most basic intuition about causality, but fails to account for cases where some variables $X$ may have become but-for causes if the values of other variables in the causal setting were different.
 
@@ -238,7 +238,7 @@ The intuition of the original definition of causality (\cite{halpern2005causes})
 
 \end{defn}
 
-\subsection{The Updated definition of HP-Causality}
+\subsection{The Updated definition of HP-Causality} \label{sec:updated}
 \begin{defn}$X=x$ is an actual cause of $\phi$ in the causal setting $(M,u)$ according to the updated causality definition iff the following 3 conditions hold:
 \begin{enumerate}
 \item $(M,u) \models (X=x)$ and $(M,u) \models \phi$.
@@ -271,7 +271,7 @@ The intuition of the original definition of causality (\cite{halpern2005causes})
 
 
 
-\subsection{The Modified definition of HP-Causality}
+\subsection{The Modified definition of HP-Causality} \label{sec:modified}
 \begin{defn}$X=x$ is an actual cause of $\phi$ in the causal setting $(M,u)$ iff the following 3 conditions hold:
 \begin{enumerate}
 \item $(M,u) \models (X=x)$ and $(M,u) \models \phi$.
@@ -291,12 +291,12 @@ Intuitively the first two requirements are: the possible cause must actually hav
 
 \newpage
 
-\section{HP-Causality Planning}
+\section{HP-Causality Planning} \label{sec:hpCausalityPlanning}
 The HP causality definitions above are restricted to the identification of variable causes, and as such, are not suitable for use in a planning domain where questions posed may also require the identification of a subset of actions or agents as causes.
 
 For this reasons I propose changed definitions of the HP-causality models which produce comparable conclusions given intuitively identical, but structural different problems. Specifically, my definitions allow for the use of actions plans rather than structural equations as original used.
 
-\subsubsection*{But-for Planning}
+\subsubsection*{But-for Planning} \label{sec:butForPlanning}
 \begin{defn} 
 
 Given a multi-agent action plan $\pi$ with a final state $s_n$, some action slots of $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a but-for cause of some final variable assignment $s_n \models \phi$ iff the following 3 conditions hold:
@@ -312,7 +312,7 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some action slot
 
 \end{defn}
 
-\subsubsection*{Original Planning}
+\subsubsection*{Original Planning} \label{sec:originalPlanning}
 \begin{defn}
 Given a multi-agent planning task $\Xi$ and action plan $\pi$ with a final state $s_n$, some actions slots $\pi'$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a cause of some final variable assignment $s_n \models \phi$ according to the Original planning definition iff:
 \begin{enumerate}
@@ -340,7 +340,7 @@ Given a multi-agent planning task $\Xi$ and action plan $\pi$ with a final state
 
 
 
-\subsubsection*{Updated Planning}
+\subsubsection*{Updated Planning}\label{sec:updatedPlanning}
 \begin{defn}
 Given a multi-agent planning task $\Xi$ and action plan $\pi$ with a final state $s_n$, some actions slots $\pi'$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a cause of some final variable assignment $s_n \models \phi$ according to the Updated planning definition iff:
 \begin{enumerate}
@@ -400,43 +400,8 @@ A subset of agents $\vec{A}$ is a cause of $\phi$ iff there exists some cause $\
 \end{itemize}
 
 
-
-\iffalse
-\subsection{Planning Causality relations}
-
-The following table shows which classes causes my definition of causality can identify. Columns are results $\phi$. Rows are causes $\vec{X}$.
-
-\begin{center}
-\begin{tabular}{ |c|c|c| }
-\hline 
-  & \textbf{Variable} & \textbf{Action} \\
- \hline 
- \textbf{Variable} & No\footnote{Although it has been mentioned that actions can be used to fix variables. Which gives the same results one would intuitively expect when using variables.} & No \\ 
- \hline
- \textbf{Action} & Yes & @TODO \\ 
- \hline
- \textbf{Agent} & Yes & @TODO\\
- \hline
-\end{tabular}
-\end{center}
-
-@TODO I would like to address the following questions:
-
-\begin{enumerate}
-\item What does it mean for an action to be the cause of an action? Is it sufficient to say that without that prior action the next action would not have occurred? What if only one action was available so $X=x'=x$?
-\item How would extensions to a game theory approach affect causality? What if changing some action $X$ would always result in a known change to some later action $Y$? Would we treat the two actions as a single action for the purposes of fixing and changing actions? How would this affect computational complexity?
-\end{enumerate}
-
-
-
-\section{Responsibility and Blameworthiness}
-\subsection{HP Responsibility and Blameworthiness}
-\subsection{Extending Responsibility and Blameworthiness to Planning}
-
-\fi
-
-\section{Examples}
-\subsection{Forest Fire}
+\section{Examples} \label{sec:examples}
+\subsection{Forest Fire} \label{sec:forestFire}
 \subsubsection*{General Description}
 Imagine a scenario in which we are in a dry field. We drop a lit match just as lightning strikes the field. A forest fire occurs. What is the cause of the forest fire? Was it dropping the match? Was it the lightning strike? Was it both? Or was it perhaps neither?
 
@@ -532,10 +497,9 @@ In the conjunctive case $DropMatch$ is a cause according to all four definition 
 
 by definition.
 
-\subsubsection*{Planning Causality}
 
 
-\subsection{Rock Throwing}
+\subsection{Rock Throwing} \label{sec:rockThrowing}
 \subsubsection*{General Description}
 Imagine a scenario in which Bill and Sue come across a bottle sitting on a windowsill. Being naughty children, they both pick up stones and throw them at the bottle. The bottle shatters. Who is responsible in this scenario?
 
@@ -624,12 +588,33 @@ Our first real deviation from the conclusions of the standard HP causality model
 
 Intuitively this occurs because although $BillHits$ was inapplicable in the MCSP, there is no way of preventing it from firing when we counterfactually reason that Sue has not thrown in our current formulation. A simple extension to the modified planning definition allows us to solve this problem. By substituting an empty exogenous action $Empty=(\top, \bot)$ wherever an exogenous action is inapplicable in $\pi$, we can now show $ThrowSue$ is a cause of $\phi$ in the MCSP.
 
-\section{Conclusion}
-@TODOmentionifexogenousactionisanaplicableitstilloccursbutnothinghappens
+
+
+\subsection{Voting} \label{sec:voting}
+\subsubsection*{HP Causality}
+\subsubsection*{Planning Causality}
 
 
 
 
+
+
+
+
+
+
+
+
+
+\section{Conclusion} \label{conclusion}
+
+This paper has demonstrated a practical means to interpret the causality of \citet{halpern2005causes} in the context of multi-agent artificial intelligence planning.
+
+It has introduced a multi-agent planning domain compatible with causality and counterfactual reasoning and explored formalizations of the principles of But-For, Original, Updated, and Modified planning through the use of examples. It has introduced a simple way to assign agent causes to settings in which action causes are known.
+
+It has shown the importance of describe the Causal Planning Setting (as Halpern did with Causal Settings) and introduced common-sense modifications to planning causality which allows it to reach conclusions similar to those on which it is based.
+
+Future work may include proving that relations defined by Halpern in Causal Setting (such as the guarantee of single variable causes in the original and updated definitions) still hold in the planning domain. Further, more integrative approaches to exogenous events may prove more able to accurately model non-independent actions and actions which result in making exogenous actions applicable at other points in a given action plan.
 
 
 
