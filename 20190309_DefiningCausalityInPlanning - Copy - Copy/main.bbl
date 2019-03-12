@@ -1,12 +1,26 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem{halpern2005causes}
-J.~Y. Halpern and J.~Pearl, ``Causes and explanations: A structural-model
-  approach. part ii: Explanations,'' {\em The British journal for the
-  philosophy of science}, vol.~56, no.~4, pp.~889--911, 2005.
-
-\bibitem{galton1987temporal}
-A.~Galton, {\em Temporal logics and their applications}, vol.~10.
+\bibitem[Galton(1987)]{galton1987temporal}
+Antony Galton.
+\newblock \emph{Temporal logics and their applications}, volume~10.
 \newblock Academic Press London, 1987.
+
+\bibitem[Halpern and Pearl(2005)]{halpern2005causes}
+Joseph~Y Halpern and Judea Pearl.
+\newblock Causes and explanations: A structural-model approach. part ii:
+  Explanations.
+\newblock \emph{The British journal for the philosophy of science}, 56\penalty0
+  (4):\penalty0 889--911, 2005.
+
+\bibitem[Lindner et~al.(2019)Lindner, Matmuller, and Nebel]{lind2019ethical}
+Felix Lindner, Robert Matmuller, and Bernhard Nebel.
+\newblock Moral permissibility of action plans.
+\newblock \emph{Proceedings of the Thirty-Third AAAI Conference on Artificial
+  Intelligence}, 2019.
 
 \end{thebibliography}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.26)  9 MAR 2019 12:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.26)  11 MAR 2019 10:44
 entering extended mode
 **./main.tex
 (main.tex
@@ -77,34 +77,41 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
 \c@thm=\count88
- (main.aux)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\natbib\natbib.sty"
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip46
+\bibsep=\skip47
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count89
+) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count89
+\scratchcounter=\count90
 \scratchdimen=\dimen105
 \scratchbox=\box26
-\nofMPsegments=\count90
-\nofMParguments=\count91
+\nofMPsegments=\count91
+\nofMParguments=\count92
 \everyMPshowfont=\toks22
-\MPscratchCnt=\count92
+\MPscratchCnt=\count93
 \MPscratchDim=\dimen106
-\MPnumerator=\count93
-\makeMPintoPDFobject=\count94
+\MPnumerator=\count94
+\makeMPintoPDFobject=\count95
 \everyMPtoPDFconversion=\toks23
 ) ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
 Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
@@ -151,48 +158,87 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 20.
+LaTeX Font Info:    Try loading font information for U+msa on input line 21.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 20.
+LaTeX Font Info:    Try loading font information for U+msb on input line 21.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {C:/Users/User/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3] [4]
-Overfull \hbox (5.47699pt too wide) in paragraph at lines 97--98
+Overfull \hbox (5.47699pt too wide) in paragraph at lines 100--101
 []\OT1/cmr/m/n/10 Given a single-agent plan-ning task $ = (\OML/cmm/m/it/10 V;
  A; s[]; s[]\OT1/cmr/m/n/10 )$ and plan $\OML/cmm/m/it/10  < a[]; :::; a[] >$\
 OT1/cmr/m/n/10 ,
  []
 
 [5] [6] [7] [8] [9] [10] [11]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 395.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 398.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 395.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 398.
  [12] [13]
-Overfull \hbox (11.0246pt too wide) in paragraph at lines 478--479
+Overfull \hbox (13.47075pt too wide) detected at line 487
+\OML/cmm/m/it/10 A[] \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 DropM
+atch \OT1/cmr/m/n/10 = (\OMS/cmsy/m/n/10 >\OML/cmm/m/it/10 ; matchDropped \OT1/
+cmr/m/n/10 = \OMS/cmsy/m/n/10 >\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; DontDropMatc
+h \OT1/cmr/m/n/10 = (\OMS/cmsy/m/n/10 >\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 ?\OT
+1/cmr/m/n/10 )\OMS/cmsy/m/n/10 g
+ []
+
+[14]
+Overfull \hbox (66.89879pt too wide) detected at line 503
+\OML/cmm/m/it/10 A[] \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 Strik
+eLightning \OT1/cmr/m/n/10 = (\OMS/cmsy/m/n/10 >\OML/cmm/m/it/10 ; lightningStr
+uck \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 ?\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; Don
+tStrikeLightning \OT1/cmr/m/n/10 = (\OMS/cmsy/m/n/10 >\OML/cmm/m/it/10 ; \OMS/c
+msy/m/n/10 ?\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 g
+ []
+
+
+Overfull \hbox (39.87144pt too wide) in paragraph at lines 521--522
+[]\OT1/cmr/m/n/10 And, in-clud-ing the ex-oge-nous $\OML/cmm/m/it/10 ForestFire
+$ \OT1/cmr/m/n/10 event which could be ei-ther $\OML/cmm/m/it/10 ForestFireCon$
+
+ []
+
+
+Overfull \hbox (1.58272pt too wide) in paragraph at lines 527--528
+\OML/cmm/m/it/10 StrikeLightning$ \OT1/cmr/m/n/10 is. The orig-i-nal and up-dat
+ed def-i-ni-tions agree that $\OML/cmm/m/it/10 DropMatch$
+ []
+
+
+Overfull \hbox (10.65398pt too wide) in paragraph at lines 527--528
+\OT1/cmr/m/n/10 is a cause of $\OML/cmm/m/it/10 $\OT1/cmr/m/n/10 . Set-ting $\
+OML/cmm/m/it/10 W \OT1/cmr/m/n/10 := \OML/cmm/m/it/10 q\OT1/cmr/m/n/10 (\OML/cm
+m/m/it/10 ; \OT1/cmr/m/n/10 2)$ (light-ning's ac-tion) and $\OML/cmm/m/it/10 w
+[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 StrikeLightning$
+ []
+
+[15]
+Overfull \hbox (11.0246pt too wide) in paragraph at lines 559--560
 []\OT1/cmr/m/n/10 One pos-si-ble rep-re-sen-ta-tion of the multi-agent plan-nin
 g task $ =\OML/cmm/m/it/10 < A; \OT1/cmr/m/n/10 \OML/cmm/m/it/10 ; T; E >$
  []
 
-[14] (main.bbl [15]) [16] (main.aux) ) 
+[16] [17] (main.bbl) [18] (main.aux) ) 
 Here is how much of TeX's memory you used:
- 1926 strings out of 493323
- 25824 string characters out of 3139068
- 85649 words of memory out of 3000000
- 5443 multiletter control sequences out of 15000+200000
+ 2268 strings out of 493323
+ 29939 string characters out of 3139068
+ 91534 words of memory out of 3000000
+ 5781 multiletter control sequences out of 15000+200000
  12456 words of font info for 48 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,8n,26p,1445b,253s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 39i,8n,26p,1477b,253s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
 msfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
@@ -210,9 +256,9 @@ m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.
 9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/
 type1/public/amsfonts/symbols/msam10.pfb>
-Output written on main.pdf (16 pages, 273704 bytes).
+Output written on main.pdf (18 pages, 285773 bytes).
 PDF statistics:
- 126 PDF objects out of 1000 (max. 8388607)
+ 132 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

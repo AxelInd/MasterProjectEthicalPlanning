@@ -11,6 +11,7 @@
 \newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
 \newtheorem{exmp}[thm]{Example} % same for example numbers
 
+\usepackage{natbib}
 
 \begin{document}
 
@@ -39,7 +40,7 @@ Section @TODOsection describes the mathematical preliminaries of multi-agent pla
 \subsubsection*{Language}
 A single-agent planning task is a 4-tuple $\Pi=(V, A, s_0, s_\star)$. Where $V$ denotes the set of variables and maps each to it's allowable values (or domain) such that, for some variable $v$, $v \in D_v$. A \textit{fact} is a pair $(v, d \in D_v)$. A conjunction of facts $v_1=d_1,...,v_k=d_k$ is \textit{consistent} if it contains no contradictory facts. That is, no pair of facts exists in this conjunction such that $v_j=d_j$ and $v_j \neq d_j$.
 
-$A$ denotes the set of \textit{actions} available to the agent. An action $a=<pre,eff>$ consists of a precondition, and an effect. A precondition is a conjunction of facts ($v_1=d_1,...,v_k=d_k$) and an effect is a conjunction of facts in \textit{effect normal form} (@TODOref) of the form $\phi_i \triangleright v_i:=d_i$. No contradictory effects are permitted for a single action. That is no pair of conditionals exists such that $\phi_i \triangleright v_j=d_j$ and $\phi_j \triangleright v_j \neq d_j$. $A$ is divided into two types of actions, endogenous actions and exogenous actions. Intuitively endogenous actions describe those actions an agent is able to choose to take. @TODOref add the requirement that the set of endogenous actions always contains the empty action $\epsilon=(\top,\bot)$, this is not a strict requirement in this paper, but is worth noting as a possible simplifying extension. Exogenous actions describe actions which are outside of the control of the agent and must be performed whenever possible. @TODOref treat exogenous actions as a series of, non-conflicting, actions which are associated with discrete time points $t(a)$ and must be applied as soon as they become applicable and result in a state change. By contrast, this paper drops the requirement that exogenous actions be non-conflicting and instead introduces the permissive and strict approach to dealing with such actions.
+$A$ denotes the set of \textit{actions} available to the agent. An action $a=<pre,eff>$ consists of a precondition, and an effect. A precondition is a conjunction of facts ($v_1=d_1,...,v_k=d_k$) and an effect is a conjunction of facts in \textit{effect normal form} (@TODOref) of the form $\phi_i \triangleright v_i:=d_i$. No contradictory effects are permitted for a single action. That is no pair of conditionals exists such that $\phi_i \triangleright v_j=d_j$ and $\phi_j \triangleright v_j \neq d_j$. $A$ is divided into two types of actions, endogenous actions and exogenous actions. Intuitively endogenous actions describe those actions an agent is able to choose to take. \citet{lind2019ethical} add the requirement that the set of endogenous actions always contains the empty action $\epsilon=(\top,\bot)$, this is not a strict requirement in this paper, but is worth noting as a possible simplifying extension. Exogenous actions describe actions which are outside of the control of the agent and must be performed whenever possible. \citet{lind2019ethical} treat exogenous actions as a series of, non-conflicting, actions which are associated with discrete time points $t(a)$ and must be applied as soon as they become applicable and result in a state change. By contrast, this paper drops the requirement that exogenous actions be non-conflicting and instead introduces the permissive and strict approach to dealing with such actions.
 
 The \textit{state} of a classical planning task is the conjunction of all variable pairs. $s_0$ describes the initial state of the agent, before any actions have been performed. $s_\star$ describes the goal state of the agent, to be achieved by execution of some number of consecutive actions.
 
@@ -50,14 +51,14 @@ The \textit{change set} $[eff]_s$ of an action is the set of facts that are affe
 
 Applying an actions $a$ to state $s$ results a state $s'$ achieved by replacing all variables in $s$ that occur in $[eff]_s$ with conditional values assigned by that change set.
 
-As with @TODOref, we assume \textit{urgent semantics} for exogenous actions. That is, if an exogenous action is applicable, it must be applied immediately and no other action may precede it. However, because this paper allows conflicting exogenous actions, it is not obvious how to deal with cases where multiple exogenous actions are simultaneously applicable. There are three intuitive solutions to this problem:
+As with \cite{lind2019ethical}, we assume \textit{urgent semantics} for exogenous actions. That is, if an exogenous action is applicable, it must be applied immediately and no other action may precede it. However, because this paper allows conflicting exogenous actions, it is not obvious how to deal with cases where multiple exogenous actions are simultaneously applicable. There are three intuitive solutions to this problem:
 \begin{enumerate}
 \item \textit{Ordering approach}: provide a strict ordering relationship among these actions and always apply the applicable action with the highest precedence first (provided it results in a state change).\footnote{Easy to do, linear time requirements, but forces a possibly unnatural order on events.}
 \item \textit{Permissive approach}: select some random order of exogenous actions.\footnote{Linear time requirements, good for generating a plan, but ignores other potential action sequences.}
 \item \textit{Strict approach}: consider every possible permutation of exogenous actions that can be performed.\footnote{Exhaustive, but computationally slow.}
 \end{enumerate}
 
-This paper will concern itself only with the third approach. $\Delta_{exo}(s)$ refers to the set of unique states that may be achieved by application of all relevant exogenous actions using one of the schemes above (Note that, unlike @TODOref, $\Delta_{exo}(s)$ is not closed and does not guarantee a single unique state in the strict approach).
+This paper will concern itself only with the third approach. $\Delta_{exo}(s)$ refers to the set of unique states that may be achieved by application of all relevant exogenous actions using one of the schemes above (Note that, unlike \cite{lind2019ethical}, $\Delta_{exo}(s)$ is not closed and does not guarantee a single unique state in the strict approach).
 
 A \textit{plan} $\pi=(a_1,...a_n)$ is a sequence of endogenous actions. In a typical plan it is sufficient to apply $a_1$ to the initials state $s_0$ to achieve the first state $s_1$ and then apply $a_2$, etc. However, to incorporate exogenous actions, $\Delta_{exo}(s)$ must be calculated at each time point in which an exogenous action may occur. If each action in $\pi$ (supplemented by appropriate intermediate states as a result of $\Delta_{exo}(s)$) is applicable to the preceding state, then the plan is called applicable. 
 
@@ -71,10 +72,12 @@ Multi-agent planning tasks extend the intuition of single agent planning tasks a
 A multi-agent planning task $\Xi$ for $n$ agents is a 3-tuple as follows:
 
 \[
-\Xi = <A, \Pi, T>
+\Xi = <A, \Pi, T, E>
 \]
 
- Where $A=(A_1,...A_k)$ is an ordered list of all agent names in the planning task. $\Pi$ is the ordered list of agent planning tasks for each agent in $A$. $\Pi=(\Pi_1,...,\Pi_n)$, and $T$ is a scheduling function which determines which agents may act at any given time-point $t$.
+ Where $A=(A_1,...A_k)$ is an ordered list of all agent names in the planning task. $\Pi$ is the ordered list of agent planning tasks for each agent in $A$. $\Pi=(\Pi_1,...,\Pi_n)$, $\Pi_i=(V,A,s_0,s_\star)$, and $T$ is a scheduling function which determines which agents may act at any given time-point $t$.
+ 
+$E$ is the set of all exogenous actions which may occur. These exogenous actions are defined as described in the single-agent planning task context.
  
 This definition intuitively aggregates a set of disparate planning tasks and makes them accessible via unique labels.
 
@@ -90,7 +93,7 @@ Counterfactual reasoning concerns the question: ''What would happen if some feat
 
 But this reasoning is simplistic. What if the boy's grades were so bad that he would have failed anyway? Could we still consider not doing his homework to be a cause of failure? Our intuitions of cause differ from scenario to scenario, and for this reason we consider four distinct definitions of causality in this paper.
 
-@TODOref introduce and justify a simple counterfactual reasoning procedure for single-agent plans. Specifically it asks what would have happened if some action had not occured and the agent had instead done nothing? In the context of a planning task the authors note that is not sufficient to replace the action slot pair $(a_j, o_j)$ in question with the empty action $\epsilon=(\top, \bot)$ to make $(a_j, \epsilon)$, because that action may have caused variable assignment $v=d$ and without that assignment some later action $a_{j+k}$ may no longer be permissible. The authors, instead, allow impermissible actions to be considered during counterfactual reasoning. That is, they assume that, provided the plan was initially valid, we should allow all other actions to occur as they had before, regardless of violated preconditions.
+\cite{lind2019ethical} introduce and justify a simple counterfactual reasoning procedure for single-agent plans. Specifically it asks what would have happened if some action had not occured and the agent had instead done nothing? In the context of a planning task the authors note that is not sufficient to replace the action slot pair $(a_j, o_j)$ in question with the empty action $\epsilon=(\top, \bot)$ to make $(a_j, \epsilon)$, because that action may have caused variable assignment $v=d$ and without that assignment some later action $a_{j+k}$ may no longer be permissible. The authors, instead, allow impermissible actions to be considered during counterfactual reasoning. That is, they assume that, provided the plan was initially valid, we should allow all other actions to occur as they had before, regardless of violated preconditions.
 
 For this paper we consider a slightly more robust choice of actions. Instead of introducing the empty action, we consider the full set of applicable actions available to an agent in a given state. In order to concisely capture the minutia of this kind of counterfactual reasoning we borrow intuition from the causality framework of \cite{halpern2005causes} and introduce our own framework.
 
@@ -452,6 +455,84 @@ We use the variables $FF$, $MD$, and $L$ to represent the forest fire, the match
 
 @TODOpossibletable?
 
+\subsubsection*{Planning Causality}
+Describing this example in a Planning Causality framework requires us to make some decisions. These decisions have a very significant influence over the results of the model. They can affect its computational complexity, and the intuitive meaning of any conclusions reached.
+
+\begin{itemize}
+
+\item \textit{What are the variables?} The most fundamental planning consideration is which variables to include and which to exclude. Only a variable that is explicitly modelled or a composite of other variables can be considered in our definition of causality. In this example we may feel that the variables we use must at least describe whether the forest fire occurred as that is the event for which we desire a cause. Variable domains are just as important; in these examples variable domains will be binary wherever possible.
+
+\item \textit{Who are the agents?} Should the arsonist be an agent? This seems fairly intuitive. But should nature also be an agent? Arguments can be made for or against this approach. One might argue that technically, nature has no agency and behaves in a complex, but deterministic, manner. @TODO defines agency as ``Agency is the capacity of an actor to act in a given environment." This definition would seem to imply that the lightning strike is not the act of an agent, but rather of the environment itself. But, using our definition of causality, which encapsulates the entire planning task and plan, it could be argued that the MCPS as a whole is the environment that facilitates action. There are many arguments along these lines that can be made for and against the agency of lightning strikes. For this example we will assume a natural disaster agent which is capable of causing lightning to strike, or of doing nothing.
+
+\item \textit{What actions are available to each agent?} We only have knowledge of the causal path and final world that actually resulted. We know, at the very least, that lightning is capable of striking, that the arsonist is able to drop the match, and that a fire can start. What we do not know is what other actions any of these agents might have performed. Is it reasonable to say that, instead of dropping the match, the arsonist decided to do nothing, or make a sandwich, or chase butterflies? All of these actions, a many, many more, are consistent with our understanding of human capabilities, but do they represent different worlds in terms of the variables we wish to model? It may be that in reality making a sandwich or chasing butterflies are completely different activities, but in our model they are essentially the same. They both take us from a world in which the match was dropped, to a counterfactual world in which it was not. For this reason and following the example of \cite{lind2019ethical} these examples will allow agents an action that results in nothing being done.
+
+\item \textit{What are the exogenous actions?}: Exogenous actions follow similar intuition to endogenous ones. They should be plausible from a counterfactual reasoning perspective. And they should be sufficiently complex to describe preferences and interactions between different aspects of the MCSP. @TODOexample illustrates the importance of defining exogenous actions that allow for a more fine-grained approach to causality in planning.
+
+\item \textit{What is the scheduling of actions?}: The sequence of allowable actions or actor turns is very important. Are actions simultaneous or parallel? When may exogenous actions occur? Can an agent's actions affect this scheduling? All of these questions result in different causal models. And, in the absence of certain right answer, the best advice is often to keep the scheduling as simple as it can reasonably be, but no simpler.
+
+\end{itemize}
+
+Taking these questions into consideration, one possible description of the plan ($\pi$), and planning task ($\Xi = (A, \Pi, T, E)$) is $A=(Arsonist, Lightning)$, $\Pi=(\Pi_{arsonist}, \Pi_{lightning})$, $T=(Arsonist, Lightning)$.
+
+\[
+\Pi_{Arsonist} = (V, A_{Arsonist}, s_0, s_{\star Arsonist})
+\]
+
+\[
+V = \{matchDropped, lightningStruck, forestFire\}
+\]
+
+\[
+A_{Arsonist} = \{ DropMatch = (\top, matchDropped = \top), DontDropMatch = (\top, \bot) \}
+\]
+
+\[
+s_0 = \{\lnot matchDropped, \lnot lightningStruck, \lnot forestFire \}
+\]
+
+\[
+s_{\star Arsonist} = \{ forestFire \}
+\]
+
+\[
+\Pi_{Lightning} = (V, A_{Lightning}, s_0, s_{\star Lightning})
+\]
+
+\[
+A_{Lightning}=\{ StrikeLightning = (\top, lightningStruck=\bot), DontStrikeLightning = (\top, \bot) \}
+\]
+
+The choice of exogenous actions actions ($E$), at their simplest, mirrors the conjunctive and disjunctive case discussed in the standard HP setting. Either both $lightningStruck$ and $matchDropped$ must have occurred, or else only one of them is sufficient.
+
+\[
+ForestFireCon = ( matchDropped \land lightningStruck, forrestFire = \top )
+\]
+
+\[
+ForestFireDis = ( matchDropped \lor lightningStruck, forrestFire = \top )
+\]
+
+And the plan followed in the actual world is as follows
+
+\[
+\pi_1 = (DropMatch, StrikeLightning)
+\]
+
+And, including the exogenous $ForestFire$ event which could be either $ForestFireCon$ or $ForestFireDis$ , it becomes
+
+\[
+\pi = (DropMatch, StrikeLightning, ForestFire)
+\]
+
+The choice of $\phi:=(forestFire)$, and $\pi'=q(\pi,1)$ (the arsonist's action slot) is obvious from the phrasing of the original example. The conclusions of all three planning causality come to the same conclusions as standard HP causality. In the disjunctive model, $DropMatch$ is not a but-for cause or cause according to the modified definition of $forestFire=\top$, although $DropMatch \land StrikeLightning$ is. The original and updated definitions agree that $DropMatch$ is a cause of $\phi$. Setting $W:= q(\pi,2)$ (lightning's action) and $w'=StrikeLightning$ and setting $o':= DontStrikeLightning$ satisfies @TODOequation. @TODOequation is satisfied because $Z'$ can only the empty set, and when $\pi'$ is returned to its original value, $\phi$ still occurs in the final state.
+
+In the conjunctive case $DropMatch$ is a cause according to all four definition of causality. It is a cause according to the but-for definition of causality, and thus a cause according to the modified definition. It is a cause in the original and updated versions of planning causality because setting $o':= DontDropMatch$ is sufficient to satisfy @TODOequation. It then trivially follows that setting $\pi' \leftarrow o$ results in the real representation of the problem again and
+
+\[
+(\Xi, \pi) \models (\Diamond \phi)
+\]
+
+by definition.
 
 \subsubsection*{Planning Causality}
 
@@ -546,6 +627,11 @@ Our first real deviation from the conclusions of the standard HP causality model
 Intuitively this occurs because although $BillHits$ was inapplicable in the MCSP, there is no way of preventing it from firing when we counterfactually reason that Sue has not thrown in our current formulation. A simple extension to the modified planning definition allows us to solve this problem. By substituting an empty exogenous action $Empty=(\top, \bot)$ wherever an exogenous action is inapplicable in $\pi$, we can now show $ThrowSue$ is a cause of $\phi$ in the MCSP.
 
 \section{Conclusion}
+@TODOmentionifexogenousactionisanaplicableitstilloccursbutnothinghappens
+
+
+
+
 
 
 
@@ -555,7 +641,7 @@ Intuitively this occurs because although $BillHits$ was inapplicable in the MCSP
 
 
 \bibliography{bibliography} 
-\bibliographystyle{ieeetr}
+\bibliographystyle{plainnat} % or try abbrvnat or unsrtnat
 
 
 
