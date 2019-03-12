@@ -294,17 +294,13 @@ The HP causality definitions above are restricted to the identification of varia
 
 For this reasons I propose changed definitions of the HP-causality models which produce comparable conclusions given intuitively identical, but structural different problems. Specifically, my definitions allow for the use of actions plans rather than structural equations as original used.
 
-\subsection{But-for Causality Planning}
-
-\subsection{HP-Causality Modified Planning}
-
 \subsubsection*{But-for Planning}
 \begin{defn} 
 
-Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ is a but-for cause of some final variable assignment $s_n \models \phi$ iff the following 3 conditions hold:
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some action slots of $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a but-for cause of some final variable assignment $s_n \models \phi$ iff the following 3 conditions hold:
 \begin{enumerate}
 \item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
-\item $BF2$: There is a setting $\vec{o'}$ of the non-$\epsilon$ action slots in $\pi'$ such that:
+\item $BF2$: There is a setting $o'$ of the non-$\epsilon$ action slots in $\pi'$ such that:
 \[
 (\pi, \Xi) \models [\pi' \leftarrow o'](\lnot \Diamond \phi)
 \]
@@ -316,13 +312,13 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 
 \subsubsection*{Original Planning}
 \begin{defn}
-Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ is a cause of some final variable assignment $s_n \models \phi$ according to the Original planning definition iff the following 3 conditions hold:
+Given a multi-agent planning task $\Xi$ and action plan $\pi$ with a final state $s_n$, some actions slots $\pi'$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a cause of some final variable assignment $s_n \models \phi$ according to the Original planning definition iff:
 \begin{enumerate}
 \item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
 
 
 
-\item $BF2(a)$: There is a partition of $E$ (the \textit{endogenous} actions) into two disjoint subplans $Z \subseteq \pi$ and $W \subseteq (\pi - Z)$ with $\pi' \subseteq Z$ and a setting $o'$ and $w'$ of the actions in $\pi'$ and $W$ respectively such that
+\item $BF2(a)$: There is a partition of $F$ (the \textit{endogenous} actions) into two disjoint subplans $Z \subseteq \pi$ and $W \subseteq (\pi - Z)$ with $\pi' \subseteq Z$ and a setting $o'$ and $w'$ of the actions in $\pi'$ and $W$ respectively such that
 
 \[
 (\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](\lnot \Diamond \phi)
@@ -344,13 +340,13 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 
 \subsubsection*{Updated Planning}
 \begin{defn}
-Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ is a cause of some final variable assignment $s_n \models \phi$ according to the Original planning definition iff the following 3 conditions hold:
+Given a multi-agent planning task $\Xi$ and action plan $\pi$ with a final state $s_n$, some actions slots $\pi'$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a cause of some final variable assignment $s_n \models \phi$ according to the Updated planning definition iff:
 \begin{enumerate}
 \item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
 
 
 
-\item $BF2(a)$: There is partition of $E$ (the endogenous actions) into two disjoint subplans $Z \subseteq \pi$ and $W \subseteq (\pi - Z)$ with $\pi' \subseteq Z$ and a setting $o'$ and $w'$ of the actions in $\pi$ and $W$ respectively such that
+\item $BF2(a)$: There is partition of $F$ (the endogenous actions) into two disjoint subplans $Z \subseteq \pi$ and $W \subseteq (\pi - Z)$ with $\pi' \subseteq Z$ and a setting $o'$ and $w'$ of the actions in $\pi$ and $W$ respectively such that
 
 \[
 (\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](\lnot \Diamond \phi)
@@ -370,18 +366,18 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered sub
 
 \subsubsection*{Modified Planning}
 \begin{defn}
-Given a multi-agent action plan $\pi$ with a final state $s_n$, some ordered subset of the actions in $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow \vec{o}$ is a cause of some final variable assignment $s_n \models \phi$ according to the modified planning definition iff the following 3 conditions hold:
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some action slots $\pi'$,$\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a cause of some final variable assignment $s_n \models \phi$ according to the modified planning definition iff the following 3 conditions hold:
 \begin{enumerate}
-\item  $\vec{o} \subseteq \pi$, $\pi' \models \vec{o}$ and $s_n \models \phi$.
-\item $BF2$: There is a setting $\vec{o'}$ of the applicable actions in $\vec{\pi'}$, and a setting of $W \subseteq (\pi  - \pi')$ such that:
+\item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
+\item $BF2$: There is a setting $o'$ of the applicable actions in $\pi'$, and a setting of $W \subseteq (\pi  - \pi')$ such that:
 \[
-(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}, W \leftarrow \vec{w^\star}](\lnot \Diamond \phi)
+(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w^\star](\lnot \Diamond \phi)
 \]
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
 \end{enumerate}
 
 
-(Where $W\leftarrow \vec{w^\star}$ denotes fixing all non-$\epsilon$ action slots in $W$ to their original actions.)
+(Where $W\leftarrow w^\star$ denotes fixing all non-$\epsilon$ action slots in $W$ to their original actions.)
 
 \end{defn}
 

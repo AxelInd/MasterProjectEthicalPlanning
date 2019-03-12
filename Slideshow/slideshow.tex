@@ -4,7 +4,13 @@
  
 \usepackage[utf8]{inputenc}
  
- 
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section] % reset theorem numbering for each chapter
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
+\newtheorem{exmp}[thm]{Example} % same for example numbers
+
 %Information to be included in the title page:
 \title{Causality in Multi-Agent Planning}
 \author{Axel Ind}
@@ -32,6 +38,25 @@
  
 \begin{frame}
 \frametitle{What is Causality?}
+\begin{itemize}
+\item What does is really mean to that $A$ caused $B$?
+\item Commonly-used word, but our intuitions differ.
+\item Does is mean that without event $B$, effect $A$ would never have happened?
+\item Broadly speaking, it means that we can identify the set of events that caused, or could have caused, some effect to occur, either in the real world or in some other possible world.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Alice's Homework}
+\begin{itemize}
+\item ``If Alice had not done her homework, she would have failed."
+\item Is it correct to say that not doing her homework caused Alice to fail?
+\item Do we implicitly assume that if she had done her homework she would have passed?
+\item Do we assume that not doing her homework is the soul cause of Alice failing?
+\item Are all the other pieces of homework that were never handed in also a cause of her failing?
+\end{itemize}
 
 \end{frame}
 
@@ -39,20 +64,86 @@
 
 
 \begin{frame}
-\frametitle{How do we Model Causality?}
+\frametitle{Modelling Causality}
+\begin{itemize}
+\item There are many intuitions about causal relations, and this is problematic.
+\item Evidently, we need to formalise our definitions of causality.
+\item But, which definitions should we use? Should they always match our intuition?
+\item In this presentation we will discuss four definitions of causality (as described by @TODOref).
+\item But-for Causality, HP's Original Causality, HP's Updated Causality, and HP's Modified causality.
+\end{itemize}
+
+\end{frame}
+
+
+
+%========================================HP CAUSALITY===============================
+\begin{frame}
+\frametitle{Halpern's Causality}
+
+\begin{itemize}
+\item @TODOref, like others before them recognized the inconsistencies in intuitive causality.
+\item Set about to systematically characterise a variety of causality intuitions.
+\item Purpose build framework for causality: Causal Settings.
+\item HP's definitions are unambiguous in this framework.
+\end{itemize}
 
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Counter Factual Reasoning}
-@TODOdiagram
+\frametitle{Counter-Factual Reasoning}
+\begin{itemize}
+\item All definitions of causality ask one question: What if the world were other than it is?
+\item We need a way of expressing reasoning in a world where Suzy has done her homework.
+\item We need to be able to establish how changing some set of prior events (the cause) causes the counter-factual world to differ from the real world.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Causal Settings}
+\begin{itemize}
+\item A causal setting $(M,u)$ is description of the world limited to those variables that are relevant to cause and effect under consideration.
+\item $M$ is the model, it describes the set of all variables and their interactions via structural equations. These variables are called \textit{endogenous} variables.
+\item $u$ is the set of all \textit{exogenous} variables. These are variables whose values are determined by information outside of the scope of the model.
+
+\end{itemize}
+
 
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Halpern's Causality?}
+\frametitle{Structural Equations}
+\begin{itemize}
+\item ``If Alice had not done her homework, she would have failed."
+\item One possible model: 
+\begin{itemize}
+\item $HW \leftarrow$ Alice does her homework.
+\item $P \leftarrow$ Alice passes.
+\item $u \leftarrow$ Exogenous variable.
+\item $HW \leftarrow u$ We control if she does her homework from outside the model.
+\item $P \leftarrow HW$ Doing her homework causes her to pass.
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Causal Settings}
+
+\begin{itemize}
+
+\item Now we can express the relationships in the model.
+\item But how do we evaluate the model?
+\item We define the causal model
+\[
+(M,u) \models \phi
+\] iff $\phi$ occurs after all structural equations in $(M,u)$ have been exhaustively evaluated.
+
+\end{itemize}
 
 \end{frame}
 
@@ -60,41 +151,177 @@
 \begin{frame}
 \frametitle{Causal Settings}
 
+@TODOdiagram of alice (including $u$ values)
+
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Structural Equations}
+\frametitle{Causal Settings}
+
+\begin{itemize}
+\item We can now describe the real world with casual settings.
+\item But we need counter-factual reasoning for causality.
+\item So we introduce the ability to modify variables:
+\[
+(M,u) [X \leftarrow x'] \models \phi
+\] iff $\phi$ holds after setting variables $X$ to $x'$ and evaluating the model.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Causal Settings}
+
+@TODOdiagram counter-factual of alice (including $u$ values)
 
 \end{frame}
 
 
 \begin{frame}
 \frametitle{But-For Causality}
+\begin{itemize}
+\item Now we are prepared to understand the first (and simplest) definition of causality.
+\item But-for Causality says: ``$X=x$ is a cause of $\phi$" if changing the value of $X$ to $x'$ means that $\phi$ no longer holds.
+\end{itemize}
+
 
 \end{frame}
 
 \begin{frame}
-\frametitle{Halpern's Original Causality}
+\frametitle{But-For Causality}
 
+\begin{defn}$X=x$ is a but-for cause of $\phi$ in the causal setting $(M,u)$ iff the following 3 conditions hold:
+\begin{enumerate}
+\item $(M,u) \models (X=x)$ and $(M,u) \models \phi$.
+\item $AC2(bf)$: There is a setting $x'$ of the variables in $X$ such that
+
+\[
+(M,u) \models [X\leftarrow x']\lnot \phi
+\] 
+
+\item $X$ is minimal, there is no strict subset of $X'$ of $X$ such that $X' = x'$ satisfies the above conditions.
+\end{enumerate}
+
+\end{defn}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Halpern's Original Causality}
+\begin{itemize}
+\item But-for causality catches only very simple intuitive causality.
+\item Halpern introduce his Original Causality to account for this deficiency.
+\item It asks two questions:
+\begin{enumerate}
+\item Is there any setting of the variables in the model such that $\phi$ no longer holds.
+\item Is there any setting of variables in the model such that $X=x$ would be a but-for cause of $\phi$.
+\end{enumerate}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Halpern's Original Causality}
+\begin{defn}$X=x$ is an actual cause of $\phi$ in the causal setting $(M,u)$ according to the original causality definition iff:
+\begin{enumerate}
+\item $(M,u) \models (X=x)$ and $(M,u) \models \phi$.
+\item $AC2(a)$: There is a partition of $V$ (the endogenous variables) into two disjoint subsets $Z$ and $W$ with $X'\subseteq Z'$ and a setting $x'$ and $w$ of the variables in $X$ and $W$, respectively, such that
+
+\[
+(M,u) \models [X\leftarrow x', W\leftarrow w]\lnot \phi
+\] 
+
+\item $AC2(b^o)$: If $z^\star$ is such that $(M,u)\models Z = z^\star$, then for all subsets $Z'$ of $Z-X$, we have
+
+\[
+(M,u) \models [X\leftarrow x, W \leftarrow w, Z' \leftarrow z^\star]\phi
+\] 
+
+\item $X$ is minimal, there is no strict subset of $X'$ of $X$ such that $X' = x'$ satisfies the above conditions.
+\end{enumerate}
+
+\end{defn}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Halpern's Updated Causality}
+\begin{itemize}
+
+
+\item Eventually Halpern found cases in which even his Original definition of causality did not seem to capture human intuition (e.g. the voting scenario which we will discuss later.)
+\item He introduced his updated version of causality to ensure that the Original Causality definition held for every possible subset of $W$, $W'$.
+\end{itemize}
 \end{frame}
 
 
 \begin{frame}
 \frametitle{Halpern's Updated Causality}
+\begin{defn}$X=x$ is an actual cause of $\phi$ in the causal setting $(M,u)$ according to the updated causality definition iff:
+\begin{enumerate}
+\item $(M,u) \models (X=x)$ and $(M,u) \models \phi$.
+\item $AC2(a)$: There is a partition of $V$ (the endogenous variables) into two disjoint subsets $Z$ and $W$ with $X'\subseteq Z'$ and a setting $x'$ and $w$ of the variables in $X$ and $W$, respectively, such that
 
+\[
+(M,u) \models [X\leftarrow x', W\leftarrow w]\lnot \phi
+\] 
+
+\item $AC2(b^u)$: If $z^\star$ is such that $(M,u)\models Z = z^\star$, then for all subsets $Z'$ of $Z-X$ and $W'$ of $W$, we have
+
+\[
+(M,u) \models [X\leftarrow x, W' \leftarrow w, Z' \leftarrow z^\star]\phi
+\] 
+
+\item $X$ is minimal, there is no strict subset of $X'$ of $X$ such that $X' = x'$ satisfies the above conditions.
+\end{enumerate}
+
+\end{defn}
 \end{frame}
+
 
 
 \begin{frame}
 \frametitle{Halpern's Modified Causality}
+\begin{itemize}
+\item Finally, we come to Halpern's Modified Causality.
+\item This definition is Halpern's preferred causality, and has the added advantage of being far simpler that the Original and Updated definitions.
+\item This definition is a direct extension of the But-For cause definition of causality.
+\item It additionally allows the $X=x$ is a cause if fixing any subset of other variable assignments to their original values would cause $X=x$ to be a But-For cause of $\phi$.
+\end{itemize}
 
 \end{frame}
 
+\begin{frame}
+\frametitle{Halpern's Modified Causality}
+\begin{defn}$X=x$ is an actual cause of $\phi$ in the causal setting $(M,u)$ iff the following 3 conditions hold:
+\begin{enumerate}
+\item $(M,u) \models (X=x)$ and $(M,u) \models \phi$.
+\item $AC2(a^m)$: There is a set $\vec{W}$ of variables in $V$ and a setting $x'$ of the variables in $X$ such that if $(M,u) \models W = w^*$, then:
+\[
+(M,u) \models [X \leftarrow x', W \leftarrow w^*] \neg \phi
+\]
+\item $X$ is minimal. There is no strict subset of $X$ that satisfies the previous 2 conditions.
+\end{enumerate}
+
+\end{defn}
+\end{frame}
 
 
 \begin{frame}
 \frametitle{Causality in Planning}
+\begin{itemize}
+\item We have now covered the principles of modelling causality.
+\item Now we approach the idea of causality in a Multi-agent AI Planning context.
+\end{itemize}
 
 \end{frame}
 
@@ -102,36 +329,89 @@
 
 \begin{frame}
 \frametitle{Why is Planning Causality Different?}
+\begin{itemize}
+\item The domain differs in that the causes under consideration are no longer variables, but actions. (Although the effects $\phi$ remain variables.)
+\item Planning also exerts a constraint that HP Causality does not. Actions must be performed \textit{sequentially}.
+\item There is no independence of actions. Counterfactual reasoning with action $a_i$ may later render action $a_{i+k}$ inapplicable.
+\end{itemize}
 
 \end{frame}
 
 
 \begin{frame}
 \frametitle{What Extra Value does Causality Planning Offer?}
+\begin{itemize}
+\item AI Planning is an extensively studied domain,
+\item We do not need to interpret our models in the Causal Setting to determine causality. (Such domain changing could well invalidate the conclusions anyway.)
+\item We are no longer constrained to independent events.
+\end{itemize}
 
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Planning Tasks}
+\frametitle{Single-Agent Planning Tasks}
+@TODOdiagram
 
 \end{frame}
 
 
 \begin{frame}
 \frametitle{Multi-agent Planning Tasks}
+@TODOdiagram
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Exogenous Actions}
+\begin{itemize}
+\item Exogenous actions are those actions which are not performed by any agent.
+\item Their occurrence can be timed, after each agent action, or a combination of these factors. (We use timed events.)
+\item Unlike @TODOref we allow conflicting exogenous actions. (Without timed events this leads to multiple possible final states.)
+\end{itemize}
 
 \end{frame}
 
 
 \begin{frame}
 \frametitle{Plans}
+\begin{itemize}
+\item A plan $\pi$ is a sequence of actions. 
+\item Each action at position $i$, $a_i$ must be applicable after the application of $a_{i-1}$, $i\geq 1$, and $\pi_0$ must be applicable in the initial state.
+\item For use in counterfactual reasoning, we define \textit{action slots}. An action slot $q(\pi,k)$ is mapped to the list of all applicable actions at position $k$ in the plan. Intuitively an action slot functions like a variable name for the domain of possible actions at a specific time-point in $\pi$.
+\end{itemize}
 
 \end{frame}
 
 
 \begin{frame}
 \frametitle{Causal Plan Settings}
+\begin{itemize}
+\item As with HP Causality we require a way to describe the world prior to the execution of the model, and the world that results afterwards.
+\item For that reason we define the Casual Plan Setting $(\pi, \Pi)$.
+\item The causal Plan Setting (CPS) contains all relevant information for causality modelling.
+\item We write
+\[
+(\pi,\Pi)\models (\Diamond \phi)
+\]
+
+iff execution of the plan results in the variable assignments $\phi$ in the final state.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Causal Plan Settings}
+\begin{itemize}
+\item As with causal settings counter-factual reasoning is possible in plan settings too.
+\item We say
+\[
+(\Pi, \pi)[\pi'\leftarrow o'] \models \phi
+\]
+iff counterfactually using actions $o'$ in the CPS would result in $\phi$.
+
+\item This definition might seem identical to that we saw in causal plans, but there are key differences.
+\end{itemize}
 
 \end{frame}
 
@@ -140,23 +420,129 @@
 \begin{frame}
 \frametitle{CPS New Operations}
 
+\begin{itemize}
+
+\item Counterfactual reasoning in causal planning settings is more complex than in causal settings.
+\item Unlike is causal setting we have no guarantee that plan will remain applicable after changing some action in $\pi$.
+\item Here we follow @TODO ref and treat any counter-factual assignment as applicable, provided the original plan was applicable.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{CPS New Operations}
+\begin{itemize}
+\item  Action slots were introduced to handle counter-factual reasoning in a paradigm where the order of action executions matters.
+\item A subplan $\pi'$, $\pi'\subset \pi$ is a subset of the action slots in $\pi$.
+\item Thus a possible subplan of $\pi=(a_1,a_2,a_3)$ is $\pi'=\{q(\pi,1), q(\pi,3)\}$ which tells us all actions that may have occurred in the first and last position of $\pi$.
+\item $\pi-\pi'$ returns a list of all action slots that occur in $\pi$ and not in $\pi'$. @TODOdiagram
+\item Remember that a plan and a subplan are not interchangeable because a plan associated a single action with each action slot.
+\end{itemize}
+
 \end{frame}
 
 
 \begin{frame}
 \frametitle{But-For Causality Planning}
+\begin{itemize}
+\item Now we can finally discuss causality planning.
+\item The intuition of But-For causality does not change, and we now simply try to determine ``Would changing $\pi'$ from $\pi'=o$ to $\pi'\leftarrow o'$ change the final value of some variables $\phi$?"
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{But-For Causality Planning}
+\begin{defn} 
+
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some action slots in $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a but-for cause of some final variable assignment $s_n \models \phi$ iff the following 3 conditions hold:
+\begin{enumerate}
+\item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
+\item $BF2$: There is a setting $o'$ of the non-$\epsilon$ action slots in $\pi'$ such that:
+\[
+(\pi, \Xi) \models [\pi' \leftarrow o'](\lnot \Diamond \phi)
+\]
+\item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
+\end{enumerate}
+
+
+\end{defn}
 
 \end{frame}
 
 
+
 \begin{frame}
 \frametitle{Original Causality Planning}
+\begin{itemize}
+\item Capturing the intuition of the original definition of HP causality is more difficult.
+\item We now restrict our counter-factual reasoning to endogenous actions.
+\end{itemize}
 
+\end{frame}
+
+\begin{frame}
+\frametitle{Original Causality Planning}
+\small
+\begin{defn}
+Given a multi-agent planning task $\Xi$ and action plan $\pi$ with a final state $s_n$, some actions slots $\pi'$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a cause of some final variable assignment $s_n \models \phi$ according to the Original planning definition iff:
+\begin{enumerate}
+\item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
+
+
+
+\item $BF2(a)$: There is a partition of $F$ (the \textit{endogenous} actions) into two disjoint subplans $Z \subseteq \pi$ and $W \subseteq (\pi - Z)$ with $\pi' \subseteq Z$ and a setting $o'$ and $w'$ of the actions in $\pi'$ and $W$ respectively such that
+
+\[
+(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](\lnot \Diamond \phi)
+\]
+
+\item $BF2(b^o)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then for all subplans $Z' \subseteq (Z - \pi')$ we have
+
+\[
+(\pi, \Xi) \models [\pi \leftarrow o, W \leftarrow w', Z' \leftarrow z^\star](\Diamond \phi)
+\]
+
+\item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 3 conditions.
+\end{enumerate}
+\end{defn}
 \end{frame}
 
 
 \begin{frame}
 \frametitle{Updated Causality Planning}
+\begin{itemize}
+\item We will not have time to discuss Updated Causality planning in detail, but it is sufficent to note that Original planning failed in the same cases as HP's Original Casuality and Updated Planning addresses the exact same circumstances as HP's Updated Causality.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Updated Causality Planning}
+\small
+\begin{defn}
+Given a multi-agent planning task $\Xi$ and action plan $\pi$ with a final state $s_n$, some actions slots $\pi'$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a cause of some final variable assignment $s_n \models \phi$ according to the Updated planning definition iff:
+\begin{enumerate}
+\item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
+
+
+
+\item $BF2(a)$: There is partition of $F$ (the endogenous actions) into two disjoint subplans $Z \subseteq \pi$ and $W \subseteq (\pi - Z)$ with $\pi' \subseteq Z$ and a setting $o'$ and $w'$ of the actions in $\pi$ and $W$ respectively such that
+
+\[
+(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](\lnot \Diamond \phi)
+\]
+
+\item $BF2(b^u)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then \textit{for all} subplans $W' \subseteq W$ and $Z' \subseteq (Z - \pi')$ we have
+
+\[
+(\pi, \Xi) \models [\pi \leftarrow o, W' \leftarrow w', Z \leftarrow z^\star](\Diamond \phi)
+\]
+
+\item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 3 conditions.
+\end{enumerate}
+\end{defn}
 
 \end{frame}
 
@@ -164,6 +550,35 @@
 
 \begin{frame}
 \frametitle{Modified Causality Planning}
+\begin{itemize}
+\item Finally, we change the modified version of causality to the planning domain.
+\item 
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Modified Causality Planning}
+\begin{defn}
+Given a multi-agent action plan $\pi$ with a final state $s_n$, some action slots $\pi'$,$\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a cause of some final variable assignment $s_n \models \phi$ according to the modified planning definition iff the following 3 conditions hold:
+\begin{enumerate}
+\item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
+\item $BF2$: There is a setting $o'$ of the applicable actions in $\pi'$, and a setting of $W \subseteq (\pi  - \pi')$ such that:
+\[
+(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w^\star](\lnot \Diamond \phi)
+\]
+\item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
+\end{enumerate}
+
+
+(Where $W\leftarrow w^\star$ denotes fixing all non-$\epsilon$ action slots in $W$ to their original actions.)
+
+\end{defn}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples}
 
 \end{frame}
 
@@ -176,6 +591,11 @@
 
 \begin{frame}
 \frametitle{Example 2: Rock Throwing}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 3: Voting}
 
 \end{frame}
 
