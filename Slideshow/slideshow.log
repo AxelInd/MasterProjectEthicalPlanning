@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.26)  12 MAR 2019 11:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.26)  12 MAR 2019 11:33
 entering extended mode
 **./slideshow.tex
 (slideshow.tex
@@ -1144,29 +1144,27 @@ y-English.dict"
 Dictionary: translator-theorem-dictionary, Language: English 
 ) (slideshow.nav) [1
 
-{C:/Users/User/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2
-
-] [3
-
-]
-LaTeX Font Info:    Try loading font information for U+msa on input line 49.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+{C:/Users/User/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+LaTeX Font Info:    Try loading font information for U+msa on input line 36.
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 49.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+LaTeX Font Info:    Try loading font information for U+msb on input line 36.
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Try loading font information for OT1+mathkerncmss on input 
-line 49.
+line 36.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\sansmathaccent\ot1mathkerncmss.fd"
 File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
 thkerncmss.
 )
-[4
+[2
+
+] [3
+
+] [4
 
 ] [5
 
@@ -1194,12 +1192,12 @@ thkerncmss.
 
 ] [17
 
-] [18
+]
+[18
 
 ] [19
 
-]
-[20
+] [20
 
 ] [21
 
@@ -1225,17 +1223,17 @@ thkerncmss.
 
 ] [32
 
-] [33
+]
+[33
 
 ] [34
 
-]
-[35
+] [35
 
 ] [36
 
 ]
-Overfull \vbox (7.56023pt too high) detected at line 510
+Overfull \vbox (7.56023pt too high) detected at line 522
  []
 
 [37
@@ -1243,7 +1241,7 @@ Overfull \vbox (7.56023pt too high) detected at line 510
 ] [38
 
 ]
-Overfull \vbox (7.56023pt too high) detected at line 547
+Overfull \vbox (7.56023pt too high) detected at line 559
  []
 
 [39
@@ -1264,6 +1262,8 @@ Overfull \vbox (7.56023pt too high) detected at line 547
 
 ] [47
 
+] [48
+
 ]
 \tf@nav=\write6
 \openout6 = `slideshow.nav'.
@@ -1274,19 +1274,19 @@ Overfull \vbox (7.56023pt too high) detected at line 547
 \tf@snm=\write8
 \openout8 = `slideshow.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 617.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 617.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 632.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 632.
  (slideshow.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 617.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 617.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 632.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 632.
 Package rerunfilecheck Info: File `slideshow.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 17420 strings out of 493323
- 324883 string characters out of 3139068
+ 17426 strings out of 493323
+ 324936 string characters out of 3139068
  399868 words of memory out of 3000000
- 20477 multiletter control sequences out of 15000+200000
+ 20481 multiletter control sequences out of 15000+200000
  15203 words of font info for 55 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,14n,55p,778b,551s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1301,9 +1301,9 @@ msfonts/cm/cmssi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
 10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C
 :/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program
  Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on slideshow.pdf (47 pages, 375558 bytes).
+Output written on slideshow.pdf (48 pages, 381219 bytes).
 PDF statistics:
- 1270 PDF objects out of 1440 (max. 8388607)
- 95 named destinations out of 1000 (max. 500000)
+ 1296 PDF objects out of 1440 (max. 8388607)
+ 97 named destinations out of 1000 (max. 500000)
  43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

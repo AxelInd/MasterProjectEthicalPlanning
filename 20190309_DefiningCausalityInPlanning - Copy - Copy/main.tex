@@ -111,7 +111,9 @@ An \textit{action slot} $q(\pi,k)$ denotes the domain of possible actions at a g
 
 Let $\pi'\subseteq \pi$ denote a situation in which all elements in $\pi'$ are action slots in $\pi$ which could have occurred in the same order or else are the empty action. Specifically, for all $a_k \in \pi'$, $a \in q(\pi,k) \cup \epsilon$. The operation $\pi'\subseteq \pi$ is henceforth abbreviated to the symbol $\pi'$.
 
-@TODOdescribe $o \subseteq \pi$
+A subplan $\pi'$, $\pi' \subseteq \pi$ is subset of the actions slots in $\pi$. It is not a plan in itself because it describes only applicable actions at a given time, but does not bind itself to a single action as happens in plans. A possible subplan of $\pi=(a_1, a_2, a_3)$ is $\pi'=\{q(\pi,1), q(\pi,3)\}$ which tells us all actions which were permissible when the first and last action in $\pi$ were fixed.
+
+With this notation any plan can be described with the unappealing, but highly informative, use of action slots. So $\pi=(a_1, a_2, a_3)$ from above is equivalent to $\pi= \{(q(\pi,1),a_1), (q(\pi,2),a_2), (q(\pi,3),a_3)  \}$
 
 $\pi' \leftarrow \vec{o'}$ is the setting of every non-$\epsilon$ action slot $a_k$ to the singleton action $\vec{o'}[k]$.
 
@@ -185,7 +187,7 @@ And if $\phi$ no longer holds after the assignment we write
 
 %-----------------------------HP CAUSALITY----------------------------------------
 \section{HP-Causality}
-This section briefly describes the notion of HP-causality and the three main definitions. @TODO must include two other definition and description of how inserting counterfactuals works.
+This section briefly describes the notion of HP-causality and the definitions and interpretations of But-For Causality, Original Causality, Updated Causality, and Modified Causality.
 
 \subsection{But-for Causality}
 
