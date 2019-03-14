@@ -1,2 +1,2 @@
-\beamer@sectionintoc {1}{Halpern's Causality}{13}{0}{1}
-\beamer@sectionintoc {2}{Test section one}{28}{0}{2}
+\beamer@sectionintoc {1}{Halpern's Causality}{12}{0}{1}
+\beamer@sectionintoc {2}{Causality in Planning}{32}{0}{2}

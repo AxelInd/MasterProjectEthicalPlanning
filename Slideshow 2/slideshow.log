@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.26)  14 MAR 2019 10:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.26)  14 MAR 2019 18:15
 entering extended mode
 **./slideshow.tex
 (slideshow.tex
@@ -1149,35 +1149,88 @@ y-English.dict"
 Dictionary: translator-theorem-dictionary, Language: English 
 ) (slideshow.nav) [1
 
-{C:/Users/User/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2
+{C:/Users/User/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] <alice.png, 
+id=40, 207.02344pt x 352.31625pt>
+File: alice.png Graphic file (type png)
 
-] [3
+<use alice.png>
+Package pdftex.def Info: alice.png used on input line 62.
+(pdftex.def)             Requested size: 103.51146pt x 176.15768pt.
 
-] [4
+Overfull \vbox (7.01628pt too high) detected at line 62
+ []
 
-] [5
+[2
 
-] [6
+ <./alice.png>] <aliceFail.png, id=47, 973.38657pt x 347.04657pt>
+File: aliceFail.png Graphic file (type png)
 
-] [7
+<use aliceFail.png>
+Package pdftex.def Info: aliceFail.png used on input line 78.
+(pdftex.def)             Requested size: 292.01822pt x 104.11476pt.
+ [3
 
-] [8
+ <./aliceFail.png>]
+<bobFire.png, id=54, 550.30594pt x 587.19376pt>
+File: bobFire.png Graphic file (type png)
+ <use bobFire.png>
+Package pdftex.def Info: bobFire.png used on input line 94.
+(pdftex.def)             Requested size: 126.5677pt x 135.05171pt.
+ [4
 
-] [9
+ <./bobFire.png>] <bobLightningFire.png, id=61, 582.67688pt x 517.935pt>
+File: bobLightningFire.png Graphic file (type png)
+
+<use bobLightningFire.png>
+Package pdftex.def Info: bobLightningFire.png used on input line 110.
+(pdftex.def)             Requested size: 145.66885pt x 129.48343pt.
+ [5
+
+ <./bobLightningFire.png>]
+<aliceandbob.png, id=70, 431.36156pt x 351.56343pt>
+File: aliceandbob.png Graphic file (type png)
+ <use aliceandbob.png>
+Package pdftex.def Info: aliceandbob.png used on input line 126.
+(pdftex.def)             Requested size: 172.54156pt x 140.62286pt.
+
+[6
+
+ <./aliceandbob.png>] <stoneWindow.png, id=77, 1093.08376pt x 1141.26375pt>
+File: stoneWindow.png Graphic file (type png)
+
+<use stoneWindow.png>
+Package pdftex.def Info: stoneWindow.png used on input line 142.
+(pdftex.def)             Requested size: 163.95549pt x 171.18217pt.
+ [7
+
+ <./stoneWindow.png>] [8
 
 ]
-LaTeX Font Info:    Try loading font information for U+msa on input line 172.
+<causaldiagram.png, id=92, 1015.54407pt x 309.40594pt>
+File: causaldiagram.png Graphic file (type png)
+ <use causaldiagram.png>
+Package pdftex.def Info: causaldiagram.png used on input line 173.
+(pdftex.def)             Requested size: 355.44576pt x 108.2937pt.
+
+Overfull \hbox (13.15045pt too wide) in paragraph at lines 173--173
+ [] 
+ []
+
+[9
+
+ <./causaldiagram.png>]
+LaTeX Font Info:    Try loading font information for U+msa on input line 186.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 172.
+LaTeX Font Info:    Try loading font information for U+msb on input line 186.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Try loading font information for OT1+mathkerncmss on input 
-line 172.
+line 186.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\sansmathaccent\ot1mathkerncmss.fd"
 File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
@@ -1185,50 +1238,189 @@ thkerncmss.
 )
 [10
 
-] [11
+] <alicepass.png, id=106, 1023.07219pt x 345.54094pt>
+File: alicepass.png Graphic file (type png)
+ <use alicepass.png>
+Package pdftex.def Info: alicepass.png used on input line 200.
+(pdftex.def)             Requested size: 317.14911pt x 107.11658pt.
 
-] [12
+[11
+
+ <./alicepass.png>] [12
 
 ] [13
 
-] [14
+]
+<alicemodel.png, id=129, 769.37437pt x 246.9225pt>
+File: alicemodel.png Graphic file (type png)
+ <use alicemodel.png>
+Package pdftex.def Info: alicemodel.png used on input line 232.
+(pdftex.def)             Requested size: 230.81409pt x 74.0773pt.
 
-] [15
+[14
 
-] [16
+ <./alicemodel.png>] <fireModel.png, id=137, 941.76843pt x 450.9347pt>
+File: fireModel.png Graphic file (type png)
 
-] [17
+<use fireModel.png>
+Package pdftex.def Info: fireModel.png used on input line 239.
+(pdftex.def)             Requested size: 282.5327pt x 135.28145pt.
+ [15
 
-] [18
+ <./fireModel.png>]
+<aliceBobModel1.png, id=144, 645.91313pt x 315.42844pt>
+File: aliceBobModel1.png Graphic file (type png)
+
+<use aliceBobModel1.png>
+Package pdftex.def Info: aliceBobModel1.png used on input line 251.
+(pdftex.def)             Requested size: 258.36067pt x 126.16913pt.
+ [16
+
+ <./aliceBobModel1.png>]
+<aliceBobModel2.png, id=151, 651.18282pt x 491.58656pt>
+File: aliceBobModel2.png Graphic file (type png)
+
+<use aliceBobModel2.png>
+Package pdftex.def Info: aliceBobModel2.png used on input line 258.
+(pdftex.def)             Requested size: 260.4685pt x 196.63113pt.
+ [17
+
+ <./aliceBobModel2.png>] [18
 
 ] [19
 
-] [20
-
-] [21
-
-] [22
-
-] [23
-
-] [24
-
 ]
-[25
+<aliceModelReal.png, id=177, 409.53pt x 59.47218pt>
+File: aliceModelReal.png Graphic file (type png)
+ <use aliceModelReal.png>
+Package pdftex.def Info: aliceModelReal.png used on input line 309.
+(pdftex.def)             Requested size: 163.80908pt x 23.78844pt.
+
+<aliceModelCounterfactual.png, id=178, 414.04688pt x 62.48344pt>
+File: aliceModelCounterfactual.png Graphic file (type png)
+
+<use aliceModelCounterfactual.png>
+Package pdftex.def Info: aliceModelCounterfactual.png used on input line 309.
+(pdftex.def)             Requested size: 165.6158pt x 24.99292pt.
+ [20
+
+ <./aliceModelReal.png> <./aliceModelCounterfactual.png>] <bobModelReal.png, id
+=185, 434.37282pt x 152.82094pt>
+File: bobModelReal.png Graphic file (type png)
+
+<use bobModelReal.png>
+Package pdftex.def Info: bobModelReal.png used on input line 325.
+(pdftex.def)             Requested size: 173.74605pt x 61.12727pt.
+
+<bobModelCounterfactual.png, id=186, 432.86719pt x 155.83218pt>
+File: bobModelCounterfactual.png Graphic file (type png)
+
+<use bobModelCounterfactual.png>
+Package pdftex.def Info: bobModelCounterfactual.png used on input line 325.
+(pdftex.def)             Requested size: 173.1438pt x 62.33176pt.
+ [21
+
+ <./bobModelReal.png> <./bobModelCounterfactual.png>] <bobModelCounterfactual2.
+png, id=193, 431.36156pt x 157.33781pt>
+File: bobModelCounterfactual2.png Graphic file (type png)
+
+<use bobModelCounterfactual2.png>
+Package pdftex.def Info: bobModelCounterfactual2.png used on input line 342.
+(pdftex.def)             Requested size: 172.54156pt x 62.934pt.
+ [22
+
+ <./bobModelCounterfactual2.png>]
+<alicebobModelReal.png, id=200, 676.02562pt x 165.61874pt>
+File: alicebobModelReal.png Graphic file (type png)
+
+<use alicebobModelReal.png>
+Package pdftex.def Info: alicebobModelReal.png used on input line 354.
+(pdftex.def)             Requested size: 270.40544pt x 66.2463pt.
+
+<alicebobModelCounterfactual.png, id=201, 676.02562pt x 167.87718pt>
+File: alicebobModelCounterfactual.png Graphic file (type png)
+
+<use alicebobModelCounterfactual.png>
+Package pdftex.def Info: alicebobModelCounterfactual.png used on input line 354
+.
+(pdftex.def)             Requested size: 270.40544pt x 67.14967pt.
+ [23
+
+ <./alicebobModelReal.png> <./alicebobModelCounterfactual.png>]
+<alicebobModelCounterfactual2.png, id=208, 678.28406pt x 168.63pt>
+File: alicebobModelCounterfactual2.png Graphic file (type png)
+
+<use alicebobModelCounterfactual2.png>
+Package pdftex.def Info: alicebobModelCounterfactual2.png used on input line 36
+6.
+(pdftex.def)             Requested size: 271.3088pt x 67.45079pt.
+ [24
+
+ <./alicebobModelCounterfactual2.png>] [25
 
 ] [26
 
-] [27
+]
+File: aliceModelReal.png Graphic file (type png)
+ <use aliceModelReal.png>
+Package pdftex.def Info: aliceModelReal.png used on input line 415.
+(pdftex.def)             Requested size: 204.7645pt x 29.73601pt.
+File: aliceModelCounterfactual.png Graphic file (type png)
+ <use aliceModelCounterfactual.png>
+Package pdftex.def Info: aliceModelCounterfactual.png used on input line 415.
+(pdftex.def)             Requested size: 207.02292pt x 31.24164pt.
 
-] [28
+[27
 
-] [29
+]
+File: bobModelReal.png Graphic file (type png)
+ <use bobModelReal.png>
+Package pdftex.def Info: bobModelReal.png used on input line 430.
+(pdftex.def)             Requested size: 217.18587pt x 76.41026pt.
+File: bobModelCounterfactual.png Graphic file (type png)
+ <use bobModelCounterfactual.png>
+Package pdftex.def Info: bobModelCounterfactual.png used on input line 430.
+(pdftex.def)             Requested size: 216.43306pt x 77.9159pt.
+ [28
 
-] [30
+]
+File: bobModelReal.png Graphic file (type png)
 
-] [31
+<use bobModelReal.png>
+Package pdftex.def Info: bobModelReal.png used on input line 441.
+(pdftex.def)             Requested size: 217.18587pt x 76.41026pt.
+File: bobModelCounterfactual.png Graphic file (type png)
+ <use bobModelCounterfactual.png>
+Package pdftex.def Info: bobModelCounterfactual.png used on input line 441.
+(pdftex.def)             Requested size: 216.43306pt x 77.9159pt.
+ [29
 
-] [32
+]
+<bobModelCounterFactual2.png, id=247, 431.36156pt x 157.33781pt>
+File: bobModelCounterFactual2.png Graphic file (type png)
+
+<use bobModelCounterFactual2.png>
+Package pdftex.def Info: bobModelCounterFactual2.png used on input line 452.
+(pdftex.def)             Requested size: 215.68025pt x 78.6687pt.
+ [30
+
+ <./bobModelCounterFactual2.png>]
+File: alicebobModelReal.png Graphic file (type png)
+
+<use alicebobModelReal.png>
+Package pdftex.def Info: alicebobModelReal.png used on input line 468.
+(pdftex.def)             Requested size: 270.40544pt x 66.2463pt.
+
+<alicebobModelCounterfactual3.png, id=254, 676.77844pt x 168.63pt>
+File: alicebobModelCounterfactual3.png Graphic file (type png)
+
+<use alicebobModelCounterfactual3.png>
+Package pdftex.def Info: alicebobModelCounterfactual3.png used on input line 46
+8.
+(pdftex.def)             Requested size: 270.70657pt x 67.45079pt.
+ [31
+
+ <./alicebobModelCounterfactual3.png>] [32
 
 ] [33
 
@@ -1244,41 +1436,119 @@ thkerncmss.
 
 ] [39
 
+] [40
+
 ]
-[40
+<bobPlanOriginal.png, id=319, 999.735pt x 58.71938pt>
+File: bobPlanOriginal.png Graphic file (type png)
 
-] [41
+<use bobPlanOriginal.png>
+Package pdftex.def Info: bobPlanOriginal.png used on input line 583.
+(pdftex.def)             Requested size: 299.9228pt x 17.61594pt.
+ <bobPlan.png, id=320, 984.67876pt x 57.21375pt>
+File: bobPlan.png Graphic file (type png)
 
-] [42
+<use bobPlan.png>
+Package pdftex.def Info: bobPlan.png used on input line 583.
+(pdftex.def)             Requested size: 344.64273pt x 20.0251pt.
+
+Overfull \hbox (2.34743pt too wide) in paragraph at lines 583--583
+ [] 
+ []
+
+[41
+
+ <./bobPlanOriginal.png> <./bobPlan.png>] [42
 
 ] [43
 
-] [44
-
-] [45
-
-] [46
-
-] [47
-
 ]
-Overfull \vbox (5.8053pt too high) detected at line 602
+<alicePlan.png, id=340, 891.33pt x 55.70813pt>
+File: alicePlan.png Graphic file (type png)
+ <use alicePlan.png>
+Package pdftex.def Info: alicePlan.png used on input line 626.
+(pdftex.def)             Requested size: 311.97017pt x 19.49812pt.
+
+<alicePlanCounterfactual.png, id=341, 944.02687pt x 55.70813pt>
+File: alicePlanCounterfactual.png Graphic file (type png)
+
+<use alicePlanCounterfactual.png>
+Package pdftex.def Info: alicePlanCounterfactual.png used on input line 626.
+(pdftex.def)             Requested size: 330.41435pt x 19.49812pt.
+ [44
+
+ <./alicePlan.png> <./alicePlanCounterfactual.png>]
+File: bobPlanOriginal.png Graphic file (type png)
+ <use bobPlanOriginal.png>
+Package pdftex.def Info: bobPlanOriginal.png used on input line 649.
+(pdftex.def)             Requested size: 329.91357pt x 19.37744pt.
+
+<bobPlanCounterfactual.png, id=348, 1032.85875pt x 58.71938pt>
+File: bobPlanCounterfactual.png Graphic file (type png)
+
+<use bobPlanCounterfactual.png>
+Package pdftex.def Info: bobPlanCounterfactual.png used on input line 649.
+(pdftex.def)             Requested size: 330.52155pt x 18.79057pt.
+
+<bobPlanCounterfactual2.png, id=349, 1032.85875pt x 58.71938pt>
+File: bobPlanCounterfactual2.png Graphic file (type png)
+
+<use bobPlanCounterfactual2.png>
+Package pdftex.def Info: bobPlanCounterfactual2.png used on input line 649.
+(pdftex.def)             Requested size: 330.52155pt x 18.79057pt.
+ [45
+
+ <./bobPlanCounterfactual.png> <./bobPlanCounterfactual2.png>]
+<alicebobPlanOriginal.png, id=356, 1248.91594pt x 58.71938pt>
+File: alicebobPlanOriginal.png Graphic file (type png)
+
+<use alicebobPlanOriginal.png>
+Package pdftex.def Info: alicebobPlanOriginal.png used on input line 665.
+(pdftex.def)             Requested size: 349.69408pt x 16.4413pt.
+
+Overfull \hbox (7.39877pt too wide) in paragraph at lines 665--665
+ [] 
  []
 
-[48
+<alicebobPlanCounterfactual.png, id=357, 1253.43282pt x 58.71938pt>
+File: alicebobPlanCounterfactual.png Graphic file (type png)
+
+<use alicebobPlanCounterfactual.png>
+Package pdftex.def Info: alicebobPlanCounterfactual.png used on input line 665.
+
+(pdftex.def)             Requested size: 350.9588pt x 16.4413pt.
+
+Overfull \hbox (8.6635pt too wide) in paragraph at lines 665--665
+ [] 
+ []
+
+<alicebobPlanCounterfactual2.png, id=358, 1253.43282pt x 58.71938pt>
+File: alicebobPlanCounterfactual2.png Graphic file (type png)
+
+<use alicebobPlanCounterfactual2.png>
+Package pdftex.def Info: alicebobPlanCounterfactual2.png used on input line 665
+.
+(pdftex.def)             Requested size: 350.9588pt x 16.4413pt.
+
+Overfull \hbox (8.6635pt too wide) in paragraph at lines 665--665
+ [] 
+ []
+
+[46
+
+ <./alicebobPlanOriginal.png> <./alicebobPlanCounterfactual.png> <./alicebobPla
+nCounterfactual2.png>] [47
+
+] [48
 
 ] [49
 
-]
-Overfull \vbox (5.8053pt too high) detected at line 639
- []
-
-[50
+] [50
 
 ] [51
 
 ]
-Overfull \vbox (12.73717pt too high) detected at line 682
+Overfull \vbox (5.8053pt too high) detected at line 767
  []
 
 [52
@@ -1286,10 +1556,26 @@ Overfull \vbox (12.73717pt too high) detected at line 682
 ] [53
 
 ]
-Overfull \vbox (12.73717pt too high) detected at line 719
+Overfull \vbox (5.8053pt too high) detected at line 804
  []
 
 [54
+
+] [55
+
+]
+Overfull \vbox (12.73717pt too high) detected at line 847
+ []
+
+[56
+
+] [57
+
+]
+Overfull \vbox (12.73717pt too high) detected at line 884
+ []
+
+[58
 
 ]
 \tf@nav=\write6
@@ -1301,40 +1587,37 @@ Overfull \vbox (12.73717pt too high) detected at line 719
 \tf@snm=\write8
 \openout8 = `slideshow.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 725.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 725.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 890.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 890.
  (slideshow.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 725.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 725.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 890.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 890.
 Package rerunfilecheck Info: File `slideshow.out' has not changed.
-(rerunfilecheck)             Checksum: F9D123F8FA40CB7DFD30FC35D98FAA6D;107.
+(rerunfilecheck)             Checksum: 86A73BAB3F5888ACB13C662374AF7E30;112.
  ) 
 Here is how much of TeX's memory you used:
- 17667 strings out of 493323
- 331900 string characters out of 3139068
+ 17819 strings out of 493323
+ 335343 string characters out of 3139068
  406452 words of memory out of 3000000
- 20690 multiletter control sequences out of 15000+200000
+ 20803 multiletter control sequences out of 15000+200000
  15803 words of font info for 57 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,15n,57p,778b,904s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{Navigation56} has been referenced but does not ex
-ist, replaced by a fixed one
-
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Prog
-ram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmss10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmss12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmss8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
-cmssi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssi8.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/
-Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on slideshow.pdf (54 pages, 233217 bytes).
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmss10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmss12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmss8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmssi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssi
+8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
+:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program
+ Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on slideshow.pdf (58 pages, 647484 bytes).
 PDF statistics:
- 455 PDF objects out of 1000 (max. 8388607)
- 112 named destinations out of 1000 (max. 500000)
- 101 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 513 PDF objects out of 1000 (max. 8388607)
+ 119 named destinations out of 1000 (max. 500000)
+ 250 words of extra memory for PDF output out of 10000 (max. 10000000)
 

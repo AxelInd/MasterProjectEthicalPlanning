@@ -55,7 +55,9 @@
 \item But she's not a very good student.
 \end{itemize}
 
-@TODOimage
+\begin{figure}
+\includegraphics[scale=0.5]{alice}
+\end{figure}
 
 \end{frame}
 
@@ -69,7 +71,9 @@
 \item Why did Alice fail?
 \end{itemize}
 
-@TODOimage
+\begin{figure}
+\includegraphics[scale=0.3]{aliceFail}
+\end{figure}
 
 \end{frame}
 
@@ -84,7 +88,9 @@
 \item And he has found a box of matches.
 \end{itemize}
 
-@TODOimage
+\begin{figure}
+\includegraphics[scale=0.23]{bobFire}
+\end{figure}
 \end{frame}
 
 
@@ -98,7 +104,9 @@
 \item Why did the forest burn down?
 \end{itemize}
 
-@TODOimage
+\begin{figure}
+\includegraphics[scale=0.25]{bobLightningFire}
+\end{figure}
 \end{frame}
 
 
@@ -111,7 +119,9 @@
 \item They decide to throw stones at the windows.
 \end{itemize}
 
-@TODOimage
+\begin{figure}
+\includegraphics[scale=0.4]{aliceandbob}
+\end{figure}
 
 \end{frame}
 
@@ -125,7 +135,9 @@
 \item Who should we blame?
 \end{itemize}
 
-@TODOimage
+\begin{figure}
+\includegraphics[scale=0.15]{stoneWindow}
+\end{figure}
 
 \end{frame}
 
@@ -155,7 +167,9 @@
 \item Four types of causality in planning.
 \end{itemize}
 
-@TODOdiagramlinediagram maybe venn diagram?
+\begin{figure}
+\includegraphics[scale=0.35]{causaldiagram}
+\end{figure}
 \end{frame}
 
 
@@ -179,24 +193,12 @@
 \item What if she \textit{had} done it?
 \end{itemize}
 
-@TODOdiagram
+\begin{figure}
+\includegraphics[scale=0.31]{alicepass}
+\end{figure}
 
 \end{frame}
 
-
-
-
-\begin{frame}
-\frametitle{Modelling Causality}
-\begin{itemize}
-\item Definitions should match our intuition.
-\item Four Definitions of Causality.
-\item But-for Causality, HP's Original Causality, HP's Updated Causality, and HP's Modified causality.
-\end{itemize}
-
-@TODOdiagram of all 4 types
-
-\end{frame}
 
 
 %========================================HP CAUSALITY===============================
@@ -208,7 +210,7 @@
 \frametitle{Halpern's Causality}
 
 \begin{itemize}
-\item Introduced the causal setting.
+\item The causal setting.
 \item Allows counter-factual reasoning.
 \item Unambiguous causality in this framework.
 
@@ -217,46 +219,44 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Causal Settings}
+\frametitle{Causal Settings: Alice's Homework}
 \begin{itemize}
 \item Causal setting $(M,u)$.
-\item Model $M$.
-\item Exogenous variables $u$.
-\item Describes the initial and final state of the world.
+\item Sufficient to the initial and final state of the world.
 
 \end{itemize}
 
-@TODOexampleimage
+\begin{figure}
+\includegraphics[scale=0.3]{alicemodel}
+\end{figure}
+\end{frame}
 
-
+\begin{frame}
+\frametitle{Causal Settings: Bob's Fire}
+\begin{figure}
+\includegraphics[scale=0.3]{fireModel}
+\end{figure}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Structural Equations}
+\frametitle{Causal Settings: Alice and Bob}
+\begin{figure}
+\includegraphics[scale=0.4]{aliceBobModel1}
+\end{figure}
 \begin{itemize}
-\item ``If Alice had not done her homework, she would have failed."
-\item One possible model: 
-\begin{itemize}
-\item $HW \leftarrow$ Alice does her homework.
-\item $P \leftarrow$ Alice passes.
-\item $u \leftarrow$ Exogenous variable.
-\item $HW \leftarrow u$ We control if she does her homework from outside the model.
-\item $P \leftarrow HW$ Doing her homework causes her to pass.
+\item Identical to the Forest Fire example.
+\item How can we change it?
 \end{itemize}
-
-\end{itemize}
-
-@TODOimage replace
 \end{frame}
-
 
 \begin{frame}
-\frametitle{Causal Settings}
-
-@TODOdiagram of alice (including $u$ values) and counterfactuals
-
+\frametitle{Causal Settings: Alice and Bob}
+\begin{figure}
+\includegraphics[scale=0.4]{aliceBobModel2}
+\end{figure}
 \end{frame}
+
 
 
 \begin{frame}
@@ -264,9 +264,9 @@
 \begin{itemize}
 \item ``$X=x$ is a cause of $\phi$" if changing the value of $X$ to $x'$ means that $\phi$ no longer holds.
 \end{itemize}
-
-
 \end{frame}
+
+
 
 \begin{frame}
 \frametitle{But-For Causality}
@@ -280,7 +280,7 @@
 (M,u) \models [X\leftarrow x']\lnot \phi
 \] 
 
-\item $X$ is minimal, there is no strict subset of $X'$ of $X$ such that $X' = x'$ satisfies the above conditions.
+\item $X$ is minimal, there is no strict subset $X'$ of $X$ such that $X' = x'$ satisfies the above conditions.
 \end{enumerate}
 
 \end{defn}
@@ -290,28 +290,87 @@
 
 \begin{frame}
 \frametitle{Example 1: Alice's Homework}
-@TODOdiagram
+
+\begin{itemize}
+\item In the actual world she didn't do her homework and failed.
+\end{itemize}
+\begin{figure}
+\includegraphics[scale=.4]{aliceModelReal}
+\end{figure}
+
+
+\begin{itemize}
+\item In our model, counter-factually examining the world in which she did her homework results in her passing.
+\end{itemize}
+\begin{figure}
+\includegraphics[scale=.4]{aliceModelCounterfactual}
+\end{figure}
+
 \end{frame}
 
 
 \begin{frame}
 \frametitle{Example 2: Bob's Fire}
-@TODOdiagram
+\begin{figure}
+\includegraphics[scale=.4]{bobModelReal}
+\end{figure}
+
+\begin{itemize}
+\item Counter-factually stating that Bob did not drop the match still results in the forest fire.
+\end{itemize}
+\begin{figure}
+\includegraphics[scale=.4]{bobModelCounterfactual}
+\end{figure}
+
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Example 3: Alice and Bob's Fire}
-@TODOdiagram
+\frametitle{Example 2: Bob's Fire}
+
+\begin{itemize}
+\item If neither the match was dropped nor the lightning struck, there would have been no forest fire.
+\end{itemize}
+\begin{figure}
+\includegraphics[scale=.4]{bobModelCounterfactual2}
+\end{figure}
+
+\begin{itemize}
+\item $X = \{Drop Match = True\}$ is not a cause of $forest fire$, but $X = \{Drop Match = True, Lightning Strike = True\}$ is a cause.
+\end{itemize}
+
 \end{frame}
 
 
+\begin{frame}
+\frametitle{Example 3: Alice and Bob's Window}
+\begin{figure}
+\includegraphics[scale=.4]{alicebobModelReal}
+\end{figure}
+
+\begin{figure}
+\includegraphics[scale=.4]{alicebobModelCounterfactual}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 3: Alice and Bob's Window}
+\begin{figure}
+\includegraphics[scale=.4]{alicebobModelCounterfactual2}
+\end{figure}
+
+\begin{itemize}
+\item $X = \{Alice Threw = True\}$ is not a cause of $Bottle Broke = True$.
+\item $X = \{Alice Threw = True, Bob Threw = True\}$ is a cause of $Bottle Broke = True$.
+\end{itemize}
+\end{frame}
 
 
 
 \begin{frame}
 \frametitle{Halpern's Modified Causality}
 \begin{itemize}
+\item Intuitively we might feel that Alice is a cause, but Bob is not.
 \item But-for causality is limited.
 \item Extends but-for causality.
 \end{itemize}
@@ -335,22 +394,80 @@
 
 \begin{frame}
 \frametitle{Example 1: Alice's Homework}
-@TODOdiagram
+
+\begin{figure}
+\includegraphics[scale=.5]{aliceModelReal}
+\end{figure}
+
+\begin{itemize}
+\item A But-For cause is a cause in the Modified definition with $W=\{\}$.
+\end{itemize}
+
+\begin{figure}
+\includegraphics[scale=.5]{aliceModelCounterfactual}
+\end{figure}
+
+\begin{itemize}
+\item $X=\{Does Homework = True\}$ is a cause in Modified Definition.
+\end{itemize}
+
+
 \end{frame}
 
 
 \begin{frame}
 \frametitle{Example 2: Bob's Fire}
-@TODOdiagram
+\begin{figure}
+\includegraphics[scale=.5]{bobModelReal}
+\end{figure}
+
+\begin{figure}
+\includegraphics[scale=.5]{bobModelCounterfactual}
+\end{figure}
+\begin{itemize}
+\item No matter what other variables we find as $W$, we can't cause $Forest Fire = False$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 2: Bob's Fire}
+\begin{figure}
+\includegraphics[scale=.5]{bobModelReal}
+\end{figure}
+
+\begin{figure}
+\includegraphics[scale=.5]{bobModelCounterfactual}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 2: Bob's Fire}
+\begin{figure}
+\includegraphics[scale=.5]{bobModelCounterFactual2}
+\end{figure}
+
+\begin{itemize}
+\item $X=\{Drop Match=True, Lightning Strike = True\}$, with $W=\{\}$ is a cause of $Forest Fire = True$
+\end{itemize}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Example 3: Alice and Bob's Fire}
-@TODOdiagram
+\frametitle{Example 3: Alice and Bob's Window}
+\begin{figure}
+\includegraphics[scale=.40]{alicebobModelReal}
+\end{figure}
+
+\begin{figure}
+\includegraphics[scale=.40]{alicebobModelCounterfactual3}
+\end{figure}
+
+\begin{itemize}
+\item By fixing $W=\{Bob Hit = True\}$, $X=\{Alice Threw = True\}$ is cause of $Window Broke = True$.
+\end{itemize}
 \end{frame}
 
-\section{Test section one}
+\section{Causality in Planning}
 
 \begin{frame}
 \frametitle{Causality in Planning}
@@ -419,7 +536,7 @@ An action slot $q(\pi,k)$ is mapped to the list of all applicable actions at pos
 
 \begin{frame}
 \frametitle{Plans}
-@TODOdiagram action slot example
+
 \end{frame}
 
 
@@ -452,7 +569,16 @@ iff counterfactually using actions $o'$ in the CPS would result in $\phi$.
 \item A plan and a subplan are not interchangeable.
 \end{itemize}
 
-@TODOdiagram
+\begin{figure}
+\includegraphics[scale=.30]{bobPlanOriginal}
+\end{figure}
+\begin{figure}
+\includegraphics[scale=.35]{bobPlan}
+\end{figure}
+
+\begin{itemize}
+\item Valid $\pi'$ values: $\{q(\pi',1),q(\pi',2),q(\pi',3)\}$, $\{q(\pi',1),q(\pi',2)\}$, $\{q(\pi',1),q(\pi',3)\}$, $\{q(\pi',2),q(\pi',3)\}$, $\{q(\pi',2),q(\pi',3)\}$, $\{(\pi',1)\}$,$\{(\pi',2)\}$, $\{(\pi',3)\}$
+\end{itemize}
 
 \end{frame}
 
@@ -483,6 +609,60 @@ Given a multi-agent action plan $\Xi$ and a plan $\pi$ with a final state $s_n$,
 \end{defn}
 
 \end{frame}
+\begin{frame}
+\frametitle{Example 1: Alice's Homework}
+\begin{figure}
+\includegraphics[scale=.35]{alicePlan}
+\end{figure}
+
+\begin{itemize}
+\item What other actions could Alice have taken taken?
+\item $\pi'= q(\pi,1)$, $o'=(Don't Do Homework)$
+\end{itemize}
+
+\begin{figure}
+\includegraphics[scale=.35]{alicePlanCounterfactual}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Example 2: Bob's Fire}
+
+\begin{figure}
+\includegraphics[scale=.33]{bobPlanOriginal}
+\end{figure}
+\begin{itemize}
+\item $\pi'= q(\pi,1)$, $o'=\{Drop Match\}$
+\end{itemize}
+\begin{figure}
+\includegraphics[scale=.32]{bobPlanCounterfactual}
+\end{figure}
+
+\begin{itemize}
+\item $\pi'= \{q(\pi,1),q(\pi,2)\}$, $o'=\{Drop Match, Lightning Strikes\}$
+\end{itemize}
+
+\begin{figure}
+\includegraphics[scale=.32]{bobPlanCounterfactual2}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Example 3: Alice and Bob's Window}
+\begin{figure}
+\includegraphics[scale=.28]{alicebobPlanOriginal}
+\end{figure}
+
+\begin{figure}
+\includegraphics[scale=.28]{alicebobPlanCounterfactual}
+\end{figure}
+
+\begin{figure}
+\includegraphics[scale=.28]{alicebobPlanCounterfactual2}
+\end{figure}
+\end{frame}
 
 \begin{frame}
 \frametitle{Modified Causality Planning}
@@ -504,22 +684,7 @@ Given a multi-agent action plan $\Xi$ and plan $\pi$ with a final state $s_n$, s
 
 \end{frame}
 
-\begin{frame}
-\frametitle{Example 1: Alice's Homework}
-@TODOdiagram
-\end{frame}
 
-
-\begin{frame}
-\frametitle{Example 2: Bob's Fire}
-@TODOdiagram
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Example 3: Alice and Bob's Fire}
-@TODOdiagram
-\end{frame}
 
 
 \begin{frame}
