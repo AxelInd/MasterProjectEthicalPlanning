@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.26)  14 MAR 2019 18:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.26)  14 MAR 2019 18:24
 entering extended mode
 **./slideshow.tex
 (slideshow.tex
@@ -1539,43 +1539,94 @@ Overfull \hbox (8.6635pt too wide) in paragraph at lines 665--665
  <./alicebobPlanOriginal.png> <./alicebobPlanCounterfactual.png> <./alicebobPla
 nCounterfactual2.png>] [47
 
-] [48
+]
+File: alicePlan.png Graphic file (type png)
+ <use alicePlan.png>
+Package pdftex.def Info: alicePlan.png used on input line 700.
+(pdftex.def)             Requested size: 311.97017pt x 19.49812pt.
+File: alicePlanCounterfactual.png Graphic file (type png)
 
-] [49
-
-] [50
-
-] [51
+<use alicePlanCounterfactual.png>
+Package pdftex.def Info: alicePlanCounterfactual.png used on input line 700.
+(pdftex.def)             Requested size: 330.41435pt x 19.49812pt.
+ [48
 
 ]
-Overfull \vbox (5.8053pt too high) detected at line 767
+File: bobPlanOriginal.png Graphic file (type png)
+ <use bobPlanOriginal.png>
+Package pdftex.def Info: bobPlanOriginal.png used on input line 714.
+(pdftex.def)             Requested size: 279.92389pt x 16.4413pt.
+File: bobPlanCounterfactual.png Graphic file (type png)
+
+<use bobPlanCounterfactual.png>
+Package pdftex.def Info: bobPlanCounterfactual.png used on input line 714.
+(pdftex.def)             Requested size: 289.19847pt x 16.4413pt.
+ [49
+
+]
+<aliceBobPlanOriginal.png, id=386, 1248.91594pt x 58.71938pt>
+File: aliceBobPlanOriginal.png Graphic file (type png)
+
+<use aliceBobPlanOriginal.png>
+Package pdftex.def Info: aliceBobPlanOriginal.png used on input line 727.
+(pdftex.def)             Requested size: 349.69408pt x 16.4413pt.
+
+Overfull \hbox (7.39877pt too wide) in paragraph at lines 727--727
+ [] 
  []
 
+<aliceBobPlanCounterfactual3.png, id=387, 1253.43282pt x 58.71938pt>
+File: aliceBobPlanCounterfactual3.png Graphic file (type png)
+
+<use aliceBobPlanCounterfactual3.png>
+Package pdftex.def Info: aliceBobPlanCounterfactual3.png used on input line 727
+.
+(pdftex.def)             Requested size: 350.9588pt x 16.4413pt.
+
+Overfull \hbox (8.6635pt too wide) in paragraph at lines 727--727
+ [] 
+ []
+
+[50
+
+ <./aliceBobPlanOriginal.png> <./aliceBobPlanCounterfactual3.png>] [51
+
+]
 [52
 
 ] [53
 
-]
-Overfull \vbox (5.8053pt too high) detected at line 804
- []
-
-[54
-
-] [55
+] [54
 
 ]
-Overfull \vbox (12.73717pt too high) detected at line 847
+Overfull \vbox (5.8053pt too high) detected at line 807
  []
 
-[56
+[55
 
-] [57
+] [56
 
 ]
-Overfull \vbox (12.73717pt too high) detected at line 884
+Overfull \vbox (5.8053pt too high) detected at line 844
  []
 
-[58
+[57
+
+] [58
+
+]
+Overfull \vbox (12.73717pt too high) detected at line 887
+ []
+
+[59
+
+] [60
+
+]
+Overfull \vbox (12.73717pt too high) detected at line 924
+ []
+
+[61
 
 ]
 \tf@nav=\write6
@@ -1587,19 +1638,19 @@ Overfull \vbox (12.73717pt too high) detected at line 884
 \tf@snm=\write8
 \openout8 = `slideshow.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 890.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 890.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 930.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 930.
  (slideshow.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 890.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 890.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 930.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 930.
 Package rerunfilecheck Info: File `slideshow.out' has not changed.
 (rerunfilecheck)             Checksum: 86A73BAB3F5888ACB13C662374AF7E30;112.
  ) 
 Here is how much of TeX's memory you used:
- 17819 strings out of 493323
- 335343 string characters out of 3139068
+ 17841 strings out of 493323
+ 335767 string characters out of 3139068
  406452 words of memory out of 3000000
- 20803 multiletter control sequences out of 15000+200000
+ 20817 multiletter control sequences out of 15000+200000
  15803 words of font info for 57 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,15n,57p,778b,904s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1615,9 +1666,9 @@ m/cmssi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssi
 :/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program
  Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on slideshow.pdf (58 pages, 647484 bytes).
+Output written on slideshow.pdf (61 pages, 665785 bytes).
 PDF statistics:
- 513 PDF objects out of 1000 (max. 8388607)
- 119 named destinations out of 1000 (max. 500000)
- 250 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 535 PDF objects out of 1000 (max. 8388607)
+ 125 named destinations out of 1000 (max. 500000)
+ 260 words of extra memory for PDF output out of 10000 (max. 10000000)
 
