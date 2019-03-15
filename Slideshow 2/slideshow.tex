@@ -47,6 +47,8 @@
  
 \frame{\titlepage}
 
+\section{Halpern's Causality}
+
 \begin{frame}
 \frametitle{Alice}
 \begin{itemize}
@@ -348,6 +350,9 @@
 \includegraphics[scale=.4]{alicebobModelReal}
 \end{figure}
 
+\begin{itemize}
+\item With $x' = \{ Alice Threw = False\}$, Bob's stone now breaks the window.
+\end{itemize}
 \begin{figure}
 \includegraphics[scale=.4]{alicebobModelCounterfactual}
 \end{figure}
@@ -495,14 +500,9 @@
 
 \begin{frame}
 \frametitle{Single-Agent Planning Tasks}
-@TODOdiagram
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Multi-agent Planning Tasks}
-@TODOdiagram
+\begin{figure}
+\includegraphics[scale=.5]{planningTask}
+\end{figure}
 
 \end{frame}
 
@@ -534,11 +534,26 @@ An action slot $q(\pi,k)$ is mapped to the list of all applicable actions at pos
 
 \end{frame}
 
+
 \begin{frame}
-\frametitle{Plans}
+\frametitle{CPS New Operations}
+\begin{itemize}
+\item A subplan $\pi'$, $\pi'\subset \pi$ is a subset of the action slots in $\pi$.
+\item A plan and a subplan are not interchangeable.
+\end{itemize}
+
+\begin{figure}
+\includegraphics[scale=.30]{bobPlanOriginal}
+\end{figure}
+\begin{figure}
+\includegraphics[scale=.35]{bobPlan}
+\end{figure}
+
+\begin{itemize}
+\item Valid $\pi'$ values: $\{q(\pi',1),q(\pi',2),q(\pi',3)\}$, $\{q(\pi',1),q(\pi',2)\}$, $\{q(\pi',1),q(\pi',3)\}$, $\{q(\pi',2),q(\pi',3)\}$, $\{q(\pi',2),q(\pi',3)\}$, $\{(\pi',1)\}$,$\{(\pi',2)\}$, $\{(\pi',3)\}$
+\end{itemize}
 
 \end{frame}
-
 
 \begin{frame}
 \frametitle{Causal Plan Settings}
@@ -562,25 +577,7 @@ iff counterfactually using actions $o'$ in the CPS would result in $\phi$.
 
 \end{frame}
 
-\begin{frame}
-\frametitle{CPS New Operations}
-\begin{itemize}
-\item A subplan $\pi'$, $\pi'\subset \pi$ is a subset of the action slots in $\pi$.
-\item A plan and a subplan are not interchangeable.
-\end{itemize}
 
-\begin{figure}
-\includegraphics[scale=.30]{bobPlanOriginal}
-\end{figure}
-\begin{figure}
-\includegraphics[scale=.35]{bobPlan}
-\end{figure}
-
-\begin{itemize}
-\item Valid $\pi'$ values: $\{q(\pi',1),q(\pi',2),q(\pi',3)\}$, $\{q(\pi',1),q(\pi',2)\}$, $\{q(\pi',1),q(\pi',3)\}$, $\{q(\pi',2),q(\pi',3)\}$, $\{q(\pi',2),q(\pi',3)\}$, $\{(\pi',1)\}$,$\{(\pi',2)\}$, $\{(\pi',3)\}$
-\end{itemize}
-
-\end{frame}
 
 
 \begin{frame}
@@ -595,12 +592,12 @@ iff counterfactually using actions $o'$ in the CPS would result in $\phi$.
 \frametitle{But-For Causality Planning}
 \begin{defn} 
 
-Given a multi-agent action plan $\Xi$ and a plan $\pi$ with a final state $s_n$, some action slots in $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a But-For cause of some final variable assignment $s_n \models \phi$ iff the following 3 conditions hold:
+Given a planning task $\Pi$ and a plan $\pi$ with a final state $s_n$, some action slots in $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a But-For cause of some final variable assignment $s_n \models \phi$ iff the following 3 conditions hold:
 \begin{enumerate}
 \item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
 \item $BF2$: There is a setting $o'$ of the non-$\epsilon$ action slots in $\pi'$ such that:
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o'](\lnot \textrm{finally} \phi)
+(\pi, \Pi) \models [\pi' \leftarrow o'](\lnot \textrm{finally} \phi)
 \]
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
 \end{enumerate}
@@ -654,11 +651,15 @@ Given a multi-agent action plan $\Xi$ and a plan $\pi$ with a final state $s_n$,
 \begin{figure}
 \includegraphics[scale=.28]{alicebobPlanOriginal}
 \end{figure}
-
+\begin{itemize}
+\item $\pi'=\{q(1,\pi)\}$, $o'=\{Not Alice Throws\}$
+\end{itemize}
 \begin{figure}
 \includegraphics[scale=.28]{alicebobPlanCounterfactual}
 \end{figure}
-
+\begin{itemize}
+\item $\pi'=\{q(1,\pi)\, q(2,\pi)\}$, $o'=\{Not Alice Throws, Not Bob Throws\}$
+\end{itemize}
 \begin{figure}
 \includegraphics[scale=.28]{alicebobPlanCounterfactual2}
 \end{figure}
@@ -667,18 +668,16 @@ Given a multi-agent action plan $\Xi$ and a plan $\pi$ with a final state $s_n$,
 \begin{frame}
 \frametitle{Modified Causality Planning}
 \begin{defn}
-Given a multi-agent action plan $\Xi$ and plan $\pi$ with a final state $s_n$, some action slots $\pi'$,$\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a cause of some final variable assignment $s_n \models \phi$ according to the modified planning definition iff the following 3 conditions hold:
+Given a planning task $\Pi$ and plan $\pi$ with a final state $s_n$, some action slots $\pi'$,$\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a cause of some final variable assignment $s_n \models \phi$ according to the modified planning definition iff the following 3 conditions hold:
 \begin{enumerate}
 \item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
 \item $BF2$: There is a setting $o'$ of the applicable actions in $\pi'$, and a setting of $W \subseteq (\pi  - \pi')$ such that:
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w^\star](\lnot \Diamond \phi)
+(\pi, \Pi) \models [\pi' \leftarrow o', W \leftarrow w^\star](\lnot \textrm{finally}\phi)
 \]
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
 \end{enumerate}
 
-
-(Where $W\leftarrow w^\star$ denotes fixing all non-$\epsilon$ action slots in $W$ to their original actions.)
 
 \end{defn}
 
@@ -707,8 +706,18 @@ Given a multi-agent action plan $\Xi$ and plan $\pi$ with a final state $s_n$, s
 \includegraphics[scale=.28]{bobPlanOriginal}
 \end{figure}
 
+\begin{itemize}
+\item $\pi'=\{ q(\pi,1)\}, o'=\{Don't Drop Match\}, W=\{\}$
+\end{itemize}
 \begin{figure}
 \includegraphics[scale=.28]{bobPlanCounterfactual}
+\end{figure}
+
+\begin{itemize}
+\item $\pi'=\{q(1,\pi)\, q(2,\pi)\}$, $o'=\{Not Alice Throws, Not Bob Throws\}, W=\{\}$
+\end{itemize}
+\begin{figure}
+\includegraphics[scale=.28]{bobPlanCounterfactual2}
 \end{figure}
 
 \end{frame}
@@ -721,6 +730,9 @@ Given a multi-agent action plan $\Xi$ and plan $\pi$ with a final state $s_n$, s
 \includegraphics[scale=.28]{aliceBobPlanOriginal}
 \end{figure}
 
+\begin{itemize}
+\item $\{q(\pi,1) \}$, $o'=\{Not Alice Throws\}$, $W=\{q(\pi, 3\}$, $w^\star=\{ Not Hits Bob\}$
+\end{itemize}
 \begin{figure}
 \includegraphics[scale=.28]{aliceBobPlanCounterfactual3}
 \end{figure}
@@ -729,12 +741,11 @@ Given a multi-agent action plan $\Xi$ and plan $\pi$ with a final state $s_n$, s
 
 \begin{frame}
 \frametitle{Conclusions}
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Future Work}
+\begin{itemize}
+\item @TODO ref's causality.
+\item Extending Causality.
+\item Future Work.
+\end{itemize}
 
 \end{frame}
 
@@ -923,7 +934,7 @@ Given a multi-agent planning task $\Xi$ and action plan $\pi$ with a final state
 
 \end{frame}
 
-
+\section{Questions}
 
 
 
