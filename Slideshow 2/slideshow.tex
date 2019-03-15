@@ -35,6 +35,11 @@
 \newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
 \newtheorem{exmp}[thm]{Example} % same for example numbers
 
+\usepackage{natbib}
+
+
+
+
 %Information to be included in the title page:
 \title{Causality in Multi-Agent Planning}
 \author{Axel Ind}
@@ -42,6 +47,7 @@
 \date{\today}
  
  
+
  
 \begin{document}
  
@@ -181,7 +187,7 @@
 \begin{itemize}
 \item $A$ caused $B$.
 \item Our intuitions differ.
-\item @TODO ref formalised their own definitions.
+\item \citet{halpern2005causes} formalised their own definitions.
 
 \end{itemize}
 
@@ -512,7 +518,7 @@
 \begin{itemize}
 \item Not performed by any agent.
 \item Can be timed, or we get non-determinism.
-\item Unlike @TODOref we allow conflicting exogenous actions.
+\item Unlike \citet{lind2019ethical} we allow conflicting exogenous actions.
 \end{itemize}
 
 \end{frame}
@@ -742,7 +748,7 @@ Given a planning task $\Pi$ and plan $\pi$ with a final state $s_n$, some action
 \begin{frame}
 \frametitle{Conclusions}
 \begin{itemize}
-\item @TODO ref's causality.
+\item \citet{halpern2005causes}'s causality.
 \item Extending Causality.
 \item Future Work.
 \end{itemize}
@@ -855,9 +861,16 @@ Given a planning task $\Pi$ and plan $\pi$ with a final state $s_n$, some action
 \end{frame}
 
 
+\begin{frame}
+\frametitle{Bibliography}
+\bibliography{bibliography} 
+\bibliographystyle{plainnat}
+\end{frame}
 
 
+\section{Questions}
 
+\section{Appendix}
 
 
 
@@ -934,7 +947,7 @@ Given a multi-agent planning task $\Xi$ and action plan $\pi$ with a final state
 
 \end{frame}
 
-\section{Questions}
+
 
 
 
