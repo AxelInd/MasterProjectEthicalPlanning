@@ -41,7 +41,7 @@
 
 
 %Information to be included in the title page:
-\title{Causality in Multi-Agent Planning}
+\title{Causality in Planning}
 \author{Axel Ind}
 \institute{ALU-Freiburg}
 \date{\today}
@@ -53,7 +53,7 @@
  
 \frame{\titlepage}
 
-\section{Halpern's Causality}
+\section{Causality}
 
 \begin{frame}
 \frametitle{Alice}
@@ -154,8 +154,8 @@
 \frametitle{A Brief Overview}
 \begin{itemize}
 \item What is causality?
-\item Halpern's Causality.
-\item Counterfactaul reasoning in planning.
+\item \citet{halpern2005causes} Causality.
+\item Counter-factual reasoning in planning.
 \item Planning Causality.
 \end{itemize}
 
@@ -544,8 +544,8 @@ An action slot $q(\pi,k)$ is mapped to the list of all applicable actions at pos
 \begin{frame}
 \frametitle{CPS New Operations}
 \begin{itemize}
-\item A subplan $\pi'$, $\pi'\subset \pi$ is a subset of the action slots in $\pi$.
-\item A plan and a subplan are not interchangeable.
+\item A slotplan $\pi'$, $\pi'\subset \pi$ is a subset of the action slots in $\pi$.
+\item A plan and a slotplan are not interchangeable.
 \end{itemize}
 
 \begin{figure}
@@ -579,7 +579,7 @@ iff execution of the plan results in the variable assignments $\phi$ in the fina
 \[
 (\Pi, \pi)[\pi'\leftarrow o'] \models (\textrm{finally} \phi)
 \]
-iff counterfactually using actions $o'$ in the CPS would result in $\phi$.
+iff counter-factually using actions $o'$ in the CPS would result in $\phi$.
 
 \end{frame}
 
@@ -737,7 +737,7 @@ Given a planning task $\Pi$ and plan $\pi$ with a final state $s_n$, some action
 \end{figure}
 
 \begin{itemize}
-\item $\{q(\pi,1) \}$, $o'=\{Not Alice Throws\}$, $W=\{q(\pi, 3\}$, $w^\star=\{ Not Hits Bob\}$
+\item $\{q(\pi,1) \}$, $o'=\{Not Alice Throws\}$, $W=\{q(\pi, 3\}$, $w^\star=\{ Not Hits Bob)\}$
 \end{itemize}
 \begin{figure}
 \includegraphics[scale=.28]{aliceBobPlanCounterfactual3}
@@ -756,11 +756,20 @@ Given a planning task $\Pi$ and plan $\pi$ with a final state $s_n$, some action
 \end{frame}
 
 \begin{frame}
-\frametitle{Special Thanks}
+\frametitle{Thank you.}
 
 \end{frame}
 
+\begin{frame}
+\frametitle{Bibliography}
+\bibliography{bibliography} 
+\bibliographystyle{plainnat}
+\end{frame}
 
+
+\section{Questions}
+
+\section{Appendix}
 
 
 
@@ -861,16 +870,7 @@ Given a planning task $\Pi$ and plan $\pi$ with a final state $s_n$, some action
 \end{frame}
 
 
-\begin{frame}
-\frametitle{Bibliography}
-\bibliography{bibliography} 
-\bibliographystyle{plainnat}
-\end{frame}
 
-
-\section{Questions}
-
-\section{Appendix}
 
 
 
