@@ -1,5 +1,5 @@
 \beamer@sectionintoc {1}{Causality}{2}{0}{1}
 \beamer@sectionintoc {2}{Halpern's Causality}{13}{0}{2}
-\beamer@sectionintoc {3}{Causality in Planning}{33}{0}{3}
-\beamer@sectionintoc {5}{Questions}{53}{0}{4}
-\beamer@sectionintoc {6}{Appendix}{54}{0}{5}
+\beamer@sectionintoc {3}{Causality in Planning}{32}{0}{3}
+\beamer@sectionintoc {5}{Questions}{52}{0}{4}
+\beamer@sectionintoc {6}{Appendix}{53}{0}{5}

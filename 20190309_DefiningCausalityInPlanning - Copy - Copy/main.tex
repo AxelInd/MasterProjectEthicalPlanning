@@ -21,7 +21,7 @@
 \maketitle
 
 \begin{abstract}
-The causality proposed by \cite{halpern2005causes} allows us to determine which variable values are causes of certain other final variable values according to a variety of definitions. The normal HP-Causality approach is limited to a structural equation representations of the problem under consideration. This paper describes a multi-agent planning approach to defining causality. Extensions to the Original, Updated, and Modified definitions of HP-Causality to planning are formalised and discussed.
+The causality proposed by \cite{halpern2005causes} allows us to determine which events and world state descriptors modelled as variables are causes of certain other final variable values according to a variety of definitions. The HP-Causality approach is limited to a structural equation representations of the problem under consideration. Though useful, this causality requires the world to be modelled under Causal Settings. This paper describes an alternate approach that describes causality in the well-studied Artificial Intelligence Planning domain. By introducing the concept of a Casual Planning Setting (CPS), a multi-agent planning approach to defining causality using counter-factual reasoning is developed. Extensions to the Original, Updated, and Modified definitions of HP-Causality to planning are formalised and discussed.
 \end{abstract}
 
 %-----------------------------INTRODUCTION----------------------------------------
@@ -42,14 +42,14 @@ This paper, necessarily, begins with an extensive examination of HP-causality an
 \subsubsection*{Language}
 A single-agent planning task is a 4-tuple $\Pi=(V, A, s_0, s_\star)$. Where $V$ denotes the set of variables and maps each to it's allowable values (or domain) such that, for some variable $v$, $v \in D_v$. A \textit{fact} is a pair $(v, d \in D_v)$. A conjunction of facts $v_1=d_1,...,v_k=d_k$ is \textit{consistent} if it contains no contradictory facts. That is, no pair of facts exists in this conjunction such that $v_j=d_j$ and $v_j \neq d_j$.
 
-$A$ denotes the set of \textit{actions} available to the agent. An action $a=<pre,eff>$ consists of a precondition, and an effect. A precondition is a conjunction of facts ($v_1=d_1,...,v_k=d_k$) and an effect is a conjunction of facts in \textit{effect normal form} (@TODOref) of the form $\phi_i \triangleright v_i:=d_i$. No contradictory effects are permitted for a single action. That is no pair of conditionals exists such that $\phi_i \triangleright v_j=d_j$ and $\phi_j \triangleright v_j \neq d_j$. $A$ is divided into two types of actions, endogenous actions and exogenous actions. Intuitively endogenous actions describe those actions an agent is able to choose to take. \citet{lind2019ethical} add the requirement that the set of endogenous actions always contains the empty action $\epsilon=(\top,\bot)$, this is not a strict requirement in this paper, but is worth noting as a possible simplifying extension. Exogenous actions describe actions which are outside of the control of the agent and must be performed whenever possible. \citet{lind2019ethical} treat exogenous actions as a series of, non-conflicting, actions which are associated with discrete time points $t(a)$ and must be applied as soon as they become applicable and result in a state change. By contrast, this paper drops the requirement that exogenous actions be non-conflicting and instead introduces the permissive and strict approach to dealing with such actions.
+$A$ denotes the set of \textit{actions} available to the agent. An action $a=<pre,eff>$ consists of a precondition, and an effect. A precondition is a conjunction of facts ($v_1=d_1,...,v_k=d_k$) and an effect is a conjunction of facts in \textit{effect normal form} (a simplification of the work of \citet{rintanen2003expressive}) of the form $\phi_i \triangleright v_i:=d_i$. No contradictory effects are permitted for a single action. That is no pair of conditionals exists such that $\phi_i \triangleright v_j=d_j$ and $\phi_j \triangleright v_j \neq d_j$. $A$ is divided into two types of actions, endogenous actions and exogenous actions. Intuitively endogenous actions describe those actions an agent is able to choose to take. \citet{lind2019ethical} add the requirement that the set of endogenous actions always contains the empty action $\epsilon=(\top,\bot)$, this is not a strict requirement in this paper, but is worth noting as a possible simplifying extension. Exogenous actions describe actions which are outside of the control of the agent and must be performed whenever possible. \citet{lind2019ethical} treat exogenous actions as a series of, non-conflicting, actions which are associated with discrete time points $t(a)$ and must be applied as soon as they become applicable and result in a state change. By contrast, this paper drops the requirement that exogenous actions be non-conflicting and instead introduces the permissive and strict approach to dealing with such actions.
 
 The \textit{state} of a classical planning task is the conjunction of all variable pairs. $s_0$ describes the initial state of the agent, before any actions have been performed. $s_\star$ describes the goal state of the agent, to be achieved by execution of some number of consecutive actions.
 
 \subsubsection*{Semantics}
-A action $a=<pre, effect>$ is applicable in a state $s$ iff $s\models pre$ @TODOref. For exogenous actions, it is further required that the current state is the $t$-th time state associated with that action. 
+A action $a=<pre, effect>$ is applicable in a state $s$ iff $s\models pre$. For exogenous actions, it is further required that the current state is the $t$-th time state associated with that action. 
 
-The \textit{change set} $[eff]_s$ of an action is the set of facts that are affected by the conditional. specifically $[eff]_s=\cup^k_{i=1}[\phi_i \triangleright v_i:=d_i]$, where $[\phi \triangleright v:=d]_s=\{v=d\}$ if $s \models phi$ and $\emptyset$ otherwise. The change set never contains contradictory facts.
+The \textit{change set} $[eff]_s$ of an action is the set of facts that are affected by the conditional. specifically $[eff]_s=\cup^k_{i=1}[\phi_i \triangleright v_i:=d_i]$, where $[\phi \triangleright v:=d]_s=\{v=d\}$ if $s \models \phi$ and $\emptyset$ otherwise. The change set never contains contradictory facts.
 
 Applying an actions $a$ to state $s$ results a state $s'$ achieved by replacing all variables in $s$ that occur in $[eff]_s$ with conditional values assigned by that change set.
 
@@ -60,11 +60,11 @@ As with \cite{lind2019ethical}, we assume \textit{urgent semantics} for exogenou
 \item \textit{Strict approach}: consider every possible permutation of exogenous actions that can be performed.\footnote{Exhaustive, but computationally slow.}
 \end{enumerate}
 
-This paper will concern itself only with the third approach. $\Delta_{exo}(s)$ refers to the set of unique states that may be achieved by application of all relevant exogenous actions using one of the schemes above (Note that, unlike \cite{lind2019ethical}, $\Delta_{exo}(s)$ is not closed and does not guarantee a single unique state in the strict approach).
+This paper will concern itself only with the first approach. $\Delta_{\textrm{exo}}(s)$ refers to the set of unique states that may be achieved by application of all relevant exogenous actions using one of the schemes above (Note that, unlike \cite{lind2019ethical}, $\Delta_{\textrm{exo}}(s)$ is not closed and does not guarantee a single unique state in the strict approach).
 
-A \textit{plan} $\pi=(a_1,...a_n)$ is a sequence of endogenous actions. In a typical plan it is sufficient to apply $a_1$ to the initials state $s_0$ to achieve the first state $s_1$ and then apply $a_2$, etc. However, to incorporate exogenous actions, $\Delta_{exo}(s)$ must be calculated at each time point in which an exogenous action may occur. If each action in $\pi$ (supplemented by appropriate intermediate states as a result of $\Delta_{exo}(s)$) is applicable to the preceding state, then the plan is called applicable. 
+A \textit{plan} $\pi=(a_1,...a_n)$ is a sequence of endogenous actions. In a typical plan it is sufficient to apply $a_1$ to the initials state $s_0$ to achieve the first state $s_1$ and then apply $a_2$, etc. However, to incorporate exogenous actions, $\Delta_{\textrm{exo}}(s)$ must be calculated at each time point in which an exogenous action may occur. If each action in $\pi$ (supplemented by appropriate intermediate states as a result of $\Delta_{\textrm{exo}}(s)$) is applicable to the preceding state, then the plan is called applicable. 
 
-It is worth noting that using the strict approach to exogenous actions above it does not simply suffice to show that some exogenous action in $\Delta_{exo}(s)$ will make the next endogenous action applicable. Instead all applicable exogenous actions must be considered, thus introducing branching complexity into the computation.
+It is worth noting that using the strict approach to exogenous actions above it does not simply suffice to show that some exogenous action in $\Delta_{\textrm{exo}}(s)$ will make the next endogenous action applicable. Instead all applicable exogenous actions must be considered, thus introducing branching complexity into the computation.
 
 
 
@@ -89,13 +89,13 @@ A multi-agent action plan $\pi=((A_x, \Pi_x[o]_1),...(A_y, \Pi_y[o]_n))$. Where 
 
 For the purposes of readability, the rest of this paper will assume unique operator names and omit agent labels and specification of the operators available for that agent. Thus, multi-agent planning tasks will be treated as $\pi=(o_1,...o_n)$, except where doing so would limit some required expressibility. 
 
-\subsection{Counterfactual Reasoning in Planning} \label{sec:counterfactualPlanning}
+\subsection{Counter-factual Reasoning in Planning} \label{sec:counterfactualPlanning}
 
-Counterfactual reasoning concerns the question: ''What would happen if some feature of the world were other than it is?", and is an important part of many approaches to causality \cite{halpern2005causes}. For example, we can intuitively grasp concepts such as: ``\textit{if the boy had not done his homework, he would not have passed}", which deal with a world different from the one in which we exist. Thus, without going into the minutia of defining causality, as will be done later, we have some intuition that not doing his homework, may have been cause of his failure.
+Counterfactual reasoning concerns the question: ''What would happen if some feature of the world were other than it is?", and is an important part of many approaches to causality \citep{halpern2005causes}. For example, we can intuitively grasp examples such as: ``\textit{if the boy had done his homework, he would not have failed}", which deal with a world different from the one in which we exist. Thus, without going into the minutia of defining causality, as will be done later, we have some intuition that not doing his homework, may have been cause of his failure.
 
-But this reasoning is simplistic. What if the boy's grades were so bad that he would have failed anyway? Could we still consider not doing his homework to be a cause of failure? Our intuitions of cause differ from scenario to scenario, and for this reason we consider four distinct definitions of causality in this paper.
+But this reasoning is simplistic. What if the boy's grades were so good that he would have passed anyway? Could we still consider doing his homework to be a cause of passing? Our intuitions of cause differ from scenario to scenario, and for this reason we consider four distinct definitions of causality in this paper.
 
-\cite{lind2019ethical} introduce and justify a simple counterfactual reasoning procedure for single-agent plans. Specifically it asks what would have happened if some action had not occurred and the agent had instead done nothing? In the context of a planning task the authors note that is not sufficient to replace the action slot pair $(a_j, o_j)$ in question with the empty action $\epsilon=(\top, \bot)$ to make $(a_j, \epsilon)$, because that action may have caused variable assignment $v=d$ and without that assignment some later action $a_{j+k}$ may no longer be permissible. The authors, instead, allow impermissible actions to be considered during counterfactual reasoning. That is, they assume that, provided the plan was initially valid, we should allow all other actions to occur as they had before, regardless of violated preconditions.
+\cite{lind2019ethical} introduce and justify a simple counter-factual reasoning procedure for single-agent plans. Specifically it asks what would have happened if some action had not occurred and the agent had instead done nothing? In the context of a planning task the authors note that is not sufficient to replace the action slot pair $(a_j, o_j)$ in question with the empty action $\epsilon=(\top, \bot)$ to make $(a_j, \epsilon)$, because that action may have caused variable assignment $v=d$ and without that assignment some later action $a_{j+k}$ may no longer be permissible. The authors, instead, allow impermissible actions to be considered during counter-factual reasoning. That is, they assume that, provided the plan was initially valid, we should allow all other actions to occur as they had before, regardless of violated preconditions.
 
 For this paper we consider a slightly more robust choice of actions. Instead of introducing the empty action, we consider the full set of applicable actions available to an agent in a given state. In order to concisely capture the minutia of this kind of counterfactual reasoning we borrow intuition from the causality framework of \cite{halpern2005causes} and introduce our own framework.
 
@@ -104,10 +104,10 @@ Given a single-agent planning task $\Pi=(V, A, s_0, s_\star)$ and plan $\pi<a_1,
 Let $s_n$ denote the final state of the agent after each action in the planning task has been applied\footnote{Although we have stated that plans using conflicting exogenous actions do not necessarily result in a single deterministic final state, our intuition for causality allows us to treat the plan and final state as known quantities examined after the fact. Thus we ensure that there is only one state final state $s_n$}. The variable assignment for which we would like to identify the cause $\phi$ is always such that $s_n \models \phi$ in the CPS. The relationship between the $CPS$ and $\phi$ is described as
 
 \[
-(\pi, \Pi) \models (\Diamond \phi)
+(\pi, \Pi) \models (\textrm{finally} \phi)
 \]
 
-Where $\Diamond \phi$ is a symbol borrowed from linear temporal logic (LTL) \cite{galton1987temporal}, and means that $\phi$ holds in the final state after execution of the plan (analogous to $s_n \models \phi$).
+Where $\textrm{finally} \phi$ is an interpretation adapted from Linear Temporal Logic (LTL) \cite{galton1987temporal}, and means that $\phi$ holds in the final state after execution of the plan (analogous to $s_n \models \phi$).
 
 An \textit{action slot} $q(\pi,k)$ denotes the domain of possible actions at a given position. For example, if $\pi=(a_1,a_2,a_3)$, $q(\pi,1)$ identifies the position occupied by $a_1$, thus containing action $a_1$ and any other action that could have been performed by any agent at that moment.
 
@@ -123,13 +123,13 @@ $\pi' \leftarrow \vec{o'}$ is the setting of every non-$\epsilon$ action slot $a
 A counterfactual consideration on a CPS asks the question ``What if some subset of actions $\pi'$ in $\pi$ had been given the values $\vec{o'}$?". If changing the values of $\vec{o'}$ still results in the values $\phi$ in the final state, we write:
 
 \[
-(\pi, \Pi) \models [\pi' \leftarrow \vec{o'}](\Diamond \phi)
+(\pi, \Pi) \models [\pi' \leftarrow \vec{o'}](\textrm{finally} \phi)
 \]
 
 If, on the other hand, $\phi$ no longer holds in the final state, we write:
 
 \[
-(\pi, \Pi) \models [\pi' \leftarrow \vec{o'}](\lnot \Diamond \phi)
+(\pi, \Pi) \models [\pi' \leftarrow \vec{o'}](\lnot \textrm{finally} \phi)
 \]
 
 
@@ -138,13 +138,13 @@ A \textit{multiagent causal plan setting} (MCPS) works in an analogous way. The 
 A counterfactual consideration on a MCPS in which setting the actions slots described by $\pi'$ to the actions $\vec{o'}$ still results in the values $\phi$ in the final state, we write:
 
 \[
-(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}](\Diamond \phi)
+(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}](\textrm{finally} \phi)
 \]
 
 And if $\phi$ no longer holds in the final state, we write:
 
 \[
-(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}](\lnot \Diamond \phi)
+(\pi, \Xi) \models [\pi' \leftarrow \vec{o'}](\lnot \textrm{finally} \phi)
 \]
 
 Finally, let $(\pi-\pi')$ denote the plan obtained by setting all non-$\epsilon$ actions slots in $\pi'$ to $\epsilon$ in $\pi$. For example, given $\pi=(a_1,a_2,a_3)$ and $\pi'=(\epsilon, a_2, \epsilon)$, $(\pi-\pi')=(a_1, \epsilon, a_3)$, where $a_i$ is an action slot.
@@ -165,7 +165,7 @@ Intuitively the $max()$ and $min()$ operations capture the $\land$ and $\lor$ op
 
 Halpern and Pearl define \textit{exogenous variables} and \textit{endogenous variable}. Exogenous variables are those variables whose value is determined by factors outside the model. Endogenous variables, by contrast, are defined by structural equations within the model.
 
-Halpern and Pearl enforce an independence criteria on structural equations, so that the sequence in which that are considered does not matter and the final variable assignments are still deterministically defined. To evaluate a causality model, one first assigns the exogenous variables, and then iterates through the structural equation (updating variables at each step) until no new variable assignments occur (@TODOdiagram).
+Halpern and Pearl enforce an independence criteria on structural equations, so that the order in which they are considered does not matter and the final variable assignments are still deterministically defined. To evaluate a causality model, one first assigns the exogenous variables, and then iterates through the structural equation (updating variables at each step) until no new variable assignments occur).
 
 A causal setting $(M,u)$ is the world described by the structural equations of the model $M$ and the exogenous variables $u$. For a given set of variables $phi$ the causal setting exactly describes the value of all those variables after calculation of all structural equations. We write
 
@@ -239,6 +239,9 @@ The intuition of the original definition of causality (\cite{halpern2005causes})
 \end{defn}
 
 \subsection{The Updated definition of HP-Causality} \label{sec:updated}
+
+For reasons outside the scope of this paper, the Original definition of HP-causality was found to be too weak to accurately describe specific complex examples and the Updated definition was introduced which considers fixing every possible subset of $Z$ and $W$ rather than just $Z$ to their respective values after step $AC2(a)$.
+
 \begin{defn}$X=x$ is an actual cause of $\phi$ in the causal setting $(M,u)$ according to the updated causality definition iff the following 3 conditions hold:
 \begin{enumerate}
 \item $(M,u) \models (X=x)$ and $(M,u) \models \phi$.
@@ -272,6 +275,9 @@ The intuition of the original definition of causality (\cite{halpern2005causes})
 
 
 \subsection{The Modified definition of HP-Causality} \label{sec:modified}
+
+Halpern's prefered definition of causality is far more closely related to but-for causality than to the Original and Modified definitions. It simply asks, ``If we fix some (non-causal) variable assignments that occurred in the real world to their original values, does changing our causal variables result in $\phi$ no longer occurring?" Intuitively the Modified definition is identical to But-For causality when $W=\{\}$.
+
 \begin{defn}$X=x$ is an actual cause of $\phi$ in the causal setting $(M,u)$ iff the following 3 conditions hold:
 \begin{enumerate}
 \item $(M,u) \models (X=x)$ and $(M,u) \models \phi$.
@@ -284,27 +290,22 @@ The intuition of the original definition of causality (\cite{halpern2005causes})
 
 \end{defn}
 
-Intuitively the first two requirements are: the possible cause must actually have occurred, the final variable assignment under consideration must also have occurred; and changing the possible cause and fixing some number of other variable assignments can change the final variable assignment under consideration.
-
-
 
 
 \newpage
 
 \section{HP-Causality Planning} \label{sec:hpCausalityPlanning}
-The HP causality definitions above are restricted to the identification of variable causes, and as such, are not suitable for use in a planning domain where questions posed may also require the identification of a subset of actions or agents as causes.
-
-For this reasons I propose changed definitions of the HP-causality models which produce comparable conclusions given intuitively identical, but structural different problems. Specifically, my definitions allow for the use of actions plans rather than structural equations as original used.
+The HP causality definitions above are restricted to the identification of variable causes, and as such, are not suitable for use in a planning domain where questions posed may also require the identification of a subset of actions or agents as causes. For these reasons, I propose an extension of the intuition and spirit of Halpern's definition into the Planning domain. Specifically, my definitions allow for the use of actions plans rather than structural equations as originally used.
 
 \subsubsection*{But-for Planning} \label{sec:butForPlanning}
 \begin{defn} 
 
 Given a multi-agent action plan $\pi$ with a final state $s_n$, some action slots of $\pi$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a but-for cause of some final variable assignment $s_n \models \phi$ iff the following 3 conditions hold:
 \begin{enumerate}
-\item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
+\item $\pi' \models o$ and $s_n \models \phi$.
 \item $BF2$: There is a setting $o'$ of the non-$\epsilon$ action slots in $\pi'$ such that:
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o'](\lnot \Diamond \phi)
+(\pi, \Xi) \models [\pi' \leftarrow o'](\lnot \textrm{finally} \phi)
 \]
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
 \end{enumerate}
@@ -316,20 +317,20 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some action slot
 \begin{defn}
 Given a multi-agent planning task $\Xi$ and action plan $\pi$ with a final state $s_n$, some actions slots $\pi'$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a cause of some final variable assignment $s_n \models \phi$ according to the Original planning definition iff:
 \begin{enumerate}
-\item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
+\item  $\pi' \models o$ and $s_n \models \phi$.
 
 
 
 \item $BF2(a)$: There is a partition of $F$ (the \textit{endogenous} actions) into two disjoint subplans $Z \subseteq \pi$ and $W \subseteq (\pi - Z)$ with $\pi' \subseteq Z$ and a setting $o'$ and $w'$ of the actions in $\pi'$ and $W$ respectively such that
 
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](\lnot \Diamond \phi)
+(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](\lnot \textrm{finally} \phi)
 \]
 
 \item $BF2(b^o)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then for all subplans $Z' \subseteq (Z - \pi')$ we have
 
 \[
-(\pi, \Xi) \models [\pi \leftarrow o, W \leftarrow w', Z' \leftarrow z^\star](\Diamond \phi)
+(\pi, \Xi) \models [\pi \leftarrow o, W \leftarrow w', Z' \leftarrow z^\star](\textrm{finally} \phi)
 \]
 
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 3 conditions.
@@ -344,20 +345,20 @@ Given a multi-agent planning task $\Xi$ and action plan $\pi$ with a final state
 \begin{defn}
 Given a multi-agent planning task $\Xi$ and action plan $\pi$ with a final state $s_n$, some actions slots $\pi'$, $\pi' \subseteq \pi$, $\pi' \leftarrow o$ are a cause of some final variable assignment $s_n \models \phi$ according to the Updated planning definition iff:
 \begin{enumerate}
-\item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
+\item  $\pi' \models o$ and $s_n \models \phi$.
 
 
 
 \item $BF2(a)$: There is partition of $F$ (the endogenous actions) into two disjoint subplans $Z \subseteq \pi$ and $W \subseteq (\pi - Z)$ with $\pi' \subseteq Z$ and a setting $o'$ and $w'$ of the actions in $\pi$ and $W$ respectively such that
 
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](\lnot \Diamond \phi)
+(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w'](\lnot \textrm{finally} \phi)
 \]
 
 \item $BF2(b^u)$: If $z^\star$ is such that $(\pi, \Xi) \models Z = z^\star$, then \textit{for all} subplans $W' \subseteq W$ and $Z' \subseteq (Z - \pi')$ we have
 
 \[
-(\pi, \Xi) \models [\pi \leftarrow o, W' \leftarrow w', Z \leftarrow z^\star](\Diamond \phi)
+(\pi, \Xi) \models [\pi \leftarrow o, W' \leftarrow w', Z \leftarrow z^\star](\textrm{finally} \phi)
 \]
 
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 3 conditions.
@@ -373,7 +374,7 @@ Given a multi-agent action plan $\pi$ with a final state $s_n$, some action slot
 \item  $o \subseteq \pi$, $\pi' \models o$ and $s_n \models \phi$.
 \item $BF2$: There is a setting $o'$ of the applicable actions in $\pi'$, and a setting of $W \subseteq (\pi  - \pi')$ such that:
 \[
-(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w^\star](\lnot \Diamond \phi)
+(\pi, \Xi) \models [\pi' \leftarrow o', W \leftarrow w^\star](\lnot \textrm{finally} \phi)
 \]
 \item $\pi'$ is minimal. There is no strict subset of $\pi'$ that satisfies the previous 2 conditions.
 \end{enumerate}
@@ -414,10 +415,6 @@ We use the variables $FF$, $MD$, and $L$ to represent the forest fire, the match
 
 \textit{Conjunctive Model}: In this example $AC2(a)$ is satisfied by simply changing the value of $X$ and setting $X:=MD$ and leaving $W$ empty. $AC2(b^o)$ is satisfied by this assignment too. The updated version of HP causality holds with identical logic (because $W$ is empty). And finally, (because $X$ is a but-for cause) it follows that $X$ is a cause according to the modified definition too.
 
-@TODOincludeimages
-
-@TODOpossibletable?
-
 \subsubsection*{Planning Causality}
 Describing this example in a Planning Causality framework requires us to make some decisions. These decisions have a very significant influence over the results of the model. They can affect its computational complexity, and the intuitive meaning of any conclusions reached.
 
@@ -425,17 +422,17 @@ Describing this example in a Planning Causality framework requires us to make so
 
 \item \textit{What are the variables?} The most fundamental planning consideration is which variables to include and which to exclude. Only a variable that is explicitly modelled or a composite of other variables can be considered in our definition of causality. In this example we may feel that the variables we use must at least describe whether the forest fire occurred as that is the event for which we desire a cause. Variable domains are just as important; in these examples variable domains will be binary wherever possible.
 
-\item \textit{Who are the agents?} Should the arsonist be an agent? This seems fairly intuitive. But should nature also be an agent? Arguments can be made for or against this approach. One might argue that technically, nature has no agency and behaves in a complex, but deterministic, manner. @TODO defines agency as ``Agency is the capacity of an actor to act in a given environment." This definition would seem to imply that the lightning strike is not the act of an agent, but rather of the environment itself. But, using our definition of causality, which encapsulates the entire planning task and plan, it could be argued that the MCPS as a whole is the environment that facilitates action. There are many arguments along these lines that can be made for and against the agency of lightning strikes. For this example we will assume a natural disaster agent which is capable of causing lightning to strike, or of doing nothing.
+\item \textit{Who are the agents?} Should the arsonist be an agent? This seems fairly intuitive. But should nature also be an agent? Arguments can be made for or against this approach. One might argue that technically, nature has no agency and behaves in a complex, but deterministic, manner. \citet{ferber1999multi} define an agent as follows: ``An agent can be a physical or virtual entity that can act, perceive its environment (in a partial way) and communicate with others, is autonomous and has skills to achieve its goals and tendencies." This definition would seem to imply that the lightning strike is not the act of an agent, but rather of the environment itself. But, using our definition of causality, which encapsulates the entire planning task and plan, it could be argued that the MCPS as a whole is the environment that facilitates action. There are many arguments along these lines that can be made for and against the agency of lightning strikes. For this example we will assume a natural disaster agent which is capable of causing lightning to strike, or of doing nothing.
 
 \item \textit{What actions are available to each agent?} We only have knowledge of the causal path and final world that actually resulted. We know, at the very least, that lightning is capable of striking, that the arsonist is able to drop the match, and that a fire can start. What we do not know is what other actions any of these agents might have performed. Is it reasonable to say that, instead of dropping the match, the arsonist decided to do nothing, or make a sandwich, or chase butterflies? All of these actions, a many, many more, are consistent with our understanding of human capabilities, but do they represent different worlds in terms of the variables we wish to model? It may be that in reality making a sandwich or chasing butterflies are completely different activities, but in our model they are essentially the same. They both take us from a world in which the match was dropped, to a counterfactual world in which it was not. For this reason and following the example of \cite{lind2019ethical} these examples will allow agents an action that results in nothing being done.
 
-\item \textit{What are the exogenous actions?}: Exogenous actions follow similar intuition to endogenous ones. They should be plausible from a counterfactual reasoning perspective. And they should be sufficiently complex to describe preferences and interactions between different aspects of the MCSP. @TODOexample illustrates the importance of defining exogenous actions that allow for a more fine-grained approach to causality in planning.
+\item \textit{What are the exogenous actions?}: Exogenous actions follow similar intuition to endogenous ones. They should be plausible from a counterfactual reasoning perspective. And they should be sufficiently complex to describe preferences and interactions between different aspects of the MCSP. \ref{sec:rockThrowing} illustrates the importance of defining exogenous actions that allow for a more fine-grained approach to causality in planning.
 
 \item \textit{What is the scheduling of actions?}: The sequence of allowable actions or actor turns is very important. Are actions simultaneous or parallel? When may exogenous actions occur? Can an agent's actions affect this scheduling? All of these questions result in different causal models. And, in the absence of certain right answer, the best advice is often to keep the scheduling as simple as it can reasonably be, but no simpler.
 
 \end{itemize}
 
-Taking these questions into consideration, one possible description of the plan ($\pi$), and planning task ($\Xi = (A, \Pi, T, E)$) is $A=(Arsonist, Lightning)$, $\Pi=(\Pi_{arsonist}, \Pi_{lightning})$, $T=(Arsonist, Lightning)$.
+Taking these questions into consideration, one possible description of the plan ($\pi$), and planning task ($\Xi = (A, \Pi, T, E)$) is $A=(Arsonist, Lightning)$, $\Pi=(\Pi_{arsonist}, \Pi_{lightning})$, $T=(Arsonist, Lightning, Exogenous)$.
 
 \[
 \Pi_{Arsonist} = (V, A_{Arsonist}, s_0, s_{\star Arsonist})
@@ -475,6 +472,12 @@ ForestFireCon = ( matchDropped \land lightningStruck, forrestFire = \top )
 ForestFireDis = ( matchDropped \lor lightningStruck, forrestFire = \top )
 \]
 
+And the inclusion of the empty exogenous action which is applied only when no other exogenous action can occupy that action slot.
+
+\[
+\epsilon Action = (\top, \bot)
+\]
+
 And the plan followed in the actual world is as follows
 
 \[
@@ -487,12 +490,12 @@ And, including the exogenous $ForestFire$ event which could be either $ForestFir
 \pi = (DropMatch, StrikeLightning, ForestFire)
 \]
 
-The choice of $\phi:=(forestFire)$, and $\pi'=q(\pi,1)$ (the arsonist's action slot) is obvious from the phrasing of the original example. The conclusions of all three planning causality come to the same conclusions as standard HP causality. In the disjunctive model, $DropMatch$ is not a but-for cause or cause according to the modified definition of $forestFire=\top$, although $DropMatch \land StrikeLightning$ is. The original and updated definitions agree that $DropMatch$ is a cause of $\phi$. Setting $W:= q(\pi,2)$ (lightning's action) and $w'=StrikeLightning$ and setting $o':= DontStrikeLightning$ satisfies @TODOequation. @TODOequation is satisfied because $Z'$ can only the empty set, and when $\pi'$ is returned to its original value, $\phi$ still occurs in the final state.
+The choice of $\phi:=(forestFire)$, and $\pi'=q(\pi,1)$ (the arsonist's action slot) is obvious from the phrasing of the original example. The conclusions of all three planning causality come to the same conclusions as standard HP causality. In the disjunctive model, $DropMatch$ is not a but-for cause or cause according to the modified definition of $forestFire=\top$, although $DropMatch \land StrikeLightning$ is. The original and updated definitions agree that $DropMatch$ is a cause of $\phi$. Setting $W:= q(\pi,2)$ (lightning's action) and $w'=StrikeLightning$ and setting $o':= DontStrikeLightning$ satisfies $BF2(a)$. $BF2(b^o)$ and $BF2(b^u)$ are satisfied because $Z'$ can only the empty set, and when $\pi'$ is returned to its original value, $\phi$ still occurs in the final state.
 
-In the conjunctive case $DropMatch$ is a cause according to all four definition of causality. It is a cause according to the but-for definition of causality, and thus a cause according to the modified definition. It is a cause in the original and updated versions of planning causality because setting $o':= DontDropMatch$ is sufficient to satisfy @TODOequation. It then trivially follows that setting $\pi' \leftarrow o$ results in the real representation of the problem again and
+In the conjunctive case $DropMatch$ is a cause according to all four definition of causality. It is a cause according to the but-for definition of causality, and thus a cause according to the modified definition. It is a cause in the original and updated versions of planning causality because setting $o':= DontDropMatch$ is sufficient to satisfy $BF2(a)$. It then trivially follows that setting $\pi' \leftarrow o$ results in the real representation of the problem again and
 
 \[
-(\Xi, \pi) \models (\Diamond \phi)
+(\Xi, \pi) \models (\textrm{finally} \phi)
 \]
 
 by definition.
@@ -516,9 +519,9 @@ All three variants of HP-causality identify $ST$ as a cause of $BS$, they also a
 
 
 \subsubsection*{Planning Causality}
-To describe these examples in the multi-agent planning domain the scenario must be described in terms of an action plan, and multi-agent planning task. This information we can perform counterfactual reasoning on the CPS.
+To describe these examples in the multi-agent planning domain the scenario must be described in terms of an action plan, and multi-agent planning task. This information we can perform counter-factual reasoning on the CPS.
 
-One possible representation of the multi-agent planning task $\Xi=<A, \Pi, T, E>$ is as follows. $A=(Bill, Sue)$, $\Pi=(\Pi_{Bill},\Pi_{Sue})$, $T= (Bill, Sue)$ @TODOexogenousactionshere?.
+One possible representation of the multi-agent planning task $\Xi=<A, \Pi, T, E>$ is as follows. $A=(Bill, Sue, exogenous)$, $\Pi=(\Pi_{Bill},\Pi_{Sue})$, $T= (Bill, Sue)$. 
 
 \[
 \Pi_{Bill}=(V, A_{Bill}, s_0, s_{\star Bill})
@@ -560,6 +563,10 @@ HitsBill = (billThrew \land \lnot sueThrew, billHit = \top)
 BottleShatters = (sueHit \lor billHit, bottleShattered = \top)
 \]
 
+\[
+\epsilon Action = (\top, \bot)
+\]
+
 The action plan describing the example is as follows
 
 \[
@@ -577,30 +584,16 @@ It is important to note that, if exogenous action sequences were unconstrained, 
 With this formulation of the action plan and MCSP and knowledge that we wish to model causes that result in $bottleShattered$ ($\phi=bottleShattered$), it is now possible to model the actual world 
 
 \[
-(\Xi, \pi) \models (\Diamond \phi)
+(\Xi, \pi) \models (\textrm{finally} \phi)
 \]
 
 Using this formulation it is immediately apparent that $ThrowSue$ is not a but-for cause of $phi$ in the causal setting, there is no setting of the first action slot (Sue's actions) in $\pi$ that does not cause $bottleShattered=\top$.
 
-As always, the original and updated models of causality are more complex. Both these definitions limit the action slots that can be manipulated to the endogenous actions of each agent. Thus, setting $Z=q(\pi,1)$, $X=q(\pi,1)$, $o'=DontThrowSue$, $W=q(\pi,2)$, $w'=DontThrowBill$, and executing the exogenous actions as normal is sufficient to validate $BF2(a)$. $BF2(B^o)$ is easily satisfied because $Z'$ is empty, and keeping $ThrowSue=\top$ while holding $W\leftarrow w'$ still results in $bottleShattered=\top$. The updated definition results in similar conclusions.
+As always, the original and updated models of causality are more complex. Both these definitions limit the action slots that can be manipulated to the endogenous actions of each agent. Thus, setting $Z=q(\pi,1)$, $X=q(\pi,1)$, $o'=DontThrowSue$, $W=q(\pi,2)$, $w'=DontThrowBill$, and executing the exogenous actions as normal is sufficient to validate $BF2(a)$. $BF2(b^o)$ is easily satisfied because $Z'$ is empty, and keeping $ThrowSue=\top$ while holding $W\leftarrow w'$ still results in $bottleShattered=\top$. The updated definition results in similar conclusions.
 
-Our first real deviation from the conclusions of the standard HP causality model comes when we use the modified planning definition. $SueThrows$ is \textit{not} a cause according to this definition because there is no way to fix the remaining action slots to their original action which which would cause any value of $\pi'$ to result in $\lnot phi$.
+Our first real deviation from the conclusions of the standard HP causality model comes when we use the modified planning definition. $SueThrows$ is \textit{not} a cause according to this definition because there is no way to fix the remaining action slots to their original action which which would cause any value of $\pi'$ to result in $\lnot \phi$.
 
-Intuitively this occurs because although $BillHits$ was inapplicable in the MCSP, there is no way of preventing it from firing when we counterfactually reason that Sue has not thrown in our current formulation. A simple extension to the modified planning definition allows us to solve this problem. By substituting an empty exogenous action $Empty=(\top, \bot)$ wherever an exogenous action is inapplicable in $\pi$, we can now show $ThrowSue$ is a cause of $\phi$ in the MCSP.
-
-
-
-\subsection{Voting} \label{sec:voting}
-\subsubsection*{HP Causality}
-\subsubsection*{Planning Causality}
-
-
-
-
-
-
-
-
+Intuitively this occurs because although $BillHits$ was inapplicable in the MCSP, there is no way of preventing it from firing when we counter-factually reason that Sue has not thrown in our current formulation. A simple extension to the modified planning definition allows us to solve this problem. By substituting an empty exogenous action $Empty=(\top, \bot)$ wherever an exogenous action is inapplicable in $\pi$, we can now show $ThrowSue$ is a cause of $\phi$ in the MCSP.
 
 
 
@@ -610,7 +603,7 @@ Intuitively this occurs because although $BillHits$ was inapplicable in the MCSP
 
 This paper has demonstrated a practical means to interpret the causality of \citet{halpern2005causes} in the context of multi-agent artificial intelligence planning.
 
-It has introduced a multi-agent planning domain compatible with causality and counterfactual reasoning and explored formalizations of the principles of But-For, Original, Updated, and Modified planning through the use of examples. It has introduced a simple way to assign agent causes to settings in which action causes are known.
+It has introduced a multi-agent planning domain compatible with causality and counter-factual reasoning and explored formalizations of the principles of But-For, Original, Updated, and Modified planning through the use of examples. It has introduced a simple way to assign agent causes to settings in which action causes are known.
 
 It has shown the importance of describe the Causal Planning Setting (as Halpern did with Causal Settings) and introduced common-sense modifications to planning causality which allows it to reach conclusions similar to those on which it is based.
 

@@ -1,9 +1,15 @@
-\begin{thebibliography}{3}
+\begin{thebibliography}{5}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ferber and Weiss(1999)]{ferber1999multi}
+Jacques Ferber and Gerhard Weiss.
+\newblock \emph{Multi-agent systems: an introduction to distributed artificial
+  intelligence}, volume~1.
+\newblock Addison-Wesley Reading, 1999.
 
 \bibitem[Galton(1987)]{galton1987temporal}
 Antony Galton.
@@ -22,5 +28,10 @@ Felix Lindner, Robert Matmuller, and Bernhard Nebel.
 \newblock Moral permissibility of action plans.
 \newblock \emph{Proceedings of the Thirty-Third AAAI Conference on Artificial
   Intelligence}, 2019.
+
+\bibitem[Rintanen(2003)]{rintanen2003expressive}
+Jussi Rintanen.
+\newblock Expressive equivalence of formalisms for planning with sensing.
+\newblock In \emph{ICAPS}, pages 185--194, 2003.
 
 \end{thebibliography}
