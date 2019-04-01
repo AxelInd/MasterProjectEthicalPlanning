@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.10.26)  26 MAR 2019 09:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2018.5.13)  1 APR 2019 14:05
 entering extended mode
 **./main.tex
 (main.tex
@@ -178,7 +178,7 @@ m-i-na-tion of HP-causality
 
 [1
 
-{C:/Users/User/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
+{C:/Users/Axel/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
 [3] [4]
 Overfull \hbox (5.47699pt too wide) in paragraph at lines 102--103
 []\OT1/cmr/m/n/10 Given a single-agent plan-ning task $ = (\OML/cmm/m/it/10 V;
@@ -186,17 +186,17 @@ Overfull \hbox (5.47699pt too wide) in paragraph at lines 102--103
 OT1/cmr/m/n/10 ,
  []
 
-[5] [6] [7] [8] [9] [10] [11]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 397.
+[5] [6] [7] [8] [9] [10] [11] [12]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 413.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 397.
- [12] [13]
-Overfull \hbox (13.47075pt too wide) detected at line 447
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 413.
+ [13]
+Overfull \hbox (13.47075pt too wide) detected at line 437
 \OML/cmm/m/it/10 A[] \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 DropM
 atch \OT1/cmr/m/n/10 = (\OMS/cmsy/m/n/10 >\OML/cmm/m/it/10 ; matchDropped \OT1/
 cmr/m/n/10 = \OMS/cmsy/m/n/10 >\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; DontDropMatc
@@ -204,8 +204,8 @@ h \OT1/cmr/m/n/10 = (\OMS/cmsy/m/n/10 >\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 ?\OT
 1/cmr/m/n/10 )\OMS/cmsy/m/n/10 g
  []
 
-[14]
-Overfull \hbox (66.89879pt too wide) detected at line 463
+
+Overfull \hbox (66.89879pt too wide) detected at line 453
 \OML/cmm/m/it/10 A[] \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 Strik
 eLightning \OT1/cmr/m/n/10 = (\OMS/cmsy/m/n/10 >\OML/cmm/m/it/10 ; lightningStr
 uck \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 ?\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; Don
@@ -213,21 +213,21 @@ tStrikeLightning \OT1/cmr/m/n/10 = (\OMS/cmsy/m/n/10 >\OML/cmm/m/it/10 ; \OMS/c
 msy/m/n/10 ?\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 g
  []
 
-
-Overfull \hbox (39.87144pt too wide) in paragraph at lines 487--488
+[14]
+Overfull \hbox (39.87144pt too wide) in paragraph at lines 477--478
 []\OT1/cmr/m/n/10 And, in-clud-ing the ex-oge-nous $\OML/cmm/m/it/10 ForestFire
 $ \OT1/cmr/m/n/10 event which could be ei-ther $\OML/cmm/m/it/10 ForestFireCon$
 
  []
 
 
-Overfull \hbox (1.58272pt too wide) in paragraph at lines 493--494
+Overfull \hbox (1.58272pt too wide) in paragraph at lines 483--484
 \OML/cmm/m/it/10 StrikeLightning$ \OT1/cmr/m/n/10 is. The orig-i-nal and up-dat
 ed def-i-ni-tions agree that $\OML/cmm/m/it/10 DropMatch$
  []
 
 
-Overfull \hbox (10.65398pt too wide) in paragraph at lines 493--494
+Overfull \hbox (10.65398pt too wide) in paragraph at lines 483--484
 \OT1/cmr/m/n/10 is a cause of $\OML/cmm/m/it/10 $\OT1/cmr/m/n/10 . Set-ting $\
 OML/cmm/m/it/10 W \OT1/cmr/m/n/10 := \OML/cmm/m/it/10 q\OT1/cmr/m/n/10 (\OML/cm
 m/m/it/10 ; \OT1/cmr/m/n/10 2)$ (light-ning's ac-tion) and $\OML/cmm/m/it/10 w
@@ -235,7 +235,7 @@ m/m/it/10 ; \OT1/cmr/m/n/10 2)$ (light-ning's ac-tion) and $\OML/cmm/m/it/10 w
  []
 
 
-Overfull \hbox (0.84692pt too wide) in paragraph at lines 493--494
+Overfull \hbox (0.84692pt too wide) in paragraph at lines 483--484
 \OT1/cmr/m/n/10 and set-ting $\OML/cmm/m/it/10 o[] \OT1/cmr/m/n/10 := \OML/cmm/
 m/it/10 DontStrikeLightning$ \OT1/cmr/m/n/10 sat-is-fies $\OML/cmm/m/it/10 BF\O
 T1/cmr/m/n/10 2(\OML/cmm/m/it/10 a\OT1/cmr/m/n/10 )$. $\OML/cmm/m/it/10 BF\OT1/
@@ -243,20 +243,20 @@ cmr/m/n/10 2(\OML/cmm/m/it/10 b[]\OT1/cmr/m/n/10 )$ and $\OML/cmm/m/it/10 BF\OT
 1/cmr/m/n/10 2(\OML/cmm/m/it/10 b[]\OT1/cmr/m/n/10 )$
  []
 
-[15] [16]
-Overfull \hbox (11.0246pt too wide) in paragraph at lines 524--525
+[15]
+Overfull \hbox (11.0246pt too wide) in paragraph at lines 514--515
 []\OT1/cmr/m/n/10 One pos-si-ble rep-re-sen-ta-tion of the multi-agent plan-nin
 g task $ =\OML/cmm/m/it/10 < A; \OT1/cmr/m/n/10 \OML/cmm/m/it/10 ; T; E >$
  []
 
-[17] [18] (main.bbl) [19] (main.aux)
+[16] [17] (main.bbl [18]) [19] (main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
  2291 strings out of 493323
- 30415 string characters out of 3139068
+ 30415 string characters out of 3139069
  91795 words of memory out of 3000000
  5804 multiletter control sequences out of 15000+200000
  12456 words of font info for 48 fonts, out of 3000000 for 9000
@@ -278,7 +278,7 @@ ype1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
 c/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmt
 i10.pfb>
-Output written on main.pdf (19 pages, 282923 bytes).
+Output written on main.pdf (19 pages, 280193 bytes).
 PDF statistics:
  132 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
